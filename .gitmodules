@@ -1,0 +1,12 @@
+[submodule "submodules/RWM1819-Collision-A"]
+	path = submodules/RWM1819-Collision-A
+	url = https://github.com/itcgames/RWM1819-Collision-A.git
+[submodule "submodules/RWM1819-Asset-B"]
+	path = submodules/RWM1819-Asset-B
+	url = https://github.com/itcgames/RWM1819-Asset-B.git
+[submodule "submodules/RWM1819-DnD-B"]
+	path = submodules/RWM1819-DnD-B
+	url = https://github.com/itcgames/RWM1819-DnD-B.git
+[submodule "submodules/RWM1819-Camera-B"]
+	path = submodules/RWM1819-Camera-B
+	url = https://github.com/itcgames/RWM1819-Camera-B.git
