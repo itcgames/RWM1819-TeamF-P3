@@ -8,7 +8,7 @@ class Game
     }
 
     /**
-     * Initialisation function for the Game class. 
+     * Initialisation function for the Game class.
      */
     init() {
         //  Initialise the canvas
@@ -36,7 +36,7 @@ class Game
 
 
         //  Draw new frame.
-        gameNs.game.render();        
+        gameNs.game.render();
 
         // Recursive call to Update method.
         window.requestAnimationFrame(gameNs.game.update);
