@@ -5,7 +5,7 @@
  */
 
 class SceneManager
-{
+ {
 /**
  * sets the current scene to null
  * initialises a dictionary

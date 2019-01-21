@@ -3,8 +3,8 @@ class Game
     /**
      * Constructor function for Game class.
      */
-    constructor() {
 
+    constructor() {
     }
 
     /**
@@ -20,6 +20,14 @@ class Game
         document.body.appendChild(gameNs.game.canvas);
 
        //   Initialise game variables.
+       gameNs.sceneManager = new SceneManager();
+       gameNs.menu = new MenuScene("Menu");
+       gameNs.play = new Play("Play");
+
+       gameNs.sceneManager.addScene(gameNs.menu);
+       gameNs.sceneManager.addScene(gameNs.play);
+       gameNs.sceneManager.goToScene(gameNs.menu.title);
+       this.update = this.update.bind(this);
 
 
     }
@@ -33,10 +41,10 @@ class Game
         gameNs.game.prevTime = now;
 
         //  Update Game here.
-
+        gameNs.sceneManager.update()
 
         //  Draw new frame.
-        gameNs.game.render();
+        gameNs.sceneManager.render();
 
         // Recursive call to Update method.
         window.requestAnimationFrame(gameNs.game.update);
@@ -46,7 +54,6 @@ class Game
      * Render function for the Game class.
      */
     render() {
-
         //  Clear previous frame.
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 
