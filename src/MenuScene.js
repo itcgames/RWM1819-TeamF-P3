@@ -21,24 +21,26 @@ class MenuScene
     ///this.playBtn.load("resources/img/play_button.png");
     //this.playBtn.setSpriteSheet(false, 3, 10);
       this.startingPosition = [];
-      //this.gestureManager = new GestureManager();
-      //this.gestureManager.init();
+      this.gestureManager = new GestureManager();
+      this.gestureManager.init();
   }
 
 
   update()
   {
-    /*if (this.gestureManager.getOnePointDetection())
+    if (this.gestureManager.getOnePointDetection())
     {
       this.gestureManager.getTouchPosition()
 
       this.startingPosition = this.gestureManager.getTouchPosition()
       //console.log( this.startingPosition)
-      if (this.checkCollisionBetween(300, 50, 300, 100))
+      if (this.checkCollisionBetween(300, 50, 300, 300))
       {
         gameNs.sceneManager.goToScene(gameNs.game.title)
+        console.log("change scene");
       }
-      if (this.checkCollisionBetween(300, 350, 300, 100))
+    }
+      /*if (this.checkCollisionBetween(300, 350, 300, 100))
       {
         gameNs.sceneManager.goToScene(gameNs.help.title)
       }
@@ -55,9 +57,9 @@ class MenuScene
       //gameNs.sceneManager.render()
       //this.gestureManager.resetDetection()
     //}
-  //}
+  }
 
-  /*checkCollisionBetween(x,y,width,height)
+  checkCollisionBetween(x,y,width,height)
   {
    var collides = false;
    if ((this.startingPosition[0] < x + width) &&
@@ -66,7 +68,7 @@ class MenuScene
      (this.startingPosition[1] > y)){
        collides = true;
      }
-   return collides;*/
+   return collides;
  }
 
 
