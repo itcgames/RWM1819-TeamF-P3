@@ -21,7 +21,8 @@ class Game
 
        //   Initialise game variables.
         gameNs.game.collisionManager = new CollisionManager();
-        
+
+        gameNs.game.tileGrid = new Grid(64, 16, 13);        
     }
 
     /**
@@ -37,7 +38,7 @@ class Game
 
 
         //  Draw new frame.
-        gameNs.game.render();        
+        gameNs.game.draw();        
 
         // Recursive call to Update method.
         window.requestAnimationFrame(gameNs.game.update);
@@ -46,10 +47,11 @@ class Game
     /**
      * Render function for the Game class.
      */
-    render() {
-
+    draw() {
         //  Clear previous frame.
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+
+        this.tileGrid.draw(this.ctx);
 
         //  Render game objects here.
         this.collisionManager.render(this.ctx);
