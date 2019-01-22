@@ -1,3 +1,8 @@
+/**
+ * @description Controls the pause menu's functionality and animation
+ * @author John O'Meara
+ */
+
 class Interface {
 
   /**
@@ -9,7 +14,6 @@ class Interface {
 
     this.active = false;
     this.moving = false;
-    this.atTop = true;
 
     this.rupeeCount = 0;
     this.bombCount = 0;
@@ -25,7 +29,7 @@ class Interface {
     this.defaultHeight = (this.screen.h - this.topHeight)*-1;
     this.goalHeight = this.defaultHeight;
 
-    this.scrollSpeed = 5;
+    this.scrollSpeed = 10;
 
     this.pos = {
       x: 0,
@@ -39,7 +43,8 @@ class Interface {
       h: 150,
     };
 
-    
+    // function binding
+    this.trigger = this.trigger.bind(this);
   }
 
   /**
@@ -47,23 +52,26 @@ class Interface {
    * 
    */
   trigger() {
-    this.moving = true;
-    this.active = false;
 
-    if(this.atTop) {
-      this.atTop = false;
-      console.log("BAP");
-      // pause play, come down
-      if(this.scrollSpeed < 0){
-        this.scrollSpeed *= -1;
+
+    if(!this.moving){
+      if(this.active) {
+        console.log("GO UP");
+        // go back up, resume play
+        if(this.scrollSpeed > 0){
+          this.scrollSpeed *= -1;
+        }
       }
-    }
-    else if (this.atTop === false) {
-      console.log("BOP");
-      // go back up, resume play
-      if(this.scrollSpeed > 0){
-        this.scrollSpeed *= -1;
+      else {
+        console.log("GO DOWN");
+        // pause play, come down
+        if(this.scrollSpeed < 0){
+          this.scrollSpeed *= -1;
+        }
       }
+
+      this.moving = true;
+      this.active = false;
     }
   }
 
@@ -73,7 +81,7 @@ class Interface {
    */
   update() {
     if(this.moving) {
-      move();
+      this.move();
     }
     else if (this.active) {
       // MENU LOGIC GOES HERE
@@ -91,10 +99,8 @@ class Interface {
       this.pos.y = this.defaultHeight;
       this.moving = false;
 
-      this.atTop = true;
-
       /* resume gameplay */
-      this.trigger();
+      
     }
 
     // Check if the UI is at the bottom
@@ -102,11 +108,10 @@ class Interface {
       console.log("HIT BOTTOM");
       this.pos.y = 0;
       this.moving = false;
-
       this.active = true;
       
       /* update menu logic */
-      this.trigger();
+      
     }
 
     this.pos.y += this.scrollSpeed;
