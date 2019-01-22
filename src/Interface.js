@@ -24,7 +24,7 @@ class Interface {
       h: screenHeight,
     };
 
-    this.topHeight = 200;
+    this.topHeight = 128;
 
     this.defaultHeight = (this.screen.h - this.topHeight)*-1;
     this.goalHeight = this.defaultHeight;

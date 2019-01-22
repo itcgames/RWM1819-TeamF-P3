@@ -1,12 +1,25 @@
+/**
+ * @description Player class that manages player entity
+ * @author John O'Grady
+ */
 class Player extends Character{
+    /**
+     * 
+     * @param {Vector2} position 
+     * @param {Collider} collider 
+     * @param {Sprite} sprite 
+     */
     constructor(position, collider, sprite){
         super(position, collider, sprite);
     }
 
+    /**
+     * initialise the player entity - bind functions for key handling and setup sprite 
+     */
     init(){
         //testing
-        this.width = 24;
-        this.height = 28;
+        this.width = 14;
+        this.height = 16;
         this.animating = false;
         this.attacking = false;
         this.attacked = false;
@@ -21,6 +34,9 @@ class Player extends Character{
         this.setUpSprites();
     }
 
+    /**
+     * Based on the direction of the player set them to the first frame in the sprite loop
+     */
     setIdle(){
         switch(this.orientation){
             case this.OrientationEnum.East:
@@ -39,6 +55,13 @@ class Player extends Character{
         this.sprite.frameIndex = 0;
     }
 
+    /**
+     * Function that updates the sprites current animation frame if moving
+     * If the player is attacking with their melee attack decrememnet the timer and stop return
+     * to idle when it is complete.
+     * Update the sprite position.
+     * @param {int} dt - clock 
+     */
     update(dt){
         if(this.animating){
             this.sprite.update();
@@ -60,12 +83,13 @@ class Player extends Character{
             
         }
 
-        this.keepOnScreen(screenWidth, screenHeight, 0);
-
         this.sprite.setPos(this.position.x, this.position.y);
         this.animating = false;
     }
 
+    /**
+     * function to move the player up and update the sprite
+     */
     moveUp(){
         if(!this.animating || !this.attacking){
             this.position.y -= 5;
@@ -75,6 +99,9 @@ class Player extends Character{
         }
     }
 
+    /**
+     * function to move the player down and update the sprite
+     */
     moveDown(){
         if(!this.animating || !this.attacking){
             this.position.y += 5;
@@ -84,6 +111,9 @@ class Player extends Character{
         }
     }
 
+    /**
+     * function to move the player left and update the sprite
+     */
     moveLeft(){
         if(!this.animating || !this.attacking){
             this.position.x -= 5;
@@ -93,6 +123,9 @@ class Player extends Character{
         }
     }
 
+    /**
+     * function to move the player right and update the sprite
+     */
     moveRight(){
         if(!this.animating || !this.attacking){
             this.position.x += 5;
@@ -102,6 +135,11 @@ class Player extends Character{
         }
     }
 
+    /**
+     * melee attack function - check the direction the player is facing
+     * and attack in that dirction - create a timer to determine how long the 
+     * attack lasts
+     */
     meleeAttack(){
         if(!this.animating && !this.attacked){
             switch(this.orientation){
@@ -125,51 +163,57 @@ class Player extends Character{
         }
     }
 
+    /**
+     * sizing up the sprite and rendering it
+     */
     draw(ctx){
-        this.sprite.setScale(2,2);
+        this.sprite.horizontalSheet = false;
+        this.sprite.setScale(2.5,2.5);
         this.sprite.draw(ctx);
+
+        this.sword.setScale(2.5,2.5);
+        this.sword.draw(ctx);
     }
 
+    /**
+     * creating different animations sheets for each direction as well as directional attacks
+     */
     setUpSprites(){
-        // testing
-        this.west = new AssetManager(this.position.x, this.position.y, this.width, this.height,0,240);
-        this.west.setSpriteSheet("assets/test.png", 3, 8);
-
-        this.east = new AssetManager(this.position.x, this.position.y, this.width, this.height,0,240);
-        this.east.setSpriteSheet("assets/test.png", 3, 8);
+        this.west = new AssetManager(this.position.x, this.position.y, this.width, this.height,0,14);
+        this.west.setSpriteSheet("assets/LinkSpriteSheet.png", 4, 2);
+        this.east = new AssetManager(this.position.x, this.position.y, this.width, this.height,0,14);
+        this.east.setSpriteSheet("assets/LinkSpriteSheet.png", 4, 2);
         this.east.flipped = true;
+        this.north = new AssetManager(this.position.x, this.position.y, this.width, this.height,0,28);
+        this.north.setSpriteSheet("assets/LinkSpriteSheet.png", 4, 2);
+        this.south = new AssetManager(this.position.x, this.position.y, this.width, this.height,0,0);
+        this.south.setSpriteSheet("assets/LinkSpriteSheet.png", 4, 2);
 
-        this.north = new AssetManager(this.position.x, this.position.y, this.width, this.height,120,0);
-        this.north.setSpriteSheet("assets/test.png", 3, 8);
-        this.north.width = 30;
-        this.north.height = 28;
-
-        this.south = new AssetManager(this.position.x, this.position.y, this.width, this.height,32,0);
-        this.south.setSpriteSheet("assets/test.png", 3, 8);
-        this.south.width = 30;
-        this.south.height = 28;
-
-        this.attackWest = new AssetManager(this.position.x, this.position.y, this.width, this.height, 90, 296);
-        this.attackWest.setSpriteSheet("assets/test.png", 3, 1)
-        this.attackWest.width = 30;
-        this.attackWest.height = 30;
-
-        this.attackEast = new AssetManager(this.position.x, this.position.y, this.width, this.height, 90, 296);
-        this.attackEast.setSpriteSheet("assets/test.png", 3, 1)
-        this.attackEast.width = 30;
-        this.attackEast.height = 30;
+        // attack animations
+        this.attackWest = new AssetManager(this.position.x, this.position.y, this.width, this.height, 32, 15);
+        this.attackWest.setSpriteSheet("assets/LinkSpriteSheet.png", 4, 1);
+        this.attackEast = new AssetManager(this.position.x, this.position.y, this.width, this.height, 32, 15);
+        this.attackEast.setSpriteSheet("assets/LinkSpriteSheet.png", 4, 1);
         this.attackEast.flipped = true;
 
-        this.attackNorth = new AssetManager(this.position.x, this.position.y, this.width, this.height, 176, 54);
-        this.attackNorth.setSpriteSheet("assets/test.png", 3, 1)
-        this.attackNorth.width = 28;    
-        this.attackNorth.height = 32;
+        this.attackNorth = new AssetManager(this.position.x, this.position.y, this.width, this.height, 16, 28);
+        this.attackNorth.setSpriteSheet("assets/LinkSpriteSheet.png", 3, 1);
+        this.attackSouth = new AssetManager(this.position.x, this.position.y, this.width, this.height, 32, 0);
+        this.attackSouth.setSpriteSheet("assets/LinkSpriteSheet.png", 3, 1);
 
-        this.attackSouth = new AssetManager(this.position.x, this.position.y, this.width, this.height, 88, 86);
-        this.attackSouth.setSpriteSheet("assets/test.png", 3, 1)
-        this.attackSouth.width = 28;
-        this.attackSouth.height = 32;
+        // sword sprite
+        this.swordRight = new AssetManager(this.position.x, this.position.y, 16, 8, 0, 0);
+        this.swordRight.setSpriteSheet("assets/Sword.png", 3, 1);
+        this.swordLeft = new AssetManager(200, 200, 16, 8, 0, 0);
+        this.swordLeft.setSpriteSheet("assets/Sword.png", 3, 1); 
+        this.swordLeft.flipped = true;
+        this.swordUp = new AssetManager(200, 200, 8, 16, 0, 18);
+        this.swordUp.setSpriteSheet("assets/Sword.png", 3, 1); 
+        this.swordUp.flipped = true;
+        this.swordDown = new AssetManager(200, 200, 8, 16, 0, 18);
+        this.swordDown.setSpriteSheet("assets/Sword.png", 3, 1); 
 
+        this.sword = this.swordUp;
         this.sprite = this.north;
     }
 }
