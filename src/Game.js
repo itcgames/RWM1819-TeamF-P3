@@ -17,16 +17,19 @@ class Game
         gameNs.game.canvas.width = window.innerWidth;
         gameNs.game.canvas.height = window.innerHeight;
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
+        gameNs.game.ctx.font = "30px Pixel-Emulator.otf";
         document.body.appendChild(gameNs.game.canvas);
 
        //   Initialise game variables.
        gameNs.sceneManager = new SceneManager();
+       gameNs.splash = new SplashScreen("Splash");
        gameNs.menu = new MenuScene("Menu");
        gameNs.play = new Play("Play");
 
+       gameNs.sceneManager.addScene(gameNs.splash);
        gameNs.sceneManager.addScene(gameNs.menu);
        gameNs.sceneManager.addScene(gameNs.play);
-       gameNs.sceneManager.goToScene(gameNs.menu.title);
+       gameNs.sceneManager.goToScene(gameNs.splash.title);
        this.update = this.update.bind(this);
 
 

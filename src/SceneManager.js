@@ -74,7 +74,7 @@ class SceneManager
    */
   goToNextScene()
   {
-
+    gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     this.index++;
     if (this.index > this.numOfScenes)
     {

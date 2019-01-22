@@ -26,7 +26,7 @@ class Play
  */
   update()
   {
-    
+    console.log("updating play");
   }
 
   render()

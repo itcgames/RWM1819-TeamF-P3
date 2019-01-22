@@ -1,10 +1,10 @@
 /**
  * @author Conor O'Toole
  * C00206724
- * The scene for the main menu
+ * The scene for the Splash Screen
  */
 
-class MenuScene
+class SplashScreen
 {
 /**
   * @param {title} string title of the MenuScene.
@@ -14,12 +14,8 @@ class MenuScene
   {
     this.title = title;
     //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
-    this.playBtn = new Image();
-    this.cursorBtn = new Image();
-    this.instructionsBtn = new Image();
-    this.playBtn.src = "resources/images/play.png";
-    this.cursorBtn.src = "resources/images/cursor.png";
-    this.instructionsBtn.src = "resources/images/instructions.png"
+    this.splash = new Image();
+    this.splash.src = "resources/images/splash.jpg";
 
     ///this.playBtn.load("resources/img/play_button.png");
     //this.playBtn.setSpriteSheet(false, 3, 10);
@@ -27,13 +23,15 @@ class MenuScene
       this.gestureManager = new GestureManager();
       this.gestureManager.init();
 
+      var text;
+      this.text = "Space to Start";
+
 
   }
 
 
   update()
   {
-    console.log("updating menu");
     if (this.gestureManager.getOnePointDetection())
     {
       this.gestureManager.getTouchPosition()
@@ -42,10 +40,22 @@ class MenuScene
       //console.log( this.startingPosition)
       if (this.checkCollisionBetween(300, 50, 300, 300))
       {
-        gameNs.sceneManager.goToScene(gameNs.game.title)
+        //gameNs.sceneManager.goToScene(gameNs.game.title)
+        gameNs.sceneManager.goToNextScene();
         console.log("change scene");
       }
     }
+
+    /*while (gameNs.game.ctx.globalAlpha <= 1.0)
+    {
+      gameNs.game.ctx.globalAlpha - 0.02;
+    }*/
+    //while (gameNs.game.ctx.globalAlpha >= 0.0)
+
+    //  gameNs.game.ctx.globalAlpha = 0.01;
+
+
+
       /*if (this.checkCollisionBetween(300, 350, 300, 100))
       {
         gameNs.sceneManager.goToScene(gameNs.help.title)
@@ -87,30 +97,16 @@ class MenuScene
   {
 
 
-    //ctx.font = '100px serif'; //48
+
     //this.playBtn.draw();
-    gameNs.game.ctx.drawImage(this.playBtn,325, 850, 150, 100);
-    gameNs.game.ctx.drawImage(this.instructionsBtn,325, 950, 300, 100);
+    gameNs.game.ctx.drawImage(this.splash,0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
 
-    gameNs.game.ctx.drawImage(this.cursorBtn, 250, 300, 50, 50);
-
-    gameNs.game.ctx.beginPath();
-    gameNs.game.ctx.moveTo(200, 200);
-    gameNs.game.ctx.lineTo(900, 200);
-    gameNs.game.ctx.lineTo(900, 800);
-    gameNs.game.ctx.lineTo(200, 800);
-    gameNs.game.ctx.closePath();
-
-  // the outline
-    gameNs.game.ctx.lineWidth = 25;
-    gameNs.game.ctx.strokeStyle = '#666666';
-    gameNs.game.ctx.stroke();
-
-  // the fill color
-    gameNs.game.ctx.fillStyle = "#FFCC00";
     //gameNs.game.ctx.fill();
 
-    //ctx.fillText(this.title, 100,100);
+    gameNs.game.ctx.globalAlpha = 0.1;
+    gameNs.game.ctx.font= "100px VT323"; //48
+    gameNs.game.ctx.fillText(this.text, 700,900);
+
   }
 
 
