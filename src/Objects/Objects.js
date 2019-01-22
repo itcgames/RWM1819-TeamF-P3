@@ -45,6 +45,7 @@ class Object {
             w,
             h
         );
+        gameNs.game.collisionManager.addBoxCollider(this.bounds);
     }
 
     /**
@@ -60,7 +61,7 @@ class Object {
      * @param {context} ctx context
      */
     render(ctx){
-        this.sprite.render(ctx);
+        this.sprite.draw(ctx);
     }
 }
 

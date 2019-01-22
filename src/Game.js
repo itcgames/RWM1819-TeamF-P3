@@ -52,6 +52,8 @@ class Game
         gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
+
+        gameNs.game.testHeart = new Heart(350,400);
     }
 
     /**
@@ -90,7 +92,7 @@ class Game
         this.collisionManager.render(this.ctx);
 
         gameNs.game.player.draw(this.ctx);
-
+        gameNs.game.testHeart.render(this.ctx);
         gameNs.game.interface.render(this.ctx);
     }
 }
