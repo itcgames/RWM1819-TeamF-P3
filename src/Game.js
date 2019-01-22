@@ -70,4 +70,5 @@ class Game
         
         //  Render game objects here.
         gameNs.game.player.draw(this.ctx);
+    }
 }
