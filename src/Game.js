@@ -11,7 +11,7 @@ class Game
      * Initialisation function for the Game class. 
      */
     init() {
-       //  Initialise the canvas
+        //  Initialise the canvas
         gameNs.game.canvas = document.createElement("canvas");
         gameNs.game.canvas.id = 'mycanvas';
         gameNs.game.canvas.width = window.innerWidth;
@@ -22,19 +22,22 @@ class Game
         document.body.appendChild(gameNs.game.canvas);
 
         //   Initialise game variables.
-      
+    
+        gameNs.game.input = new Input();
+
+
         // Interface testing
         gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
-        gameNs.game.interface.trigger();
-      
-       //   Initialise game variables.
+        gameNs.game.input.bind(gameNs.game.interface.trigger, "p");
+    
+        //   Initialise game variables.
         gameNs.game.collisionManager = new CollisionManager();
 
         gameNs.game.tileGrid = new Grid(64, 16, 13);        
         //   Initialise game variables.
         gameNs.game.player = new Player();
         gameNs.game.player.init(gameNs.game.canvas.ctx);
-        gameNs.game.input = new Input();
+
         gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
         gameNs.game.input.bind(gameNs.game.player.moveLeft, "a");
         gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
@@ -54,7 +57,7 @@ class Game
         //  Update Game here.
         gameNs.game.input.update();
         gameNs.game.player.update(gameNs.game.dt);
-      
+    
         gameNs.game.interface.update();
 
         //  Draw new frame.
@@ -75,8 +78,9 @@ class Game
         this.tileGrid.draw(this.ctx);
 
         this.collisionManager.render(this.ctx);
-        gameNs.game.interface.render(this.ctx);
-      
+    
         gameNs.game.player.draw(this.ctx);
+        
+        gameNs.game.interface.render(this.ctx);
     }
 }
