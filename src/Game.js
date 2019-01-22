@@ -22,6 +22,7 @@ class Game
        document.body.appendChild(gameNs.game.canvas);
 
        //   Initialise game variables.
+       gameNs.game.collisionManager = new CollisionManager();
        gameNs.game.input = new Input();
        gameNs.sceneManager = new SceneManager();
        gameNs.splash = new SplashScreen("Splash");
@@ -31,18 +32,17 @@ class Game
        gameNs.sceneManager.addScene(gameNs.splash);
        gameNs.sceneManager.addScene(gameNs.menu);
        gameNs.sceneManager.addScene(gameNs.play);
-       gameNs.sceneManager.goToScene(gameNs.splash.title);
+       gameNs.sceneManager.goToScene(gameNs.menu.title);
        this.update = this.update.bind(this);
 
 
-        // Interface testing
-        gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
-        gameNs.game.input.bind(gameNs.game.interface.trigger, "p");
+
+
 
         //   Initialise game variables.
-        gameNs.game.collisionManager = new CollisionManager();
 
-        gameNs.game.tileGrid = new Grid(64, 16, 13);
+
+
         //   Initialise game variables.
         gameNs.game.player = new Player();
         gameNs.game.player.init(gameNs.game.canvas.ctx);
@@ -52,6 +52,9 @@ class Game
         gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
+        gameNs.game.input.bind(gameNs.sceneManager.goToNextScene, "x");
+        gameNs.game.input.bind(gameNs.menu.cursorMoveUp, "ArrowUp");
+        gameNs.game.input.bind(gameNs.menu.cursorMoveDown, "ArrowDown");
     }
 
     /**
@@ -66,9 +69,7 @@ class Game
         //  Update Game here.
         gameNs.sceneManager.update()
         gameNs.game.input.update();
-        gameNs.game.player.update(gameNs.game.dt);
-
-        gameNs.game.interface.update();
+        ;
 
         //  Draw new frame.
         gameNs.game.draw();
@@ -82,15 +83,8 @@ class Game
      */
     draw() {
         //  Clear previous frame.
-        this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+        //this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+         gameNs.sceneManager.render()
 
-        //  Render game objects here.
-        this.tileGrid.draw(this.ctx);
-
-        this.collisionManager.render(this.ctx);
-
-        gameNs.game.player.draw(this.ctx);
-
-        gameNs.game.interface.render(this.ctx);
     }
 }

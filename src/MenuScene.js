@@ -13,6 +13,8 @@ class MenuScene
   constructor(title)
   {
     this.title = title;
+    this.curX = 250;
+    gameNs.game.curY = 300;
     //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
     this.playBtn = new Image();
     this.cursorBtn = new Image();
@@ -33,7 +35,6 @@ class MenuScene
 
   update()
   {
-    console.log("updating menu");
     if (this.gestureManager.getOnePointDetection())
     {
       this.gestureManager.getTouchPosition()
@@ -77,6 +78,28 @@ class MenuScene
    return collides;
  }
 
+cursorMoveUp()
+{
+  console.log("move up");
+  if (gameNs.game.curY === 300)
+  {
+    gameNs.game.curY -=0;
+  }
+  else {
+    gameNs.game.curY -= 100
+  }
+}
+
+cursorMoveDown()
+{
+  if (gameNs.game.curY === 900)
+  {
+    gameNs.game.curY +=0;
+  }
+  else {
+    gameNs.game.curY += 100
+  }
+}
 
 /**
   * creates a canvas and context
@@ -89,10 +112,11 @@ class MenuScene
 
     //ctx.font = '100px serif'; //48
     //this.playBtn.draw();
+    gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     gameNs.game.ctx.drawImage(this.playBtn,325, 850, 150, 100);
     gameNs.game.ctx.drawImage(this.instructionsBtn,325, 950, 300, 100);
 
-    gameNs.game.ctx.drawImage(this.cursorBtn, 250, 300, 50, 50);
+    gameNs.game.ctx.drawImage(this.cursorBtn, this.curX, gameNs.game.curY, 50, 50);
 
     gameNs.game.ctx.beginPath();
     gameNs.game.ctx.moveTo(200, 200);
