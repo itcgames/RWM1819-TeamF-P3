@@ -21,6 +21,12 @@ class Game
         gameNs.game.ctx.fillStyle = "green";
         document.body.appendChild(gameNs.game.canvas);
 
+        //   Initialise game variables.
+      
+        // Interface testing
+        gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
+        gameNs.game.interface.trigger();
+      
        //   Initialise game variables.
         gameNs.game.collisionManager = new CollisionManager();
 
@@ -48,6 +54,8 @@ class Game
         //  Update Game here.
         gameNs.game.input.update();
         gameNs.game.player.update(gameNs.game.dt);
+      
+        gameNs.game.interface.update();
 
         //  Draw new frame.
         gameNs.game.draw();        
@@ -63,12 +71,12 @@ class Game
         //  Clear previous frame.
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 
+        //  Render game objects here.
         this.tileGrid.draw(this.ctx);
 
-        //  Render game objects here.
         this.collisionManager.render(this.ctx);
-        
-        //  Render game objects here.
+        gameNs.game.interface.render(this.ctx);
+      
         gameNs.game.player.draw(this.ctx);
     }
 }
