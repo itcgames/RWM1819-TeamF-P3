@@ -1,15 +1,9 @@
-var that = {};
-
-class Player{
-    constructor(){
+class Player extends Character{
+    constructor(position, collider, sprite){
+        super(position, collider, sprite);
     }
 
     init(){
-        that = this;
-
-        this.direction = "North";
-        this.alive = true;
-        this.position = {x:400, y:400};
         //testing
         this.width = 24;
         this.height = 28;
@@ -28,19 +22,19 @@ class Player{
     }
 
     setIdle(){
-        switch(this.direction){
-            case "East":
-            this.sprite = this.east;
-            break;
-            case "West":
-            this.sprite = this.west;
-            break;
-            case "North":
-            this.sprite = this.north;
-            break;
-            case "South":
-            this.sprite = this.south;
-            break;
+        switch(this.orientation){
+            case this.OrientationEnum.East:
+                this.sprite = this.east;
+                break;
+            case this.OrientationEnum.West:
+                this.sprite = this.west;
+                break;
+            case this.OrientationEnum.North:
+                this.sprite = this.north;
+                break;
+            case this.OrientationEnum.South:
+                this.sprite = this.south;
+                break;
         }
         this.sprite.frameIndex = 0;
     }
@@ -66,6 +60,8 @@ class Player{
             
         }
 
+        this.keepOnScreen(screenWidth, screenHeight, 0);
+
         this.sprite.setPos(this.position.x, this.position.y);
         this.animating = false;
     }
@@ -73,7 +69,7 @@ class Player{
     moveUp(){
         if(!this.animating || !this.attacking){
             this.position.y -= 5;
-            this.direction = "North";
+            this.orientation = this.OrientationEnum.North;
             this.sprite = this.north;
             this.animating = true;
         }
@@ -82,7 +78,7 @@ class Player{
     moveDown(){
         if(!this.animating || !this.attacking){
             this.position.y += 5;
-            this.direction = "South";
+            this.orientation = this.OrientationEnum.South;
             this.sprite = this.south;
             this.animating = true;
         }
@@ -91,7 +87,7 @@ class Player{
     moveLeft(){
         if(!this.animating || !this.attacking){
             this.position.x -= 5;
-            this.direction = "West";
+            this.orientation = this.OrientationEnum.West;
             this.sprite = this.west;
             this.animating = true;
         }
@@ -100,7 +96,7 @@ class Player{
     moveRight(){
         if(!this.animating || !this.attacking){
             this.position.x += 5;
-            this.direction = "East";
+            this.orientation = this.OrientationEnum.East;
             this.sprite = this.east;
             this.animating = true;
         }
@@ -108,19 +104,19 @@ class Player{
 
     meleeAttack(){
         if(!this.animating && !this.attacked){
-            switch(this.direction){
-                case "East":
-                this.sprite = this.attackEast;
-                break;
-                case "West":
-                this.sprite = this.attackWest;
-                break;
-                case "North":
-                this.sprite = this.attackNorth;
-                break;
-                case "South":
-                this.sprite = this.attackSouth;
-                break;
+            switch(this.orientation){
+                case this.OrientationEnum.East:
+                    this.sprite = this.attackEast;
+                    break;
+                case this.OrientationEnum.West:
+                    this.sprite = this.attackWest;
+                    break;
+                case this.OrientationEnum.North:
+                    this.sprite = this.attackNorth;
+                    break;
+                case this.OrientationEnum.South:
+                    this.sprite = this.attackSouth;
+                    break;
             }
             this.attackWindow = 10;
             this.attacking = true;

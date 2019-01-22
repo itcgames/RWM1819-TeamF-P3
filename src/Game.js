@@ -33,9 +33,9 @@ class Game
         //   Initialise game variables.
         gameNs.game.collisionManager = new CollisionManager();
 
-        gameNs.game.tileGrid = new Grid(64, 16, 13);        
+        gameNs.game.tileGrid = new Grid(64, 16, 13);
         //   Initialise game variables.
-        gameNs.game.player = new Player();
+        gameNs.game.player = new Player(new Vector2(400,400), new BoxCollider(new Vector2(400,400), 64, 64), null);
         gameNs.game.player.init(gameNs.game.canvas.ctx);
 
         gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
