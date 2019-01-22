@@ -24,6 +24,8 @@ class MenuScene
       this.startingPosition = [];
       this.gestureManager = new GestureManager();
       this.gestureManager.init();
+
+
   }
 
 
@@ -85,22 +87,23 @@ class MenuScene
     //ctx.font = '100px serif'; //48
     //this.playBtn.draw();
     gameNs.game.ctx.drawImage(this.playBtn,300, 50, 300, 300);
-    gameNs.game.ctx.drawImage(this.cursorBtn, 200, 300, 50, 50);
+    gameNs.game.ctx.drawImage(this.cursorBtn, 250, 300, 50, 50);
 
     gameNs.game.ctx.beginPath();
-    gameNs.game.ctx.moveTo(100, 100);
-    gameNs.game.ctx.lineTo(100, 300);
-    gameNs.game.ctx.lineTo(300, 300);
+    gameNs.game.ctx.moveTo(200, 200);
+    gameNs.game.ctx.lineTo(900, 200);
+    gameNs.game.ctx.lineTo(900, 800);
+    gameNs.game.ctx.lineTo(200, 800);
     gameNs.game.ctx.closePath();
 
   // the outline
-    gameNs.game.ctx.lineWidth = 10;
+    gameNs.game.ctx.lineWidth = 25;
     gameNs.game.ctx.strokeStyle = '#666666';
     gameNs.game.ctx.stroke();
 
   // the fill color
     gameNs.game.ctx.fillStyle = "#FFCC00";
-    gameNs.game.ctx.fill();
+    //gameNs.game.ctx.fill();
 
     //ctx.fillText(this.title, 100,100);
   }

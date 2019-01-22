@@ -26,9 +26,11 @@ class Play
  */
   update()
   {
+    
   }
 
   render()
   {
+
   }
 }

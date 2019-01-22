@@ -47,6 +47,8 @@ class SceneManager
    */
   goToScene(title)
   {
+    gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
+
     if(this.dontPlayFirst === false)
     {
       /*this.audioManager.loadSoundFile("BUTTONCLICK","resources/audio/buttonClick.mp3");
@@ -72,6 +74,7 @@ class SceneManager
    */
   goToNextScene()
   {
+
     this.index++;
     if (this.index > this.numOfScenes)
     {
