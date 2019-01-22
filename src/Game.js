@@ -11,17 +11,25 @@ class Game
      * Initialisation function for the Game class. 
      */
     init() {
-        //  Initialise the canvas
+       //  Initialise the canvas
         gameNs.game.canvas = document.createElement("canvas");
         gameNs.game.canvas.id = 'mycanvas';
         gameNs.game.canvas.width = window.innerWidth;
         gameNs.game.canvas.height = window.innerHeight;
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
+        
+        gameNs.game.ctx.fillStyle = "green";
         document.body.appendChild(gameNs.game.canvas);
 
-       //   Initialise game variables.
-
-
+        //   Initialise game variables.
+        gameNs.game.player = new Player();
+        gameNs.game.player.init(gameNs.game.canvas.ctx);
+        gameNs.game.input = new Input();
+        gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
+        gameNs.game.input.bind(gameNs.game.player.moveLeft, "a");
+        gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
+        gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
+        gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
     }
 
     /**
@@ -33,10 +41,11 @@ class Game
         gameNs.game.prevTime = now;
 
         //  Update Game here.
-
+        gameNs.game.input.update();
+        gameNs.game.player.update(gameNs.game.dt);
 
         //  Draw new frame.
-        gameNs.game.render();        
+        gameNs.game.draw();        
 
         // Recursive call to Update method.
         window.requestAnimationFrame(gameNs.game.update);
@@ -45,12 +54,11 @@ class Game
     /**
      * Render function for the Game class.
      */
-    render() {
-
+    draw() {
         //  Clear previous frame.
-        this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
-
+        this.ctx.fillRect(0,0,this.canvas.width, this.canvas.height);
+        
         //  Render game objects here.
-
+        gameNs.game.player.draw(this.ctx);
     }
 }
