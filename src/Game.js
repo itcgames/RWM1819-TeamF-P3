@@ -27,20 +27,15 @@ class Game
        gameNs.sceneManager = new SceneManager();
        gameNs.splash = new SplashScreen("Splash");
        gameNs.menu = new MenuScene("Menu");
+       gameNs.instructions = new InstructionsScene("Press space to return");
        gameNs.play = new Play("Play");
 
        gameNs.sceneManager.addScene(gameNs.splash);
        gameNs.sceneManager.addScene(gameNs.menu);
+       gameNs.sceneManager.addScene(gameNs.instructions);
        gameNs.sceneManager.addScene(gameNs.play);
-       gameNs.sceneManager.goToScene(gameNs.menu.title);
+       gameNs.sceneManager.goToScene(gameNs.instructions.title);
        this.update = this.update.bind(this);
-
-
-
-
-
-        //   Initialise game variables.
-
 
 
         //   Initialise game variables.
