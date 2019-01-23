@@ -20,21 +20,21 @@ class Sword extends Utility{
      * update for the sword projectile
      */
     update(dt){
-        if(this.OrientationEnum === "North" || this.OrientationEnum === "South"){
-            this.collider.shape.width = 24;
-            this.collider.shape.height = 64;
-        } else {
-            this.collider.shape.width = 64;
-            this.collider.shape.height = 24;
-        }
-        
+
         this.setPos(this.position.x + this.updateVector.x, this.position.y + this.updateVector.y);
+        if(this.orientation === this.OrientationEnum.North || this.orientation === this.OrientationEnum.South){
+            this.verticalCollider.position = new Vector2(this.position.x, this.position.y);
+        } else {
+            this.horizontalCollider.position = new Vector2(this.position.x, this.position.y);
+        }
         this.sprite.setPos(this.position.x, this.position.y);
         this.sprite.update();
 
+        console.log(this.verticalCollider.shape.width);
+
         if(this.inFlight){
-            if((this.position.x + this.collider.shape.width  > 64 * 15 || this.position.x < 64 ||
-                this.position.y + this.collider.shape.height > 64 * 12 || this.position.y < 64 * 3) && this.collided == false){
+            if((this.position.x + this.horizontalCollider.shape.width  > 64 * 15 || this.position.x < 64 ||
+                this.position.y + this.verticalCollider.shape.height > 64 * 12 || this.position.y < 64 * 3) && this.collided == false){
                     this.processCollision();
                 }
             if(this.collided){
@@ -76,18 +76,22 @@ class Sword extends Utility{
         this.updateVector = new Vector2(0,0);
         switch(this.orientation){
             case this.OrientationEnum.East:
+                this.collider = this.horizontalCollider;
                 this.sprite = this.swordRight;
                 this.setPos(position.x + this.sprite.width / 2, position.y + this.sprite.height / 1.35);
                 break;
             case this.OrientationEnum.West:
+                this.collider = this.horizontalCollider;
                 this.sprite = this.swordLeft;
                 this.setPos(position.x - this.sprite.width / 1.15, position.y + this.sprite.height / 2);
                 break;
             case this.OrientationEnum.North:
+                this.collider = this.verticalCollider;
                 this.sprite = this.swordUp;
                 this.setPos(position.x + this.sprite.width / 3, position.y - this.sprite.height / 2);
                 break;
             case this.OrientationEnum.South:
+                this.collider = this.verticalCollider;
                 this.sprite = this.swordDown;
                 this.setPos(position.x + this.sprite.width / 2, position.y + this.sprite.height / 2);
                 break;
@@ -104,18 +108,22 @@ class Sword extends Utility{
 
         switch(this.orientation){
             case this.OrientationEnum.North:
+                this.collider = this.verticalCollider;
                 this.updateVector = new Vector2(0,-5);
                 this.sprite = this.animatedSwordUp;
                 break;
             case this.OrientationEnum.South:
+                this.collider = this.verticalCollider;
                 this.updateVector = new Vector2(0,5);
                 this.sprite = this.animatedSwordDown;
                 break;
             case this.OrientationEnum.East:
+                this.collider = this.horizontalCollider;
                 this.updateVector = new Vector2(5,0);
                 this.sprite = this.animatedSwordRight;
                 break;
             case this.OrientationEnum.West:
+                this.collider = this.horizontalCollider;
                 this.updateVector = new Vector2(-5,0);
                 this.sprite = this.animatedSwordLeft;
                 break;
@@ -128,32 +136,53 @@ class Sword extends Utility{
     setUpSprites(){
         // sword sprite
         this.swordRight = new AssetManager(0, 0, 64, 24, 0, 96);
-        this.swordRight.setSpriteSheet("assets/sword.png", 3, 1);
+        this.swordRight.setSpriteSheet("resources/sword.png", 3, 1);
         this.swordLeft = new AssetManager(0, 0, 64, 24, 0, 160);
-        this.swordLeft.setSpriteSheet("assets/sword.png", 3, 1); 
+        this.swordLeft.setSpriteSheet("resources/sword.png", 3, 1); 
         this.swordUp = new AssetManager(0, 0, 24, 64, 0, 0);
-        this.swordUp.setSpriteSheet("assets/sword.png", 3, 1); 
+        this.swordUp.setSpriteSheet("resources/sword.png", 3, 1); 
         this.swordDown = new AssetManager(0, 0, 24, 64, 0, 48);
-        this.swordDown.setSpriteSheet("assets/sword.png", 3, 1);
+        this.swordDown.setSpriteSheet("resources/sword.png", 3, 1);
 
         //animated sword
         this.animatedSwordRight = new AssetManager(0, 0, 64, 24, 0, 96);
-        this.animatedSwordRight.setSpriteSheet("assets/sword.png", 1, 2);
+        this.animatedSwordRight.setSpriteSheet("resources/sword.png", 1, 2);
         this.animatedSwordRight.horizontalSheet = false;
         this.animatedSwordLeft = new AssetManager(0, 0, 64, 24, 0, 160);
-        this.animatedSwordLeft.setSpriteSheet("assets/sword.png", 1, 2);
+        this.animatedSwordLeft.setSpriteSheet("resources/sword.png", 1, 2);
         this.animatedSwordLeft.horizontalSheet = false;
 
         this.animatedSwordUp = new AssetManager(0, 0, 24, 64, 0, 0);
-        this.animatedSwordUp.setSpriteSheet("assets/sword.png", 1, 2); 
+        this.animatedSwordUp.setSpriteSheet("resources/sword.png", 1, 2); 
         this.animatedSwordDown = new AssetManager(0, 0, 24, 64, 0, 48);
-        this.animatedSwordDown.setSpriteSheet("assets/sword.png", 1, 2);
+        this.animatedSwordDown.setSpriteSheet("resources/sword.png", 1, 2);
 
         this.explosion = new AssetManager(200,200,18,21,1,1);
-        this.explosion.setSpriteSheet("assets/SwordExplosion.png", 1, 2);
+        this.explosion.setSpriteSheet("resources/SwordExplosion.png", 1, 2);
         this.explosion.setScale(2.5, 2.5);
 
-        this.collider = new BoxCollider(new Vector2(0,0), 8 ,17, "sword", "obstacle");
+        this.horizontalCollider = new BoxCollider(
+            new Vector2(
+                this.position.x,
+                this.position.y,
+            ),
+            this.width,
+            this.height,
+            ['sword']
+        );
+
+        this.verticalCollider = new BoxCollider(
+            new Vector2(
+                this.position.x,
+                this.position.y,
+            ),
+            this.height,
+            this.width,
+            ['sword']
+        );
+        
+        gameNs.game.collisionManager.addBoxCollider(this.verticalCollider);
+        gameNs.game.collisionManager.addBoxCollider(this.horizontalCollider);
     }
 
     /**

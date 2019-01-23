@@ -32,7 +32,7 @@ class Player extends Character{
         this.meleeAttack = this.meleeAttack.bind(this);
         this.plantBomb = this.plantBomb.bind(this);
 
-        this.sword = new Sword(0, 0);
+        this.sword = new Sword(64, 24);
 
         this.health = 6;
         this.rupees = 0;
@@ -109,21 +109,17 @@ class Player extends Character{
         this.collider.shape.position = new Vector2(this.position.x, this.position.y);
 
         if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'heart')) {
-            console.log('heart');
             if(this.health < 6){
                 this.health += 1;
             }
         }
         if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'bomb')) {
-            console.log('bomb');
             this.bombs++;
         }
         if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'rupee')) {
-            console.log('rupee');
             this.rupees++;
         }
         if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'key')) {
-            console.log('key');
             this.keys++;
         }
 
@@ -242,35 +238,35 @@ class Player extends Character{
      */
     setUpSprites(){
         this.west = new AssetManager(this.position.x, this.position.y, 38, 63,0,36);
-        this.west.setSpriteSheet("assets/link.png", 4, 2);
+        this.west.setSpriteSheet("resources/link.png", 4, 2);
         this.west.horizontalSheet = false;
         this.west.flipped = true;
 
         this.east = new AssetManager(this.position.x, this.position.y, 38, 63,0,36);
-        this.east.setSpriteSheet("assets/link.png", 4, 2);
+        this.east.setSpriteSheet("resources/link.png", 4, 2);
         this.east.horizontalSheet = false;
 
         this.north = new AssetManager(this.position.x, this.position.y, 32, 62, 62,0);
-        this.north.setSpriteSheet("assets/link.png", 4, 2);
+        this.north.setSpriteSheet("resources/link.png", 4, 2);
         this.north.horizontalSheet = false;
 
         this.south = new AssetManager(this.position.x, this.position.y, 32, 63 , 0, 82);
-        this.south.setSpriteSheet("assets/link.png", 4, 3);
+        this.south.setSpriteSheet("resources/link.png", 4, 3);
         this.south.horizontalSheet = false;
 
         // attack animations
         this.attackWest = new AssetManager(this.position.x, this.position.y, 38, 63, 63, 36);
-        this.attackWest.setSpriteSheet("assets/link.png", 4, 1);
+        this.attackWest.setSpriteSheet("resources/link.png", 4, 1);
         this.attackWest.flipped = true;
 
         this.attackEast = new AssetManager(this.position.x, this.position.y, 38, 63, 63, 36);
-        this.attackEast.setSpriteSheet("assets/link.png", 4, 1);
+        this.attackEast.setSpriteSheet("resources/link.png", 4, 1);
 
         this.attackNorth = new AssetManager(this.position.x, this.position.y, 32, 63, 0, 0);
-        this.attackNorth.setSpriteSheet("assets/link.png", 3, 1);
+        this.attackNorth.setSpriteSheet("resources/link.png", 3, 1);
 
         this.attackSouth = new AssetManager(this.position.x, this.position.y, 32, 63, 0, 82);
-        this.attackSouth.setSpriteSheet("assets/link.png", 3, 1);
+        this.attackSouth.setSpriteSheet("resources/link.png", 3, 1);
 
         this.sprite = this.north;
         this.swordCharges = 5;

@@ -44,7 +44,7 @@ class Game
 
         gameNs.game.tileGrid = new Grid(64, 16, 13);
         //   Initialise game variables.
-        gameNs.game.player = new Player(new Vector2(400,400), new BoxCollider(new Vector2(400,400), 64, 64), null);
+        gameNs.game.player = new Player(new Vector2(400,400), new BoxCollider(new Vector2(400,400), 42, 64), null);
         gameNs.game.player.init(gameNs.game.canvas.ctx);
 
         gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
@@ -111,6 +111,6 @@ class Game
         gameNs.game.testBomb.render(this.ctx);
         gameNs.game.testRupee.render(this.ctx);
         gameNs.game.testKey.render(this.ctx);
-        gameNs.game.interface.render(this.ctx);
+        //gameNs.game.interface.render(this.ctx);
     }
 }

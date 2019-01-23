@@ -15,11 +15,12 @@ class Utility{
             "South":3,
             "West":4
         });
-
+        this.width = width;
+        this.height = height;
+        this.collider = {};
         this.orientation = this.OrientationEnum.North;
         this.position = new Vector2(0,0);
         this.alive = false;
-        this.collider = {};
         this.sprite = {};
     }
 
@@ -31,7 +32,5 @@ class Utility{
     setPos(x, y){
         this.position.x = x;
         this.position.y = y;
-        this.collider.position.x = x;
-        this.collider.position.y = y;
     }
 }
