@@ -14,6 +14,7 @@ class MenuScene
   {
     this.title = title;
     this.curX = 250;
+    gameNs.game.up = false;
     gameNs.game.curY = 300;
     //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
     this.playBtn = new Image();
@@ -47,6 +48,8 @@ class MenuScene
         console.log("change scene");
       }
     }
+
+
       /*if (this.checkCollisionBetween(300, 350, 300, 100))
       {
         gameNs.sceneManager.goToScene(gameNs.help.title)
@@ -81,18 +84,23 @@ class MenuScene
 cursorMoveUp()
 {
   console.log("move up");
-  if (gameNs.game.curY === 300)
+  if ( gameNs.game.up === false)
   {
-    gameNs.game.curY -=0;
+    if (gameNs.game.curY === 300)
+    {
+      gameNs.game.curY -=0;
+    }
+    else {
+      gameNs.game.curY -= 100
+    }
   }
-  else {
-    gameNs.game.curY -= 100
-  }
+  gameNs.game.up = true;
+
 }
 
 cursorMoveDown()
 {
-  if (gameNs.game.curY === 900)
+  if (gameNs.game.curY === 950)
   {
     gameNs.game.curY +=0;
   }
