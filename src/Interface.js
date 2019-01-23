@@ -4,7 +4,6 @@
  */
 
 class Interface {
-
   /**
    * Creates the interface object
    * @param {number} screenWidth Width of the game screen

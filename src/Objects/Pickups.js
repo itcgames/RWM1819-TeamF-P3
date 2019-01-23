@@ -2,7 +2,7 @@
  * @description Recovery heart, picking one up heals the player
  * @author John O'Meara
  */
-class Heart extends Object {
+class Heart extends Objects {
 
   constructor(x, y) {
     super(
@@ -28,7 +28,7 @@ class Heart extends Object {
  * @description Bomb pickup, picking one up increases player bomb count
  * @author John O'Meara
  */
-class Bomb extends Object {
+class Bomb extends Objects {
   constructor(x,y) {
     super(
       "bomb",
@@ -52,7 +52,7 @@ class Bomb extends Object {
  * @description Rupee pickup, picking one up increases player rupee count
  * @author John O'Meara
  */
-class Rupee extends Object {
+class Rupee extends Objects {
   constructor(x,y) {
     super(
       "rupee",
@@ -76,7 +76,7 @@ class Rupee extends Object {
  * @description Key pickup, picking one up gives the player an extra key
  * @author John O'Meara
  */
-class Key extends Object {
+class Key extends Objects {
   constructor(x,y) {
     super(
       "key",
