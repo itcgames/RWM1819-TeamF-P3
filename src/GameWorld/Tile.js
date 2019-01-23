@@ -33,11 +33,13 @@ class Tile {
             ctx.rect(this.position.x, this.position.y, this.tileSize, this.tileSize);
             ctx.fill();
 
-            //  Draw a rectangle to represent the tile.
-            ctx.beginPath();
-            ctx.fillStyle = "White";
-            ctx.rect(this.position.x + 2, this.position.y + 2, this.tileSize - 2, this.tileSize - 2);
-            ctx.fill();
+            if (this.isTraversable) {
+                //  Draw a rectangle to represent the tile.
+                ctx.beginPath();
+                ctx.fillStyle = "White";
+                ctx.rect(this.position.x + 2, this.position.y + 2, this.tileSize - 2, this.tileSize - 2);
+                ctx.fill();
+            }
         }        
     }
 }

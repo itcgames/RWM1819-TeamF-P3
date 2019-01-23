@@ -10,7 +10,7 @@ class Grid {
      * @param {Integer} width The number of tiles in the grid along the x-axis.
      * @param {Integer} height The number of tiles in the grid along te y-axis.
      */
-    constructor(tileSize, width, height){
+    constructor(tileSize, width, height) {
         this.tileSize = tileSize;
         this.width = width;
         this.height = height;
@@ -29,11 +29,19 @@ class Grid {
      * Draws the grid.
      * @param {Canvas Context} ctx 
      */
-    draw(ctx){
+    draw(ctx) {
         this.tiles.forEach(tileRow => {
             tileRow.forEach(tile => {
                 tile.draw(ctx);
             });
         });
+    }
+
+    /**
+     * @param {Integer} x
+     * @param {Integer} y
+     */
+    getTile(x, y) {
+        return this.tiles[x][y];
     }
 }
