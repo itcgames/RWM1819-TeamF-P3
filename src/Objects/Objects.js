@@ -36,6 +36,7 @@ class Object {
       frameLeft
     );
     this.sprite.setSpriteSheet(filepath, ticksperframe, numberperframe);
+    this.sprite.setScale(w/frameWidth, h/frameHeight);
 
     // collider
     this.bounds = new BoxCollider(
