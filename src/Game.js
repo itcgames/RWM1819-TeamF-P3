@@ -23,6 +23,7 @@ class Game
 
         //   Initialise game variables.
         gameNs.game.input = new Input();
+        gameNs.game.globalInput = new Input();
         gameNs.sceneManager = new SceneManager();
         gameNs.splash = new SplashScreen("Splash");
         gameNs.menu = new MenuScene("Menu");
@@ -37,7 +38,7 @@ class Game
 
         // Interface testing
         gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
-        gameNs.game.input.bind(gameNs.game.interface.trigger, "p");
+        gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
 
         //   Initialise game variables.
         gameNs.game.collisionManager = new CollisionManager();
@@ -48,9 +49,13 @@ class Game
         gameNs.game.player.init(gameNs.game.canvas.ctx);
 
         gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
+        gameNs.game.input.bind(gameNs.game.player.moveUp, "W");
         gameNs.game.input.bind(gameNs.game.player.moveLeft, "a");
+        gameNs.game.input.bind(gameNs.game.player.moveLeft, "A");
         gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
+        gameNs.game.input.bind(gameNs.game.player.moveDown, "S");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
+        gameNs.game.input.bind(gameNs.game.player.moveRight, "D");
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
 
         gameNs.game.testHeart = new Heart(350,400);
@@ -69,11 +74,16 @@ class Game
         gameNs.game.prevTime = now;
 
         //  Update Game here.
-        let cols = gameNs.game.collisionManager.checkBoxColliderArray();
-
         gameNs.sceneManager.update();
-        gameNs.game.input.update();
-        gameNs.game.player.update(gameNs.game.dt, cols);
+        
+        gameNs.game.globalInput.update();
+
+        if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
+            gameNs.game.input.update();
+            let cols = gameNs.game.collisionManager.checkBoxColliderArray();
+            gameNs.game.player.update(gameNs.game.dt, cols);
+        }
+
 
         gameNs.game.interface.update();
 
