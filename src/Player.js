@@ -24,6 +24,22 @@ class Player{
         this.moveRight = this.moveRight.bind(this);
         this.meleeAttack = this.meleeAttack.bind(this);
 
+        this.health = 6;
+        this.rupees = 0;
+        this.bombs = 0;
+        this.keys = 0;
+
+        this.collider = new BoxCollider(
+            new Vector2(
+                this.position.x,
+                this.position.y,
+            ),
+            this.width,
+            this.height,
+            "player"
+        );
+        gameNs.game.collisionManager.addBoxCollider(this.collider);
+
         this.setUpSprites();
     }
 
@@ -45,7 +61,7 @@ class Player{
         this.sprite.frameIndex = 0;
     }
 
-    update(dt){
+    update(dt, cols){
         if(this.animating){
             this.sprite.update();
         }
@@ -67,6 +83,27 @@ class Player{
         }
 
         this.sprite.setPos(this.position.x, this.position.y);
+        this.collider.shape.position = new Vector2(this.position.x, this.position.y);
+
+        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'heart')) {
+            console.log('heart');
+            if(this.health < 6){
+                this.health += 1;
+            }
+        }
+        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'bomb')) {
+            console.log('bomb');
+            this.bombs++;
+        }
+        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'rupee')) {
+            console.log('rupee');
+            this.rupees++;
+        }
+        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'key')) {
+            console.log('key');
+            this.keys++;
+        }
+
         this.animating = false;
     }
 

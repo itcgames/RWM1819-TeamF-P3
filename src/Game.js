@@ -54,6 +54,9 @@ class Game
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
 
         gameNs.game.testHeart = new Heart(350,400);
+        gameNs.game.testBomb = new Bomb(550,400);
+        gameNs.game.testRupee = new Rupee(350,600);
+        gameNs.game.testKey = new Key(550,600);
     }
 
     /**
@@ -66,9 +69,11 @@ class Game
         gameNs.game.prevTime = now;
 
         //  Update Game here.
-        gameNs.sceneManager.update()
+        let cols = gameNs.game.collisionManager.checkBoxColliderArray();
+
+        gameNs.sceneManager.update();
         gameNs.game.input.update();
-        gameNs.game.player.update(gameNs.game.dt);
+        gameNs.game.player.update(gameNs.game.dt, cols);
 
         gameNs.game.interface.update();
 
@@ -93,6 +98,9 @@ class Game
 
         gameNs.game.player.draw(this.ctx);
         gameNs.game.testHeart.render(this.ctx);
+        gameNs.game.testBomb.render(this.ctx);
+        gameNs.game.testRupee.render(this.ctx);
+        gameNs.game.testKey.render(this.ctx);
         gameNs.game.interface.render(this.ctx);
     }
 }

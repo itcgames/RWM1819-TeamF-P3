@@ -27,7 +27,6 @@ class Interface {
     this.topHeight = 200;
 
     this.defaultHeight = (this.screen.h - this.topHeight)*-1;
-    this.goalHeight = this.defaultHeight;
 
     this.scrollSpeed = 10;
 
@@ -133,11 +132,32 @@ class Interface {
       this.map.h
     );
 
-    ctx.font = "60px comic sans"
+    //ctx.font = "60px comic sans"
     ctx.fillText(
       "Inventory", 
       50 + this.pos.x, 
       70 + this.pos.y);
+
+    ctx.fillText(
+      "Bombs: "+gameNs.game.player.bombs,
+      50 + this.pos.x,
+      800 + this.pos.y
+    )
+    ctx.fillText(
+      "Rupees: "+gameNs.game.player.rupees,
+      50 + this.pos.x,
+      820 + this.pos.y
+    )
+    ctx.fillText(
+      "Keys: "+gameNs.game.player.keys,
+      50 + this.pos.x,
+      840 + this.pos.y
+    )
+    ctx.fillText(
+      "will to live: "+0,
+      50 + this.pos.x,
+      860 + this.pos.y
+    )
   }
 
   /**
