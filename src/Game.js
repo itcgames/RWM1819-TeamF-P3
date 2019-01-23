@@ -17,22 +17,22 @@ class Game
         gameNs.game.canvas.width = window.innerWidth;
         gameNs.game.canvas.height = window.innerHeight;
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
-       gameNs.game.ctx.fillStyle = "green";
-       gameNs.game.ctx.font = "30px Pixel-Emulator.otf";
-       document.body.appendChild(gameNs.game.canvas);
+        gameNs.game.ctx.fillStyle = "green";
+        gameNs.game.ctx.font = "30px Pixel-Emulator.otf";
+        document.body.appendChild(gameNs.game.canvas);
 
-       //   Initialise game variables.
-       gameNs.game.input = new Input();
-       gameNs.sceneManager = new SceneManager();
-       gameNs.splash = new SplashScreen("Splash");
-       gameNs.menu = new MenuScene("Menu");
-       gameNs.play = new Play("Play");
+        //   Initialise game variables.
+        gameNs.game.input = new Input();
+        gameNs.sceneManager = new SceneManager();
+        gameNs.splash = new SplashScreen("Splash");
+        gameNs.menu = new MenuScene("Menu");
+        gameNs.play = new Play("Play");
 
-       gameNs.sceneManager.addScene(gameNs.splash);
-       gameNs.sceneManager.addScene(gameNs.menu);
-       gameNs.sceneManager.addScene(gameNs.play);
-       gameNs.sceneManager.goToScene(gameNs.splash.title);
-       this.update = this.update.bind(this);
+        gameNs.sceneManager.addScene(gameNs.splash);
+        gameNs.sceneManager.addScene(gameNs.menu);
+        gameNs.sceneManager.addScene(gameNs.play);
+        gameNs.sceneManager.goToScene(gameNs.splash.title);
+        this.update = this.update.bind(this);
 
 
         // Interface testing
@@ -52,6 +52,11 @@ class Game
         gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
+
+        gameNs.game.testHeart = new Heart(350,400);
+        gameNs.game.testBomb = new Bomb(550,400);
+        gameNs.game.testRupee = new Rupee(350,600);
+        gameNs.game.testKey = new Key(550,600);
     }
 
     /**
@@ -64,9 +69,11 @@ class Game
         gameNs.game.prevTime = now;
 
         //  Update Game here.
-        gameNs.sceneManager.update()
+        let cols = gameNs.game.collisionManager.checkBoxColliderArray();
+
+        gameNs.sceneManager.update();
         gameNs.game.input.update();
-        gameNs.game.player.update(gameNs.game.dt);
+        gameNs.game.player.update(gameNs.game.dt, cols);
 
         gameNs.game.interface.update();
 
@@ -90,7 +97,10 @@ class Game
         this.collisionManager.render(this.ctx);
 
         gameNs.game.player.draw(this.ctx);
-
+        gameNs.game.testHeart.render(this.ctx);
+        gameNs.game.testBomb.render(this.ctx);
+        gameNs.game.testRupee.render(this.ctx);
+        gameNs.game.testKey.render(this.ctx);
         gameNs.game.interface.render(this.ctx);
     }
 }
