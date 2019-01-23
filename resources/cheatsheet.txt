@@ -1,0 +1,6 @@
+02 = sand
+22 = door
+43 = green wall top
+60 = \ green wall
+61 = green wall
+62 = / green wall

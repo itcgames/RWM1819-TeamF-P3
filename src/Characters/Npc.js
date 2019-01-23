@@ -14,8 +14,9 @@ class Npc extends Character {
     constructor(position, collider, sprite, grid) {
         super(position, collider, sprite);
         this.grid = grid;
-        this.targetPos = new Vector2(this.position.x, this.position.y);
         this.tileSize = this.grid.tileSize;
+        this.updateGridPosition(this.tileSize);
+        this.targetPos = new Vector2(this.gridPosition.x, this.gridPosition.y);        
         this.tilesToLeft = 0;    //  The number of tiles to the left.
         this.tilesToRight = 0;   //  The number of tiles to the right.
     }
@@ -35,7 +36,7 @@ class Npc extends Character {
             //  Turn left or right.
             this.turn(leftWeight);
             //  If there is nowhere to go don't set a new target so we will immediately turn again.
-            if (this.tilesToLeft !== 0 && this.tilesToRight !== 0){
+            if (this.tilesToLeft === 0 && this.tilesToRight === 0){
                 /*  Do Nothing  */
             } else {
                 //  Pick a new target in the direction we are facing.

@@ -17,20 +17,25 @@ class Game
         gameNs.game.canvas.width = window.innerWidth;
         gameNs.game.canvas.height = window.innerHeight;
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
-        gameNs.game.ctx.fillStyle = "green";
-        gameNs.game.ctx.font = "30px Pixel-Emulator.otf";
         document.body.appendChild(gameNs.game.canvas);
 
         //   Initialise game variables.
         gameNs.game.prevTime = Date.now();
         gameNs.game.collisionManager = new CollisionManager();
 
+        CSV_Reader.CSV_ToArray('resources/levelCSV/Screen01.csv');
+
         gameNs.game.tileGrid = new Grid(64, 16, 13);    
-        gameNs.game.octo = new Octorok(new Vector2(0,0), new BoxCollider(), null, gameNs.game.tileGrid);  
-        gameNs.game.tileGrid.getTile(0, 2).isTraversable = false;  
-        gameNs.game.tileGrid.getTile(2, 1).isTraversable = false;  
-        gameNs.game.tileGrid.getTile(1, 2).isTraversable = false; 
-        gameNs.game.tileGrid.getTile(2, 0).isTraversable = false;  
+        gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
+        for(var i = 0; i < gameNs.game.tileGrid.width; i++){
+            gameNs.game.tileGrid.getTile(i, 0).isTraversable = false;
+            gameNs.game.tileGrid.getTile(i, 1).isTraversable = false;
+        }  
+
+        gameNs.game.tileGrid.getTile(5, 6).isTraversable = false;
+        gameNs.game.tileGrid.getTile(7, 12).isTraversable = false;
+        gameNs.game.tileGrid.getTile(2, 3).isTraversable = false;
+        gameNs.game.tileGrid.getTile(8, 7).isTraversable = false;
 
         gameNs.game.input = new Input();
         gameNs.game.sceneManager = new SceneManager();
@@ -43,7 +48,6 @@ class Game
         gameNs.game.sceneManager.addScene(gameNs.game.play);
         gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
         this.update = this.update.bind(this);
-
 
         // Interface testing
         gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
@@ -108,6 +112,6 @@ class Game
         gameNs.game.testBomb.render(this.ctx);
         gameNs.game.testRupee.render(this.ctx);
         gameNs.game.testKey.render(this.ctx);
-        gameNs.game.interface.render(this.ctx);
+        //gameNs.game.interface.render(this.ctx);
     }
 }
