@@ -3,12 +3,12 @@ class Game
     /**
      * Constructor function for Game class.
      */
-    constructor() {
 
+    constructor() {
     }
 
     /**
-     * Initialisation function for the Game class. 
+     * Initialisation function for the Game class.
      */
     init() {
         //  Initialise the canvas
@@ -17,17 +17,28 @@ class Game
         gameNs.game.canvas.width = window.innerWidth;
         gameNs.game.canvas.height = window.innerHeight;
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
-        
         gameNs.game.ctx.fillStyle = "green";
+        gameNs.game.ctx.font = "30px Pixel-Emulator.otf";
         document.body.appendChild(gameNs.game.canvas);
 
         //   Initialise game variables.
         gameNs.game.input = new Input();
+        gameNs.game.globalInput = new Input();
+        gameNs.sceneManager = new SceneManager();
+        gameNs.splash = new SplashScreen("Splash");
+        gameNs.menu = new MenuScene("Menu");
+        gameNs.play = new Play("Play");
+
+        gameNs.sceneManager.addScene(gameNs.splash);
+        gameNs.sceneManager.addScene(gameNs.menu);
+        gameNs.sceneManager.addScene(gameNs.play);
+        gameNs.sceneManager.goToScene(gameNs.splash.title);
+        this.update = this.update.bind(this);
 
         // Interface testing
         gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
-        gameNs.game.input.bind(gameNs.game.interface.trigger, "p");
-    
+        gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
+
         //   Initialise game variables.
         gameNs.game.collisionManager = new CollisionManager();
 
@@ -37,10 +48,19 @@ class Game
         gameNs.game.player.init(gameNs.game.canvas.ctx);
 
         gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
+        gameNs.game.input.bind(gameNs.game.player.moveUp, "W");
         gameNs.game.input.bind(gameNs.game.player.moveLeft, "a");
+        gameNs.game.input.bind(gameNs.game.player.moveLeft, "A");
         gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
+        gameNs.game.input.bind(gameNs.game.player.moveDown, "S");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
+        gameNs.game.input.bind(gameNs.game.player.moveRight, "D");
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
+
+        gameNs.game.testHeart = new Heart(350,400);
+        gameNs.game.testBomb = new Bomb(550,400);
+        gameNs.game.testRupee = new Rupee(350,600);
+        gameNs.game.testKey = new Key(550,600);
     }
 
     /**
@@ -53,13 +73,21 @@ class Game
         gameNs.game.prevTime = now;
 
         //  Update Game here.
-        gameNs.game.input.update();
-        gameNs.game.player.update(gameNs.game.dt);
-    
+        gameNs.sceneManager.update();
+        
+        gameNs.game.globalInput.update();
+
+        if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
+            gameNs.game.input.update();
+            let cols = gameNs.game.collisionManager.checkBoxColliderArray();
+            gameNs.game.player.update(gameNs.game.dt, cols);
+        }
+
+
         gameNs.game.interface.update();
 
         //  Draw new frame.
-        gameNs.game.draw();        
+        gameNs.game.draw();
 
         // Recursive call to Update method.
         window.requestAnimationFrame(gameNs.game.update);
@@ -77,9 +105,12 @@ class Game
         //  Render game objects here.
         this.tileGrid.draw(this.ctx);
         this.collisionManager.render(this.ctx);
-    
+
         gameNs.game.player.draw(this.ctx);
-        
+        gameNs.game.testHeart.render(this.ctx);
+        gameNs.game.testBomb.render(this.ctx);
+        gameNs.game.testRupee.render(this.ctx);
+        gameNs.game.testKey.render(this.ctx);
         gameNs.game.interface.render(this.ctx);
     }
 }

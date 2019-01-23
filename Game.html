@@ -4,10 +4,13 @@
     <head>
         <meta charset="utf-8"/>
         <title>Game2</title>
+        <style>
+        @import url(https://fonts.googleapis.com/css?family=VT323);
+        </style>
     </head>
 
     <body onload=main()>
-        
+
         <!--Collision Submodule-->
         <script src="submodules/RWM1819-Collision-A/src/Vector2.js"></script>
         <script src="submodules/RWM1819-Collision-A/src/MathHelper.js"></script>
@@ -20,7 +23,7 @@
         <script src="submodules/RWM1819-Collision-A/src/Collider/BoxCollider.js"></script>
         <script src="submodules/RWM1819-Collision-A/src/Collider/PolygonCollider.js"></script>
         <script src="submodules/RWM1819-Collision-A/src/CollisionManager.js"></script>
-        
+
         <!--          Submodules        -->
         <script src="submodules\RWM1819-Asset-B\AssetManager.js"></script>
         <script src="submodules\RWM1819-Input-A\src\input.js"></script>
@@ -31,12 +34,21 @@
         <script src="src/Characters/Character.js"></script>
         <script src="src/Characters/Player.js"></script>
         <script src="src/GameWorld/Tile.js"></script>
-        <script src="src/GameWorld/Grid.js"></script>        
+        <script src="src/GameWorld/Grid.js"></script>
+
+        <script src="src/Objects/Objects.js"></script>
+        <script src="src/Objects/Pickups.js"></script>
+
         <script src="src/Game.js"></script>
         <script src="src/Interface.js"></script>
+        <script src="src/gestureManager.js"></script>
+        <script src="src/SplashScreen.js"></script>
+        <script src="src/Play.js"></script>
+        <script src="src/SceneManager.js"></script>
+        <script src="src/MenuScene.js"></script>
 
         <!--         Entry point        -->
-        <script src="src/Main.js"></script>
 
+        <script src="src/Main.js"></script>
     </body>
 </html>

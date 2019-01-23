@@ -32,7 +32,23 @@ class Player extends Character{
         this.meleeAttack = this.meleeAttack.bind(this);
         this.plantBomb = this.plantBomb.bind(this);
 
-        this.sword = new Sword(8, 16);
+        this.sword = new Sword(0, 0);
+
+        this.health = 6;
+        this.rupees = 0;
+        this.bombs = 0;
+        this.keys = 0;
+
+        this.collider = new BoxCollider(
+            new Vector2(
+                this.position.x,
+                this.position.y,
+            ),
+            this.width,
+            this.height,
+            "player"
+        );
+        gameNs.game.collisionManager.addBoxCollider(this.collider);
 
         this.setUpSprites();
     }
@@ -65,7 +81,7 @@ class Player extends Character{
      * Update the sprite position.
      * @param {int} dt - clock 
      */
-    update(dt){
+    update(dt, cols){
         if(this.animating){
             this.sprite.update();
         }
@@ -90,8 +106,28 @@ class Player extends Character{
         }
 
         this.sprite.setPos(this.position.x, this.position.y);
-        this.collider.position.x = this.position.x;
-        this.collider.position.y = this.position.y;
+        this.collider.shape.position = new Vector2(this.position.x, this.position.y);
+
+        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'heart')) {
+            console.log('heart');
+            if(this.health < 6){
+                this.health += 1;
+            }
+        }
+        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'bomb')) {
+            console.log('bomb');
+            this.bombs++;
+        }
+        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'rupee')) {
+            console.log('rupee');
+            this.rupees++;
+        }
+        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'key')) {
+            console.log('key');
+            this.keys++;
+        }
+
+
         this.animating = false;
     }
 
