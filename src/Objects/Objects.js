@@ -2,7 +2,7 @@
  * @description Items that appear on overworld and can be interacted with
  * @author John O'Meara
  */
-class Object {
+class Objects {
 
   /**
    * Constructs the base object class
