@@ -1,4 +1,13 @@
-class Projectile{
+/**
+ * @description Project base class for creating shooting objects
+ * @author John O'Grady
+ */
+class Utility{
+    /**
+     * 
+     * @param {*} width 
+     * @param {*} height 
+     */
     constructor(width, height){
         this.OrientationEnum = Object.freeze({
             "North":1,
@@ -10,10 +19,15 @@ class Projectile{
         this.orientation = this.OrientationEnum.North;
         this.position = new Vector2(0,0);
         this.alive = false;
-        this.collider = new BoxCollider(this.position, width, height, "sword", "obstacle");
+        this.collider = {};
         this.sprite = {};
     }
 
+    /**
+     * 
+     * @param {*} x 
+     * @param {*} y 
+     */
     setPos(x, y){
         this.position.x = x;
         this.position.y = y;
