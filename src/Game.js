@@ -22,9 +22,7 @@ class Game
         document.body.appendChild(gameNs.game.canvas);
 
         //   Initialise game variables.
-    
         gameNs.game.input = new Input();
-
 
         // Interface testing
         gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
@@ -72,11 +70,12 @@ class Game
      */
     draw() {
         //  Clear previous frame.
+        
+        this.ctx.imageSmoothingEnabled = false;
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 
         //  Render game objects here.
         this.tileGrid.draw(this.ctx);
-
         this.collisionManager.render(this.ctx);
     
         gameNs.game.player.draw(this.ctx);

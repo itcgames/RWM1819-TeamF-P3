@@ -30,6 +30,9 @@ class Player extends Character{
         this.moveLeft = this.moveLeft.bind(this);
         this.moveRight = this.moveRight.bind(this);
         this.meleeAttack = this.meleeAttack.bind(this);
+        this.plantBomb = this.plantBomb.bind(this);
+
+        this.swordProjectile = new Sword(8, 16);
 
         this.setUpSprites();
     }
@@ -80,10 +83,15 @@ class Player extends Character{
             if(this.attackDelay < 0){
                 this.attacked = false;
             }
-            
+        }
+
+        if(this.swordProjectile.alive){
+            this.swordProjectile.update(dt);
         }
 
         this.sprite.setPos(this.position.x, this.position.y);
+        this.collider.position.x = this.position.x;
+        this.collider.position.y = this.position.y;
         this.animating = false;
     }
 
@@ -135,6 +143,15 @@ class Player extends Character{
         }
     }
 
+    launchSword(){
+        this.swordProjectile.setPos(this.position.x, this.position.y);
+        this.swordProjectile.fire(this.orientation);
+    }
+
+    plantBomb(){
+
+    }
+
     /**
      * melee attack function - check the direction the player is facing
      * and attack in that dirction - create a timer to determine how long the 
@@ -145,15 +162,35 @@ class Player extends Character{
             switch(this.orientation){
                 case this.OrientationEnum.East:
                     this.sprite = this.attackEast;
+                    this.sword = this.swordRight;
+                    this.sword.setPos(this.position.x + this.sword.width / 2, this.position.y + this.sword.height);
+                    if(this.swordCharges > 0){
+                        this.launchSword();
+                    }
                     break;
                 case this.OrientationEnum.West:
                     this.sprite = this.attackWest;
+                    this.sword = this.swordLeft;
+                    this.sword.setPos(this.position.x - this.sword.width * 2, this.position.y + this.sword.height);
+                    if(this.swordCharges > 0){
+                        this.launchSword();
+                    }
                     break;
                 case this.OrientationEnum.North:
                     this.sprite = this.attackNorth;
+                    this.sword = this.swordUp;
+                    this.sword.setPos(this.position.x + this.sword.width * 2, this.position.y - this.sword.height * 2);
+                    if(this.swordCharges > 0){
+                        this.launchSword();
+                    }
                     break;
                 case this.OrientationEnum.South:
                     this.sprite = this.attackSouth;
+                    this.sword = this.swordDown;
+                    this.sword.setPos(this.position.x + this.sword.width * 1.5, this.position.y + this.sword.height * 2);
+                    if(this.swordCharges > 0){
+                        this.launchSword();
+                    }
                     break;
             }
             this.attackWindow = 10;
@@ -167,12 +204,17 @@ class Player extends Character{
      * sizing up the sprite and rendering it
      */
     draw(ctx){
+        if(this.attacking){
+            this.sword.setScale(2.5,2.5);
+            this.sword.draw(ctx);
+        }
+        if(this.swordProjectile.alive){
+            this.swordProjectile.draw(ctx);
+        }
+
         this.sprite.horizontalSheet = false;
         this.sprite.setScale(2.5,2.5);
         this.sprite.draw(ctx);
-
-        this.sword.setScale(2.5,2.5);
-        this.sword.draw(ctx);
     }
 
     /**
@@ -204,16 +246,15 @@ class Player extends Character{
         // sword sprite
         this.swordRight = new AssetManager(this.position.x, this.position.y, 16, 8, 0, 0);
         this.swordRight.setSpriteSheet("assets/Sword.png", 3, 1);
-        this.swordLeft = new AssetManager(200, 200, 16, 8, 0, 0);
+        this.swordLeft = new AssetManager(200, 200, 16, 8, 0, 52);
         this.swordLeft.setSpriteSheet("assets/Sword.png", 3, 1); 
-        this.swordLeft.flipped = true;
-        this.swordUp = new AssetManager(200, 200, 8, 16, 0, 18);
+        this.swordUp = new AssetManager(200, 200, 8, 16, 0, 34);
         this.swordUp.setSpriteSheet("assets/Sword.png", 3, 1); 
-        this.swordUp.flipped = true;
         this.swordDown = new AssetManager(200, 200, 8, 16, 0, 18);
-        this.swordDown.setSpriteSheet("assets/Sword.png", 3, 1); 
+        this.swordDown.setSpriteSheet("assets/Sword.png", 3, 1);
 
-        this.sword = this.swordUp;
+        this.sword = this.swordDown;
         this.sprite = this.north;
+        this.swordCharges = 5;
     }
 }
