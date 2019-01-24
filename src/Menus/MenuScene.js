@@ -114,7 +114,7 @@ cursorMoveDown()
     {
     gameNs.game.curY +=0;
     }
-    if (gameNs.game.curY === 400)
+    else if (gameNs.game.curY === 400)
     {
       gameNs.game.curY += 175;
       console.log(  gameNs.game.curY);
@@ -128,9 +128,11 @@ cursorMoveDown()
 
 goToPlay()
 {
+  gameNs.game.play.initWorld();
   if (gameNs.game.spaceAlive === true)
   {
       gameNs.game.sceneManager.goToScene("Play");
+
   }
 
 }
@@ -145,10 +147,9 @@ goToInstructions()
 
 navigation()
 {
-  gameNs.game.sceneManager.goToScene("Play");
-  if (gameNs.game.curY === 575)
+  if (gameNs.game.curY === 675)
   {
-    gameNs.sceneManager.goToScene("Play");
+    gameNs.game.sceneManager.goToScene("Play");
   }
 
   if (gameNs.game.curY === 775)

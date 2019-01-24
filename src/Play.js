@@ -19,7 +19,7 @@ class Play
   initWorld()
   {
     gameNs.game.tileGrid = new Grid(64, 16, 13);
-
+    console.log("intiWOrld");
     // Interface testing
     gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
     gameNs.game.input.bind(gameNs.game.interface.trigger, "p");
@@ -35,18 +35,17 @@ class Play
 
     gameNs.game.interface.update()
 
-    console.log("updating play");
   }
 
-  draw()
+  render()
   {
     //  Render game objects here.
-    this.tileGrid.draw(this.ctx);
+      gameNs.game.tileGrid.draw(gameNs.game.ctx);
 
     //this.collisionManager.render(this.ctx);
 
-    gameNs.game.player.draw(this.ctx);
+    gameNs.game.player.draw(gameNs.game.ctx);
 
-    gameNs.game.interface.render(this.ctx);
+    gameNs.game.interface.render(gameNs.game.ctx);
   }
 }

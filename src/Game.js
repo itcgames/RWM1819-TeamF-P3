@@ -56,6 +56,7 @@ class Game
         gameNs.game.input.bind(gameNs.game.splash.goNext, " ")
 
         gameNs.game.input.setHoldValue(1000);
+        gameNs.game.play.initWorld();
     }
 
     /**
