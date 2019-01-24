@@ -110,6 +110,6 @@ class Game
         gameNs.game.testBomb.render(this.ctx);
         gameNs.game.testRupee.render(this.ctx);
         gameNs.game.testKey.render(this.ctx);
-        gameNs.game.interface.render(this.ctx);
+        //gameNs.game.interface.render(this.ctx);
     }
 }
