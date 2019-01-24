@@ -40,9 +40,6 @@ class Game
         //   Initialise game variables.
         gameNs.game.prevTime = Date.now();
 
-        gameNs.game.tileGrid = new Grid(64, "Screen11");    
-        gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
-
         gameNs.game.sceneManager.addScene(gameNs.game.splash);
         gameNs.game.sceneManager.addScene(gameNs.game.menu);
         gameNs.game.sceneManager.addScene(gameNs.game.play);
