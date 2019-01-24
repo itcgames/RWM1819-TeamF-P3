@@ -299,18 +299,18 @@ class Npc extends Character {
          * Move along the x-axis.
          */
         if (this.gridPosition.x < this.targetPos.x){
-            this.position.x += this.tileSize;
+            this.checkMovement(new Vector2(this.tileSize, 0));
         } else if (this.gridPosition.x > this.targetPos.x) {
-            this.position.x -= this.tileSize;
+            this.checkMovement(new Vector2(-this.tileSize, 0));
         }
 
         /**
          * Move along the y-axis.
          */
         if (this.gridPosition.y < this.targetPos.y){
-            this.position.y += this.tileSize;
+            this.checkMovement(new Vector2(0, this.tileSize));
         } else if (this.gridPosition.y > this.targetPos.y) {
-            this.position.y -= this.tileSize;
+            this.checkMovement(new Vector2(0, -this.tileSize));
         }
 
         if(this.collider !== null){
@@ -325,5 +325,26 @@ class Npc extends Character {
      */
     static RandomNum(min, max) {
         return Math.floor((Math.random() * max) - min);
+    }
+
+    /**
+     * 
+     * @param {Vector2} attemptedMovement 
+     */
+    checkMovement(attemptedMovement){
+        var tempGridPosition = this.grid.screenToGridCoords(this.position.add(attemptedMovement));
+        if (this.position.x + attemptedMovement.x < 0 || this.position.x + attemptedMovement.x > this.grid.width * this.tileSize || !this.grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
+            //  If we can't do the movement set the target to our current position.
+            this.targetPos = new Vector2(this.gridPosition.x, this.gridPosition.y);        
+        } else {
+            this.position.x += attemptedMovement.x; 
+        }
+
+        if (this.position.y + attemptedMovement.y < 0 || this.position.y + attemptedMovement.y > this.grid.height * this.tileSize || !this.grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
+            //  If we can't do the movement set the target to our current position.
+            this.targetPos = new Vector2(this.gridPosition.x, this.gridPosition.y);        
+        } else {
+            this.position.y += attemptedMovement.y;
+        }
     }
 }
