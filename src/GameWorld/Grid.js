@@ -23,10 +23,13 @@ class Grid {
       "Dead_Tree"         :  20,
       "Door"              :  23,
       "Tree"              :  26,
-      "Green_Wall_Top"    :  43,
-      "Right_Green_Wall"  :  60,
-      "Green_Wall"        :  61,
-      "Left_Green_Wall"   :  62,
+      "Top_Brown_Wall"    :  38,
+      "Top_Green_Wall_v1" :  43,
+      "Top_Green_Wall_v2" :  44,
+      "Brown_Wall"        :  56,
+      "Right_Green_Wall"  :  61,
+      "Green_Wall"        :  62,
+      "Left_Green_Wall"   :  63,
       "Water"             :  98,
       "Bridge"            : 132,
     });
@@ -42,10 +45,76 @@ class Grid {
     for (var i = 0; i < this.width; i++) {
       this.tiles[i] = [];
       for (var j = 0; j < this.height; j++) {
-        this.tiles[i][j] = new Tile(new Vector2((i * this.tileSize) + this.position.x, (j * this.tileSize) + this.position.y), null, true, this.tileSize); //  Passing null as the sprite for the time being.
+        var tileColour = "";
+        switch (this.screenData.tileData[i + (j * this.width)]) {
+          case this.TileEnum.Brown_Rock:
+            tileColour = "Brown";
+            break;
+
+          case this.TileEnum.Sand:
+            tileColour = "Bisque";
+            break;
+
+          case this.TileEnum.Green_Rock:
+            tileColour = "Green";
+            break;
+
+          case this.TileEnum.Dead_Tree:
+            tileColour = "Peru";
+            break;
+
+          case this.TileEnum.Door:
+            tileColour = "Black";
+            break;
+
+          case this.TileEnum.Tree:
+            tileColour = "SpringGreen";
+            break;
+
+          case this.TileEnum.Top_Brown_Wall:
+            tileColour = "SandyBrown";
+            break;
+
+          case this.TileEnum.Top_Green_Wall_v1:
+            tileColour = "DarkOliveGreen";
+            break;
+            
+          case this.TileEnum.Top_Green_Wall_v2:
+            tileColour = "DarkOliveGreen";
+            break;
+
+          case this.TileEnum.Brown_Wall:
+            tileColour = "Sienna";
+            break;
+
+          case this.TileEnum.Right_Green_Wall:
+            tileColour = "DarkOliveGreen";
+            break;
+
+          case this.TileEnum.Green_Wall:
+            tileColour = "DarkGreen";
+            break;
+
+          case this.TileEnum.Left_Green_Wall:
+            tileColour = "DarkOliveGreen";
+            break;
+
+          case this.TileEnum.Water:
+            tileColour = "RoyalBlue";
+            break;
+
+          case this.TileEnum.Bridge:
+            tileColour = "SaddleBrown";
+            break;
         
-        var tempTileValue = this.screenData.tileData[i + (j * this.width)];
-        if (CollisionManager.ArrayContainsElement(this.TraversableTiles, tempTileValue)){
+          default:
+            tileColour = "Magenta";
+            break;
+        }
+        
+        this.tiles[i][j] = new Tile(new Vector2((i * this.tileSize) + this.position.x, (j * this.tileSize) + this.position.y), null, true, this.tileSize, tileColour); //  Passing null as the sprite for the time being.        
+        var tileType = this.screenData.tileData[i + (j * this.width)];
+        if (CollisionManager.ArrayContainsElement(this.TraversableTiles, tileType)){
           this.tiles[i][j].isTraversable = true;
         } else {
           this.tiles[i][j].isTraversable = false;
