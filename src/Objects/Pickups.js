@@ -11,8 +11,8 @@ class Heart extends Objects {
     y,
     25,     // Width
     25,     // Height
-    847,    // frameWidth
-    768,    // frameHeight
+    48,    // frameWidth
+    45,    // frameHeight
     0,      // frameTop
     0,      // frameLeft
     0,
@@ -20,7 +20,7 @@ class Heart extends Objects {
     "resources/recoveryheart.png",
     )
     //this.sprite.setScale(0.03, 0.03);
-    this.sprite.setScale(25/847, 25/768);
+    //this.sprite.setScale(25/847, 25/768);
   }
 }
 
@@ -36,15 +36,15 @@ class Bomb extends Objects {
       y,
       25,     // Width
       25,     // Height
-      256,    // frameWidth
-      256,    // frameHeight
+      50,    // frameWidth
+      61,    // frameHeight
       0,      // frameTop
       0,      // frameLeft
       0,
       0,
       "resources/bomb.png",
       )
-      this.sprite.setScale(0.1, 0.1);
+      //this.sprite.setScale(1, 0.1);
   }
 }
 
@@ -58,17 +58,17 @@ class Rupee extends Objects {
       "rupee",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      342,    // frameWidth
-      569,    // frameHeight
+      15,     // Width
+      30,     // Height
+      40,    // frameWidth
+      60,    // frameHeight
       0,      // frameTop
       0,      // frameLeft
       0,
       0,
       "resources/rupee.png",
       )
-      this.sprite.setScale(25/342, 25/569);
+      //this.sprite.setScale(25/342, 25/569);
   }
 }
 
@@ -92,6 +92,6 @@ class Key extends Objects {
       0,
       "resources/key.png",
       )
-      this.sprite.setScale(25/512, 25/512);
+      //this.sprite.setScale(25/512, 25/512);
   }
 }

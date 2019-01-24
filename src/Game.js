@@ -27,6 +27,7 @@ class Game
         gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
 
         gameNs.game.input = new Input();
+        gameNs.game.globalInput = new Input();
         gameNs.game.sceneManager = new SceneManager();
         gameNs.game.splash = new SplashScreen("Splash");
         gameNs.game.menu = new MenuScene("Menu");
@@ -40,15 +41,19 @@ class Game
 
         // Interface testing
         gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
-        gameNs.game.input.bind(gameNs.game.interface.trigger, "p");
+        gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
         
         gameNs.game.player = new Player();
         gameNs.game.player.init(gameNs.game.canvas.ctx);
 
         gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
+        gameNs.game.input.bind(gameNs.game.player.moveUp, "W");
         gameNs.game.input.bind(gameNs.game.player.moveLeft, "a");
+        gameNs.game.input.bind(gameNs.game.player.moveLeft, "A");
         gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
+        gameNs.game.input.bind(gameNs.game.player.moveDown, "S");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
+        gameNs.game.input.bind(gameNs.game.player.moveRight, "D");
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
 
         gameNs.game.testHeart = new Heart(350,400);
@@ -67,12 +72,16 @@ class Game
         gameNs.game.prevTime = now;
 
         //  Update Game here.
-        gameNs.game.octo.update(gameNs.game.dt);
-        let cols = gameNs.game.collisionManager.checkBoxColliderArray();
-
         gameNs.game.sceneManager.update();
-        gameNs.game.input.update();
-        gameNs.game.player.update(gameNs.game.dt, cols);
+        
+        gameNs.game.globalInput.update();
+
+        if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
+            gameNs.game.input.update();
+            let cols = gameNs.game.collisionManager.checkBoxColliderArray();
+            gameNs.game.player.update(gameNs.game.dt, cols);
+            gameNs.game.octo.update(gameNs.game.dt);
+        }
 
         gameNs.game.interface.update();
 
@@ -101,6 +110,6 @@ class Game
         gameNs.game.testBomb.render(this.ctx);
         gameNs.game.testRupee.render(this.ctx);
         gameNs.game.testKey.render(this.ctx);
-        //gameNs.game.interface.render(this.ctx);
+        gameNs.game.interface.render(this.ctx);
     }
 }
