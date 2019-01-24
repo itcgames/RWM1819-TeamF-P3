@@ -130,6 +130,8 @@ class Player extends Character{
         {
           gameNs.game.octo.update(gameNs.game.dt);
         }
+
+
     }
 
     /**
