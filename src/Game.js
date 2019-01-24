@@ -23,19 +23,8 @@ class Game
         gameNs.game.prevTime = Date.now();
         gameNs.game.collisionManager = new CollisionManager();
 
-        CSV_Reader.CSV_ToArray('resources/levelCSV/Screen01.csv');
-
-        gameNs.game.tileGrid = new Grid(64, 16, 13);    
+        gameNs.game.tileGrid = new Grid(64, "Screen01");    
         gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
-        for(var i = 0; i < gameNs.game.tileGrid.width; i++){
-            gameNs.game.tileGrid.getTile(i, 0).isTraversable = false;
-            gameNs.game.tileGrid.getTile(i, 1).isTraversable = false;
-        }  
-
-        gameNs.game.tileGrid.getTile(5, 6).isTraversable = false;
-        gameNs.game.tileGrid.getTile(7, 12).isTraversable = false;
-        gameNs.game.tileGrid.getTile(2, 3).isTraversable = false;
-        gameNs.game.tileGrid.getTile(8, 7).isTraversable = false;
 
         gameNs.game.input = new Input();
         gameNs.game.sceneManager = new SceneManager();
