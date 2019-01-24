@@ -11,8 +11,15 @@ class Play
   constructor()
   {
     this.overworld = [[]];
+    this.activeScreen = {
+      x: 0,
+      y: 0
+    };
     this.scrolling = false;
+
+    //this.camera = new Camera(0,0,64*10,13*10);
   }
+
     /**
   * initWorld
   * @desc Initialises game world
@@ -28,10 +35,14 @@ class Play
   update()
   {
     console.log("updating play");
+
+    for(i = 0; i < overworld[active.x][active.y].grid.enemyList.length(); i++){
+      overworld[active.x][active.y].grid.enemyList[i];
+    }
   }
 
   render()
   {
-
+    //this.camera.draw(0,ctx);
   }
 }

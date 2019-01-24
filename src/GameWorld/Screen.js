@@ -7,10 +7,11 @@ class Screen {
   /**
    * 
    * @param {NPC Array} enemies 
+   * @param {string} name
    */
-  constructor(enemies){
+  constructor(name){
 
-    this.grid = new Grid(64,16,11);
+    this.grid = new Grid(64,name);
 
     this.enemyList = [];
     this.pickupList = [];

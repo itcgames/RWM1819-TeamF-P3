@@ -23,8 +23,37 @@ class Game
         gameNs.game.prevTime = Date.now();
         gameNs.game.collisionManager = new CollisionManager();
 
-        gameNs.game.tileGrid = new Grid(64, "Screen01");    
-        gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
+        //gameNs.game.tileGrid = new Grid(64, "Screen01");  
+        gameNs.game.testScreen = new Screen("Screen01");
+
+        //gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
+        gameNs.game.testScreen.enemyList.push(
+            new Octorok(
+                new Vector2(
+                    5 * gameNs.game.testScreen.grid.tileSize, 
+                    4 * gameNs.game.testScreen.grid.tileSize), 
+                null, 
+                null, 
+                gameNs.game.testScreen.grid
+            ),
+            new Octorok(
+                new Vector2(
+                    5 * gameNs.game.testScreen.grid.tileSize, 
+                    4 * gameNs.game.testScreen.grid.tileSize), 
+                null, 
+                null, 
+                gameNs.game.testScreen.grid
+            ),
+            new Octorok(
+                new Vector2(
+                    5 * gameNs.game.testScreen.grid.tileSize, 
+                    4 * gameNs.game.testScreen.grid.tileSize), 
+                null, 
+                null, 
+                gameNs.game.testScreen.grid
+            )
+        );
+
 
         gameNs.game.input = new Input();
         gameNs.game.globalInput = new Input();
@@ -60,6 +89,13 @@ class Game
         gameNs.game.testBomb = new Bomb(550,400);
         gameNs.game.testRupee = new Rupee(350,600);
         gameNs.game.testKey = new Key(550,600);
+
+        this.camera = new Camera(
+            0,
+            0,
+            gameNs.game.canvas.width,
+            gameNs.game.canvas.height
+        );
     }
 
     /**
@@ -80,7 +116,11 @@ class Game
             gameNs.game.input.update();
             let cols = gameNs.game.collisionManager.checkBoxColliderArray();
             gameNs.game.player.update(gameNs.game.dt, cols);
-            gameNs.game.octo.update(gameNs.game.dt);
+
+            for(let i = 0; i < gameNs.game.testScreen.enemyList.length; i++){
+                gameNs.game.testScreen.enemyList[i].update(gameNs.game.dt);
+            }
+            //gameNs.game.octo.update(gameNs.game.dt);
         }
 
         gameNs.game.interface.update();
@@ -98,10 +138,15 @@ class Game
     draw() {
         //  Clear previous frame.
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+        //this.camera.draw(0,this.ctx);
 
         //  Render game objects here.
-        this.tileGrid.draw(this.ctx);
-        this.octo.draw(this.ctx);
+        gameNs.game.testScreen.grid.draw(this.ctx);
+        for(let i = 0; i < gameNs.game.testScreen.enemyList.length; i++){
+            gameNs.game.testScreen.enemyList[i].draw(this.ctx);
+        }
+        //this.tileGrid.draw(this.ctx);
+        //this.octo.draw(this.ctx);
 
         this.collisionManager.render(this.ctx);
 
@@ -109,8 +154,10 @@ class Game
         gameNs.game.testBomb.render(this.ctx);
         gameNs.game.testRupee.render(this.ctx);
         gameNs.game.testKey.render(this.ctx);
+        
+        gameNs.game.player.draw(this.ctx);
+
         gameNs.game.interface.render(this.ctx);
 
-        gameNs.game.player.draw(this.ctx);
     }
 }

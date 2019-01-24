@@ -17,7 +17,7 @@ class Heart extends Objects {
     0,      // frameLeft
     0,
     0,
-    "resources/recoveryheart.png",
+    "resources/heart.png",
     )
     //this.sprite.setScale(0.03, 0.03);
     //this.sprite.setScale(25/847, 25/768);
