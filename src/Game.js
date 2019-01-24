@@ -40,7 +40,6 @@ class Game
         //   Initialise game variables.
         gameNs.game.prevTime = Date.now();
 
-        gameNs.game.tileGrid = new Grid(64, "Screen01");
         gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
 
 
@@ -71,13 +70,13 @@ class Game
         gameNs.game.input.bind(gameNs.game.player.plantBomb, "q");
         gameNs.game.input.bind(gameNs.game.player.plantBomb, "Q");
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
-        gameNs.game.input.bind(gameNs.game.menu.cursorMoveUp, "ArrowUp");
-        gameNs.game.input.bind(gameNs.game.menu.cursorMoveDown, "ArrowDown");
+        gameNs.game.globalInput.bind(gameNs.game.menu.cursorMoveUp, "ArrowUp");
+        gameNs.game.globalInput.bind(gameNs.game.menu.cursorMoveDown, "ArrowDown");
 
 
-        gameNs.game.input.bind(gameNs.game.menu.navigation, "Enter");
-        gameNs.game.input.bind(gameNs.game.instructions.comeBack, "Escape");
-        gameNs.game.input.bind(gameNs.game.splash.goNext, " ")
+        gameNs.game.globalInput.bind(gameNs.game.menu.navigation, "Enter");
+        gameNs.game.globalInput.bind(gameNs.game.instructions.comeBack, "Escape");
+        gameNs.game.globalInput.bind(gameNs.game.splash.goNext, " ")
 
         gameNs.game.input.setHoldValue(1000);
         gameNs.game.play.initWorld();
@@ -104,11 +103,7 @@ class Game
 
         gameNs.game.globalInput.update();
 
-        if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
-            gameNs.game.input.update();
-            let cols = gameNs.game.collisionManager.checkBoxColliderArray();
-            gameNs.game.player.update(gameNs.game.dt, cols);
-            gameNs.game.octo.update(gameNs.game.dt);
+        
         }
 
 

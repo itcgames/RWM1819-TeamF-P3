@@ -5,17 +5,17 @@
  */
 class Player extends Character{
     /**
-     * 
-     * @param {Vector2} position 
-     * @param {Collider} collider 
-     * @param {Sprite} sprite 
+     *
+     * @param {Vector2} position
+     * @param {Collider} collider
+     * @param {Sprite} sprite
      */
     constructor(position, collider, sprite){
         super(position, collider, sprite);
     }
 
     /**
-     * initialise the player entity - bind functions for key handling and setup sprite 
+     * initialise the player entity - bind functions for key handling and setup sprite
      */
     init(){
         //testing
@@ -24,7 +24,6 @@ class Player extends Character{
         this.animating = false;
         this.attacking = false;
         this.attacked = false;
-        this.hasSword = false;
         this.swordBeam = false;
 
         // binding functions for key handling
@@ -39,10 +38,16 @@ class Player extends Character{
         this.projectile = new Sword(64, 24);
         this.bomb = new Bombs(50,61);
 
+        //collectable variables and player info
         this.health = 6;
+        this.maxHealth = 6;
         this.rupees = 0;
         this.bombs = 0;
         this.keys = 0;
+        this.stopwatch = false;
+        this.compass = false;
+        this.map = false;
+        this.hasSword = false;
 
         this.collider = new BoxCollider(
             new Vector2(
@@ -85,7 +90,7 @@ class Player extends Character{
      * If the player is attacking with their melee attack decrememnet the timer and stop return
      * to idle when it is complete.
      * Update the sprite position.
-     * @param {int} dt - clock 
+     * @param {int} dt - clock
      */
     update(dt){
         if(this.animating){
@@ -120,6 +125,11 @@ class Player extends Character{
         this.sprite.setPos(this.position.x, this.position.y);
         this.collider.shape.position = new Vector2(this.position.x, this.position.y);
         this.animating = false;
+
+        if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false) && (this.stopwatch === false))
+        {
+          gameNs.game.octo.update(gameNs.game.dt);
+        }
     }
 
     /**
@@ -203,15 +213,37 @@ class Player extends Character{
                     this.health++;
                 }
                 break;
+            case "stopwatch":
+                this.stopwatch = true;
+                break;
+            case "compass":
+                this.compass = true;
+                break;
+            case "map":
+                this.map = true;
+                break;
+            case "heartContainer":
+                this.maxHealth++;
+                break;
+            case "triforcePiece":
+                break;
+            case "sword":
+                this.hasSword = true;
+                break;
+            case "fairy":
+                this.health =  this.maxHealth;
+                break;
         }
     }
 
     /**
      * melee attack function - check the direction the player is facing
-     * and attack in that dirction - create a timer to determine how long the 
+     * and attack in that dirction - create a timer to determine how long the
      * attack lasts
      */
     meleeAttack(){
+      if (hasSword === true)
+      {
         if(!this.animating && !this.attacked){
             switch(this.orientation){
                 case this.OrientationEnum.East:
@@ -227,7 +259,7 @@ class Player extends Character{
                     this.sprite = this.attackSouth;
                     break;
             }
-            
+
             this.sword.melee(this.orientation, this.position);
             if(this.swordCharges >= 0 ){
                 this.launchSword();
@@ -237,6 +269,7 @@ class Player extends Character{
             this.attacking = true;
             this.sprite.update();
         }
+      }
     }
 
     /**

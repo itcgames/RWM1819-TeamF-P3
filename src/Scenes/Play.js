@@ -31,7 +31,10 @@ class Play
  */
   update()
   {
-    gameNs.game.player.update(gameNs.game.dt);
+    if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
+        gameNs.game.input.update();
+        let cols = gameNs.game.collisionManager.checkBoxColliderArray();
+        gameNs.game.player.update(gameNs.game.dt, cols);
 
     gameNs.game.interface.update()
 
