@@ -106,11 +106,12 @@ class Game
 
         this.collisionManager.render(this.ctx);
 
-        gameNs.game.player.draw(this.ctx);
         gameNs.game.testHeart.render(this.ctx);
         gameNs.game.testBomb.render(this.ctx);
         gameNs.game.testRupee.render(this.ctx);
         gameNs.game.testKey.render(this.ctx);
         gameNs.game.interface.render(this.ctx);
+
+        gameNs.game.player.draw(this.ctx);
     }
 }

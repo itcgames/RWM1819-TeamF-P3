@@ -10,7 +10,8 @@ class Play
 {
   constructor()
   {
-
+    this.overworld = [[]];
+    this.scrolling = false;
   }
     /**
   * initWorld
