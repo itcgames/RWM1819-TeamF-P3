@@ -2,20 +2,18 @@
  * @description Bomb class inherits from utility, bomb for player character
  * @author John O'Grady
  */
-class Bombs extends Utility{
+class Boomerang extends Utility{
     constructor(width, height){
         super(width, height);
-
-        this.clock = 0;
-        this.exploded = false;
+        this.collided = false;
         this.collider = new BoxCollider(
             new Vector2(
                 this.position.x,
                 this.position.y,
             ),
-            this.height,
-            this.width,
-            ['explosion'],
+            this.height * 4,
+            this.width * 4,
+            ['boomerang'],
             ['pickup', 'obstacle']
         );
         gameNs.game.collisionManager.addBoxCollider(this.collider);
@@ -27,21 +25,10 @@ class Bombs extends Utility{
      * 
      * @param {*} dt 
      */
-    update(dt){
-        this.clock+=dt;
-        this.sprite.setPos(this.position.x, this.position.y);
-        if(this.clock > 1000){
-            this.clock = 0;
-            this.exploded = true;
-        }
-        if(this.exploded){
-            this.explosion.setPos(this.position.x - this.explosion.width / 3, this.position.y - this.explosion.height / 3.5);
-            this.explosion.update(dt);
-            if(this.clock > 100){
-                this.exploded = false;
-                this.alive = false;
-            }
-        }
+    update(){
+        this.sprite.setPos(this.position.x + 5, this.position.y);
+        this.sprite.update();
+        this.collider.position = new Vector2(this.position.x, this.position.y);
     }
 
     /**
@@ -49,7 +36,7 @@ class Bombs extends Utility{
      * @param {*} orientation 
      * @param {*} position
      */
-    plantBomb(orientation, position){
+    throw(orientation, position){
         this.alive = true;
         switch(orientation){
             case this.OrientationEnum.East:
@@ -69,16 +56,8 @@ class Bombs extends Utility{
     }
 
     setUpSprites(){
-        this.sprite = new AssetManager(0, 0, this.width, this.height, 0, 0);
-        this.sprite.setSpriteSheet("resources/objects.png", 3, 1);
-        this.sprite.setScale(25 / this.width, 25 / this.height);
-
-        this.explosion = new AssetManager(0, 0, 228, 283, 0, 0);
-        this.explosion.setSpriteSheet("resources/smoke.png", 3, 2);
-        this.explosion.setScale(192 / this.explosion.width, 192 / this.explosion.height);
-
-        this.collider.shape.width = 192; 
-        this.collider.shape.height = 192;
+        this.sprite = new AssetManager(0, 0, this.width, this.height, 128, 0);
+        this.sprite.setSpriteSheet("resources/objects.png", 3, 4);
     }
 
     /**
@@ -87,8 +66,5 @@ class Bombs extends Utility{
      */
     draw(ctx){
         this.sprite.draw(ctx);
-        if(this.exploded){
-            this.explosion.draw(ctx);
-        }
     }
 }

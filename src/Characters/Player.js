@@ -12,20 +12,31 @@ class Player extends Character{
      */
     constructor(position, collider, sprite){
         super(position, collider, sprite);
+
     }
 
     /**
      * initialise the player entity - bind functions for key handling and setup sprite 
      */
     init(){
+
+        this.UseItem = Object.freeze({
+            "Boomerang":1,
+            "Bomb":2
+        });
+        
+        this.util = this.UseItem.Bomb;
+        console.log(this.util);
+
         //testing
-        this.width = 34;
+        this.width = 48;
         this.height = 64;
         this.animating = false;
         this.attacking = false;
         this.attacked = false;
         this.hasSword = false;
         this.swordBeam = false;
+        this.active = true;
 
         // binding functions for key handling
         this.moveUp = this.moveUp.bind(this);
@@ -35,9 +46,10 @@ class Player extends Character{
         this.meleeAttack = this.meleeAttack.bind(this);
         this.plantBomb = this.plantBomb.bind(this);
 
-        this.sword = new Sword(64, 24);
-        this.projectile = new Sword(64, 24);
+        this.sword = new Sword('sword', 64, 24);
+        this.projectile = new Sword('flying sword',64, 24);
         this.bomb = new Bombs(50,61);
+        this.boomerang = new Boomerang(64,64);
 
         this.health = 6;
         this.rupees = 0;
@@ -109,12 +121,14 @@ class Player extends Character{
         if(this.bomb.alive){
             this.bomb.update(dt);
         }
-
         if(this.attacking){
             this.sword.update(dt);
         }
         if(this.projectile.inFlight){
             this.projectile.update(dt);
+        }
+        if(this.boomerang.alive){
+            this.boomerang.update();
         }
 
         this.sprite.setPos(this.position.x, this.position.y);
@@ -187,6 +201,24 @@ class Player extends Character{
         }
     }
 
+    throwBoomerang(){
+        this.boomerang.throw(this.position, this.orientation);
+    }
+
+    useUtility(){
+       /* if(this.active){
+            switch(this.util){
+                case this.UseItem.Boomerang:
+                    this.throwBoomerang();
+                    break;
+                case this.UseItem.Boomerang:
+                    this.plantBomb();
+                    break;
+            }
+        }
+        */
+    }
+
     processPickup(type){
         switch(type){
             case "rupee":
@@ -252,6 +284,9 @@ class Player extends Character{
         if(this.swordBeam){
             this.projectile.draw(ctx);
         }
+        if(this.boomerang.alive){
+            this.boomerang.draw(ctx);
+        }
         this.sprite.horizontalSheet = false;
         this.sprite.draw(ctx);
     }
@@ -260,20 +295,20 @@ class Player extends Character{
      * creating different animations sheets for each direction as well as directional attacks
      */
     setUpSprites(){
-        this.west = new AssetManager(this.position.x, this.position.y, 38, 63,0,36);
+        this.west = new AssetManager(this.position.x, this.position.y, 48, 64,0,48);
         this.west.setSpriteSheet("resources/link.png", 4, 2);
         this.west.horizontalSheet = false;
         this.west.flipped = true;
 
-        this.east = new AssetManager(this.position.x, this.position.y, 38, 63,0,36);
+        this.east = new AssetManager(this.position.x, this.position.y, 48, 64,0,48);
         this.east.setSpriteSheet("resources/link.png", 4, 2);
         this.east.horizontalSheet = false;
 
-        this.north = new AssetManager(this.position.x, this.position.y, 32, 62, 62,0);
-        this.north.setSpriteSheet("resources/link.png", 4, 2);
+        this.north = new AssetManager(this.position.x, this.position.y, 48, 64, 0,96);
+        this.north.setSpriteSheet("resources/link.png", 4, 3);
         this.north.horizontalSheet = false;
 
-        this.south = new AssetManager(this.position.x, this.position.y, 32, 63 , 0, 82);
+        this.south = new AssetManager(this.position.x, this.position.y, 48, 64 , 0, 0);
         this.south.setSpriteSheet("resources/link.png", 4, 3);
         this.south.horizontalSheet = false;
 

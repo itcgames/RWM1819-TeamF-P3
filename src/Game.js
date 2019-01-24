@@ -62,9 +62,10 @@ class Game
         gameNs.game.input.bind(gameNs.game.player.moveDown, "S");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "D");
-        gameNs.game.input.bind(gameNs.game.player.plantBomb, "q");
-        gameNs.game.input.bind(gameNs.game.player.plantBomb, "Q");
-        gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
+        gameNs.game.input.bind(gameNs.game.player.useUtility, "q");
+        gameNs.game.input.bind(gameNs.game.player.useUtility, "Q");
+        gameNs.game.input.bind(gameNs.game.player.meleeAttack, "e");
+        gameNs.game.input.bind(gameNs.game.player.meleeAttack, "E");
         gameNs.game.input.bind(gameNs.game.menu.cursorMoveUp, "ArrowUp");
         gameNs.game.input.bind(gameNs.game.menu.cursorMoveDown, "ArrowDown");
 
@@ -76,12 +77,17 @@ class Game
         gameNs.game.input.setHoldValue(1000);
         gameNs.game.play.initWorld();
 
+        gameNs.game.pickups = [];
 
         gameNs.game.testHeart = new Heart(350,400);
         gameNs.game.testBomb = new Bomb(550,400);
         gameNs.game.testRupee = new Rupee(350,600);
         gameNs.game.testKey = new Key(550,600);
-
+        
+        gameNs.game.pickups.push(gameNs.game.testHeart);
+        gameNs.game.pickups.push(gameNs.game.testBomb);
+        gameNs.game.pickups.push(gameNs.game.testRupee);
+        gameNs.game.pickups.push(gameNs.game.testKey);
     }
 
     /**
@@ -95,7 +101,6 @@ class Game
         //  Update Game here.
 
         gameNs.game.sceneManager.update();
-
         gameNs.game.globalInput.update();
 
         if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
@@ -105,6 +110,9 @@ class Game
             gameNs.game.octo.update(gameNs.game.dt);
         }
 
+        for(var i = 0; i < gameNs.game.pickups.length; i++){
+            gameNs.game.pickups[i].update();
+        }
 
         gameNs.game.input.update();
         gameNs.game.sceneManager.update();
