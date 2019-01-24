@@ -37,7 +37,7 @@ class Play
 
   }
 
-  render()
+  draw()
   {
     //  Render game objects here.
       gameNs.game.tileGrid.draw(gameNs.game.ctx);

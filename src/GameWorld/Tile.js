@@ -10,12 +10,14 @@ class Tile {
      * @param {Sprite} sprite the sprite that represents the tile.
      * @param {Boolean} isTraversable if the tile can be stepped through.
      * @param {Integer} tileSize the size of the tile in pixels.
+     * @param {String} tileColour the colour of the tile if no sprite is present.
      */
-    constructor(position, sprite, isTraversable, tileSize){
+    constructor(position, sprite, isTraversable, tileSize, tileColour){
         this.position = position;
         this.sprite = sprite;
         this.isTraversable = isTraversable;
         this.tileSize = tileSize;
+        this.tileColour = tileColour;
     }
 
     /**
@@ -35,7 +37,7 @@ class Tile {
 
             //  Draw a rectangle to represent the tile.
             ctx.beginPath();
-            ctx.fillStyle = "White";
+            ctx.fillStyle = this.tileColour;
             ctx.rect(this.position.x + 2, this.position.y + 2, this.tileSize - 2, this.tileSize - 2);
             ctx.fill();
         }        
