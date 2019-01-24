@@ -128,19 +128,11 @@ class Game
     draw() {
         //  Clear previous frame.
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
-         gameNs.game.sceneManager.render()
-
         //  Render game objects here.
-        this.tileGrid.draw(this.ctx);
-        this.octo.draw(this.ctx);
+        gameNs.game.sceneManager.draw()
 
-        this.collisionManager.render(this.ctx);
 
-        gameNs.game.player.draw(this.ctx);
-        gameNs.game.testHeart.render(this.ctx);
-        gameNs.game.testBomb.render(this.ctx);
-        gameNs.game.testRupee.render(this.ctx);
-        gameNs.game.testKey.render(this.ctx);
-        //gameNs.game.interface.render(this.ctx);
+
+
     }
 }

@@ -15,7 +15,7 @@ class InstructionsScene
     this.title = title;
     //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
     this.instructions = new Image();
-    this.instructions.src = "resources/images/InstructionMenu.png";
+    this.instructions.src = "resources/InstructionMenu.png";
 
 
   }
@@ -38,7 +38,7 @@ class InstructionsScene
   * changes the color of the background to green
   * changes the font and the font size
   */
-  render()
+  draw()
   {
 
 

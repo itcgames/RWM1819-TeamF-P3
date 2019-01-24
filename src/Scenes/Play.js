@@ -18,7 +18,7 @@ class Play
   */
   initWorld()
   {
-    gameNs.game.tileGrid = new Grid(64, 16, 13);
+    gameNs.game.tileGrid = new Grid(64, "Screen01");
     console.log("intiWOrld");
     // Interface testing
     gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
@@ -39,12 +39,16 @@ class Play
 
   draw()
   {
-    //  Render game objects here.
-      gameNs.game.tileGrid.draw(gameNs.game.ctx);
+    gameNs.game.tileGrid.draw(gameNs.game.ctx);
+    gameNs.game.octo.draw(gameNs.game.ctx);
 
-    //this.collisionManager.render(this.ctx);
+    gameNs.game.collisionManager.render(gameNs.game.ctx);
 
     gameNs.game.player.draw(gameNs.game.ctx);
+    gameNs.game.testHeart.render(gameNs.game.ctx);
+    gameNs.game.testBomb.render(gameNs.game.ctx);
+    gameNs.game.testRupee.render(gameNs.game.ctx);
+    gameNs.game.testKey.render(gameNs.game.ctx);
 
     gameNs.game.interface.render(gameNs.game.ctx);
   }
