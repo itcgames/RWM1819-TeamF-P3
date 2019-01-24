@@ -82,7 +82,7 @@ class Player extends Character{
      * Update the sprite position.
      * @param {int} dt - clock 
      */
-    update(dt, cols){
+    update(dt){
         if(this.animating){
             this.sprite.update();
         }

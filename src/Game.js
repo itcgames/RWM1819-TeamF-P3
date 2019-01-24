@@ -24,15 +24,15 @@ class Game
         //   Initialise game variables.
         gameNs.game.input = new Input();
         gameNs.game.globalInput = new Input();
-        gameNs.sceneManager = new SceneManager();
-        gameNs.splash = new SplashScreen("Splash");
-        gameNs.menu = new MenuScene("Menu");
-        gameNs.play = new Play("Play");
+        gameNs.game.sceneManager = new SceneManager();
+        gameNs.game.splash = new SplashScreen("Splash");
+        gameNs.game.menu = new MenuScene("Menu");
+        gameNs.game.play = new Play("Play");
 
-        gameNs.sceneManager.addScene(gameNs.splash);
-        gameNs.sceneManager.addScene(gameNs.menu);
-        gameNs.sceneManager.addScene(gameNs.play);
-        gameNs.sceneManager.goToScene(gameNs.splash.title);
+        gameNs.game.sceneManager.addScene(gameNs.game.splash);
+        gameNs.game.sceneManager.addScene(gameNs.game.menu);
+        gameNs.game.sceneManager.addScene(gameNs.game.play);
+        gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
         this.update = this.update.bind(this);
 
         // Interface testing
@@ -73,16 +73,14 @@ class Game
         gameNs.game.prevTime = now;
 
         //  Update Game here.
-        gameNs.sceneManager.update();
-        
+        gameNs.game.sceneManager.update();
+        gameNs.game.collisionManager.checkBoxColliderArray();
         gameNs.game.globalInput.update();
 
         if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
             gameNs.game.input.update();
-            let cols = gameNs.game.collisionManager.checkBoxColliderArray();
-            gameNs.game.player.update(gameNs.game.dt, cols);
+            gameNs.game.player.update(gameNs.game.dt);
         }
-
 
         gameNs.game.interface.update();
 
@@ -98,7 +96,6 @@ class Game
      */
     draw() {
         //  Clear previous frame.
-        
         this.ctx.imageSmoothingEnabled = false;
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 
@@ -111,6 +108,6 @@ class Game
         gameNs.game.testBomb.render(this.ctx);
         gameNs.game.testRupee.render(this.ctx);
         gameNs.game.testKey.render(this.ctx);
-        //gameNs.game.interface.render(this.ctx);
+        gameNs.game.interface.render(this.ctx);
     }
 }
