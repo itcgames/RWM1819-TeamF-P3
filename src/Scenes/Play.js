@@ -8,9 +8,9 @@
 
 class Play
 {
-  constructor()
+  constructor(title)
   {
-
+    this.title = title;
   }
     /**
   * initWorld
@@ -29,7 +29,7 @@ class Play
     console.log("updating play");
   }
 
-  render()
+  draw()
   {
 
   }

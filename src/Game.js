@@ -43,7 +43,8 @@ class Game
         gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
         gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
         
-        gameNs.game.player = new Player();
+        //   Initialise game variables.
+        gameNs.game.player = new Player(new Vector2(400,400), new BoxCollider(new Vector2(400,400), 42, 64), null);
         gameNs.game.player.init(gameNs.game.canvas.ctx);
 
         gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
@@ -54,6 +55,8 @@ class Game
         gameNs.game.input.bind(gameNs.game.player.moveDown, "S");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "D");
+        gameNs.game.input.bind(gameNs.game.player.plantBomb, "q");
+        gameNs.game.input.bind(gameNs.game.player.plantBomb, "Q");
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
 
         gameNs.game.testHeart = new Heart(350,400);
