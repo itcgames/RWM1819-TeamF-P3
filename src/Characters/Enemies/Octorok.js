@@ -19,7 +19,7 @@ class Octorok extends Npc {
      */
     update(dt){
         this.timer += dt;     
-        if (this.timer > 10){
+        if (this.timer > 500){
             this.wander();
             this.timer = 0;
         }
