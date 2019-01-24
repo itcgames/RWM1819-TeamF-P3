@@ -8,9 +8,9 @@
 
 class Play
 {
-  constructor()
+  constructor(title)
   {
-
+    this.title = title;
   }
     /**
   * initWorld

@@ -31,10 +31,10 @@ class Game
        gameNs.game.play = new Play("Play");
 
        gameNs.game.sceneManager.addScene(gameNs.game.instructions);
-       gameNs.game.sceneManager.addScene(gameNs.game.menu);
        gameNs.game.sceneManager.addScene(gameNs.game.splash);
        gameNs.game.sceneManager.addScene(gameNs.game.play);
-       gameNs.game.sceneManager.goToScene(gameNs.game.menu.title);
+       gameNs.game.sceneManager.addScene(gameNs.game.menu);
+       gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
        this.update = this.update.bind(this);
 
 
@@ -50,10 +50,11 @@ class Game
         gameNs.game.input.bind(gameNs.game.menu.cursorMoveUp, "ArrowUp");
         gameNs.game.input.bind(gameNs.game.menu.cursorMoveDown, "ArrowDown");
 
-        if (gameNs.game.curY === 300)
-        {
-          gameNs.game.input.bind(gameNs.game.menu.goToInstructions, "t");
-        }
+
+        gameNs.game.input.bind(gameNs.game.menu.navigation, "Enter");
+        gameNs.game.input.bind(gameNs.game.instructions.comeBack, "Escape");
+        gameNs.game.input.bind(gameNs.game.splash.goNext, " ")
+
         gameNs.game.input.setHoldValue(1000);
     }
 

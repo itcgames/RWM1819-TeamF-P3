@@ -46,33 +46,11 @@ class SplashScreen
       }
     }
 
-    /*while (gameNs.game.ctx.globalAlpha <= 1.0)
-    {
-      gameNs.game.ctx.globalAlpha - 0.02;
-    }*/
-    //while (gameNs.game.ctx.globalAlpha >= 0.0)
+  }
 
-    //  gameNs.game.ctx.globalAlpha = 0.01;
-
-
-
-      /*if (this.checkCollisionBetween(300, 350, 300, 100))
-      {
-        gameNs.sceneManager.goToScene(gameNs.help.title)
-      }
-      if (this.checkCollisionBetween(300, 500, 300, 100))
-      {
-        gameNs.sceneManager.goToScene(gameNs.highScore.title)
-      }*/
-
-        /*if (this.checkCollisionBetween(300, 650, 300, 100)) {
-            gameNs.game.tutorialBool = true;
-          gameNs.sceneManager.goToScene(gameNs.game.title)
-      }*/
-      //gameNs.sceneManager.goToScene(gameNs.game.title)
-      //gameNs.sceneManager.render()
-      //this.gestureManager.resetDetection()
-    //}
+  goNext()
+  {
+    gameNs.game.sceneManager.goToScene("Menu");
   }
 
   checkCollisionBetween(x,y,width,height)
@@ -103,7 +81,7 @@ class SplashScreen
 
     //gameNs.game.ctx.fill();
 
-    gameNs.game.ctx.globalAlpha = 0.1;
+    //gameNs.game.ctx.globalAlpha = 0.1;
     gameNs.game.ctx.font= "100px VT323"; //48
     gameNs.game.ctx.fillText(this.text, 700,900);
 

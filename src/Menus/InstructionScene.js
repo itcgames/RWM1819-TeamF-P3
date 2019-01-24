@@ -25,6 +25,11 @@ class InstructionsScene
   {
   }
 
+
+  comeBack()
+  {
+    gameNs.game.sceneManager.goToScene("Menu");
+  }
 /**
   * creates a canvas and context
   * changes the color of the background to green
@@ -40,11 +45,10 @@ class InstructionsScene
     gameNs.game.ctx.drawImage(this.instructions,0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
 
   // the outline
-    
 
     // the fill color
     gameNs.game.ctx.font= "100px VT323"; //48
-    gameNs.game.ctx.fillText(this.title, 700,900);
+    gameNs.game.ctx.fillText(this.title, 100,900);
     //gameNs.game.ctx.fill();
 
     //ctx.fillText(this.title, 100,100);

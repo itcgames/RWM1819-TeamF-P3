@@ -18,7 +18,7 @@ class MenuScene
     this.spaceTime = 0;
     this.title = title;
     this.curX = 250;
-    gameNs.game.curY = 300;
+    gameNs.game.curY = 200;
     //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
     this.playBtn = new Image();
     this.cursorBtn = new Image();
@@ -88,9 +88,13 @@ cursorMoveUp()
 {
   if ( gameNs.game.cursAlive === true)
   {
-    if (gameNs.game.curY === 300)
+    if (gameNs.game.curY === 200)
     {
       gameNs.game.curY -=0;
+    }
+    else if (gameNs.game.curY === 675)
+    {
+      gameNs.game.curY -= 275;
     }
     else
     {
@@ -106,9 +110,14 @@ cursorMoveDown()
 {
   if (gameNs.game.cursAlive === true)
   {
-    if (gameNs.game.curY >= 950)
+    if (gameNs.game.curY >= 750)
     {
     gameNs.game.curY +=0;
+    }
+    if (gameNs.game.curY === 400)
+    {
+      gameNs.game.curY += 175;
+      console.log(  gameNs.game.curY);
     }
     else {
       gameNs.game.curY += 100;
@@ -121,7 +130,7 @@ goToPlay()
 {
   if (gameNs.game.spaceAlive === true)
   {
-      gameNs.sceneManager.goToScene("Play");
+      gameNs.game.sceneManager.goToScene("Play");
   }
 
 }
@@ -131,6 +140,20 @@ goToInstructions()
   if (gameNs.game.spaceAlive === true)
   {
       gameNs.game.sceneManager.goToScene("Instructions");
+  }
+}
+
+navigation()
+{
+  gameNs.game.sceneManager.goToScene("Play");
+  if (gameNs.game.curY === 575)
+  {
+    gameNs.sceneManager.goToScene("Play");
+  }
+
+  if (gameNs.game.curY === 775)
+  {
+    gameNs.game.sceneManager.goToScene("Instructions");
   }
 }
 /**
@@ -145,16 +168,16 @@ goToInstructions()
     //ctx.font = '100px serif'; //48
     //this.playBtn.draw();
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
-    gameNs.game.ctx.drawImage(this.playBtn,325, 850, 150, 100);
-    gameNs.game.ctx.drawImage(this.instructionsBtn,325, 950, 300, 100);
+    gameNs.game.ctx.drawImage(this.playBtn,325, 650, 150, 100);
+    gameNs.game.ctx.drawImage(this.instructionsBtn,325, 750, 300, 100);
 
     gameNs.game.ctx.drawImage(this.cursorBtn, this.curX, gameNs.game.curY, 50, 50);
 
     gameNs.game.ctx.beginPath();
-    gameNs.game.ctx.moveTo(200, 200);
-    gameNs.game.ctx.lineTo(900, 200);
-    gameNs.game.ctx.lineTo(900, 800);
-    gameNs.game.ctx.lineTo(200, 800);
+    gameNs.game.ctx.moveTo(200, 125);
+    gameNs.game.ctx.lineTo(900, 125);
+    gameNs.game.ctx.lineTo(900, 525);
+    gameNs.game.ctx.lineTo(200, 525);
     gameNs.game.ctx.closePath();
 
   // the outline
