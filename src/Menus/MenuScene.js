@@ -12,9 +12,12 @@ class MenuScene
   */
   constructor(title)
   {
+    gameNs.game.cursAlive = false;
+    gameNs.game.spaceAlive = true;;
+    this.time = 0;
+    this.spaceTime = 0;
     this.title = title;
     this.curX = 250;
-    gameNs.game.up = false;
     gameNs.game.curY = 300;
     //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
     this.playBtn = new Image();
@@ -23,6 +26,8 @@ class MenuScene
     this.playBtn.src = "resources/images/play.png";
     this.cursorBtn.src = "resources/images/cursor.png";
     this.instructionsBtn.src = "resources/images/instructions.png"
+
+
 
     ///this.playBtn.load("resources/img/play_button.png");
     //this.playBtn.setSpriteSheet(false, 3, 10);
@@ -49,24 +54,22 @@ class MenuScene
       }
     }
 
+    this.time++;
+    if (this.time >= 30)
+    {
+      gameNs.game.cursAlive = true;
+      this.time = 0;
+    }
 
-      /*if (this.checkCollisionBetween(300, 350, 300, 100))
-      {
-        gameNs.sceneManager.goToScene(gameNs.help.title)
-      }
-      if (this.checkCollisionBetween(300, 500, 300, 100))
-      {
-        gameNs.sceneManager.goToScene(gameNs.highScore.title)
-      }*/
+    this.spaceTime++;
+    if (this.time >= 60)
+    {
+      gameNs.game.spaceAlive = true;
+      this.spaceTime = 0;
+      gameNs.game.spaceAlive = false;
+    }
 
-        /*if (this.checkCollisionBetween(300, 650, 300, 100)) {
-            gameNs.game.tutorialBool = true;
-          gameNs.sceneManager.goToScene(gameNs.game.title)
-      }*/
-      //gameNs.sceneManager.goToScene(gameNs.game.title)
-      //gameNs.sceneManager.render()
-      //this.gestureManager.resetDetection()
-    //}
+
   }
 
   checkCollisionBetween(x,y,width,height)
@@ -83,32 +86,53 @@ class MenuScene
 
 cursorMoveUp()
 {
-  console.log("move up");
-  if ( gameNs.game.up === false)
+  if ( gameNs.game.cursAlive === true)
   {
     if (gameNs.game.curY === 300)
     {
       gameNs.game.curY -=0;
     }
-    else {
-      gameNs.game.curY -= 100
+    else
+    {
+      gameNs.game.curY -= 100;
+      gameNs.game.cursAlive = false;
     }
   }
-  gameNs.game.up = true;
 
 }
+
 
 cursorMoveDown()
 {
-  if (gameNs.game.curY === 950)
+  if (gameNs.game.cursAlive === true)
   {
+    if (gameNs.game.curY >= 950)
+    {
     gameNs.game.curY +=0;
-  }
-  else {
-    gameNs.game.curY += 100
+    }
+    else {
+      gameNs.game.curY += 100;
+      gameNs.game.cursAlive = false;
+    }
   }
 }
 
+goToPlay()
+{
+  if (gameNs.game.spaceAlive === true)
+  {
+      gameNs.sceneManager.goToScene("Play");
+  }
+
+}
+
+goToInstructions()
+{
+  if (gameNs.game.spaceAlive === true)
+  {
+      gameNs.game.sceneManager.goToScene("Instructions");
+  }
+}
 /**
   * creates a canvas and context
   * changes the color of the background to green

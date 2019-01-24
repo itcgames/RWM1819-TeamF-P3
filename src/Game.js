@@ -14,8 +14,8 @@ class Game
         //  Initialise the canvas
         gameNs.game.canvas = document.createElement("canvas");
         gameNs.game.canvas.id = 'mycanvas';
-        gameNs.game.canvas.width = window.innerWidth;
-        gameNs.game.canvas.height = window.innerHeight;
+        gameNs.game.canvas.width = 64 * 16;
+        gameNs.game.canvas.height = 64 * 13;
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
        gameNs.game.ctx.fillStyle = "green";
        gameNs.game.ctx.font = "30px Pixel-Emulator.otf";
@@ -24,17 +24,17 @@ class Game
        //   Initialise game variables.
        gameNs.game.collisionManager = new CollisionManager();
        gameNs.game.input = new Input();
-       gameNs.sceneManager = new SceneManager();
-       gameNs.splash = new SplashScreen("Splash");
-       gameNs.menu = new MenuScene("Menu");
-       gameNs.instructions = new InstructionsScene("Press space to return");
-       gameNs.play = new Play("Play");
+       gameNs.game.sceneManager = new SceneManager();
+       gameNs.game.splash = new SplashScreen("Splash");
+       gameNs.game.menu = new MenuScene("Menu");
+       gameNs.game.instructions = new InstructionsScene("Instructions");
+       gameNs.game.play = new Play("Play");
 
-       gameNs.sceneManager.addScene(gameNs.splash);
-       gameNs.sceneManager.addScene(gameNs.menu);
-       gameNs.sceneManager.addScene(gameNs.instructions);
-       gameNs.sceneManager.addScene(gameNs.play);
-       gameNs.sceneManager.goToScene(gameNs.instructions.title);
+       gameNs.game.sceneManager.addScene(gameNs.game.instructions);
+       gameNs.game.sceneManager.addScene(gameNs.game.menu);
+       gameNs.game.sceneManager.addScene(gameNs.game.splash);
+       gameNs.game.sceneManager.addScene(gameNs.game.play);
+       gameNs.game.sceneManager.goToScene(gameNs.game.menu.title);
        this.update = this.update.bind(this);
 
 
@@ -47,9 +47,14 @@ class Game
         gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
         gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
         gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
-        gameNs.game.input.bind(gameNs.sceneManager.goToNextScene, "x");
-        gameNs.game.input.bind(gameNs.menu.cursorMoveUp, "ArrowUp");
-        gameNs.game.input.bind(gameNs.menu.cursorMoveDown, "ArrowDown");
+        gameNs.game.input.bind(gameNs.game.menu.cursorMoveUp, "ArrowUp");
+        gameNs.game.input.bind(gameNs.game.menu.cursorMoveDown, "ArrowDown");
+
+        if (gameNs.game.curY === 300)
+        {
+          gameNs.game.input.bind(gameNs.game.menu.goToInstructions, "t");
+        }
+        gameNs.game.input.setHoldValue(1000);
     }
 
     /**
@@ -60,11 +65,10 @@ class Game
         var now = Date.now();
         gameNs.game.dt = (now - gameNs.game.prevTime);
         gameNs.game.prevTime = now;
-
         //  Update Game here.
-        gameNs.sceneManager.update()
+
         gameNs.game.input.update();
-        ;
+        gameNs.game.sceneManager.update();
 
         //  Draw new frame.
         gameNs.game.draw();
@@ -78,8 +82,8 @@ class Game
      */
     draw() {
         //  Clear previous frame.
-        //this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
-         gameNs.sceneManager.render()
+        this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+         gameNs.game.sceneManager.render()
 
     }
 }

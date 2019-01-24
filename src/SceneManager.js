@@ -87,6 +87,7 @@ class SceneManager
 
   changeScene(title)
   {
+    gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     this.currentScene = this.titles[title]
   }
   update()

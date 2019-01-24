@@ -17,6 +17,7 @@ class InstructionsScene
     this.instructions = new Image();
     this.instructions.src = "resources/images/InstructionMenu.png";
 
+
   }
 
 
@@ -39,9 +40,7 @@ class InstructionsScene
     gameNs.game.ctx.drawImage(this.instructions,0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
 
   // the outline
-    gameNs.game.ctx.lineWidth = 25;
-    gameNs.game.ctx.strokeStyle = '#666666';
-    gameNs.game.ctx.stroke();
+    
 
     // the fill color
     gameNs.game.ctx.font= "100px VT323"; //48
