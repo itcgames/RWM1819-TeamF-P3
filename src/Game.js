@@ -40,12 +40,6 @@ class Game
         //   Initialise game variables.
         gameNs.game.prevTime = Date.now();
 
-        gameNs.game.tileGrid = new Grid(64, "Screen01");
-        gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
-
-
-
-
         gameNs.game.sceneManager.addScene(gameNs.game.splash);
         gameNs.game.sceneManager.addScene(gameNs.game.menu);
         gameNs.game.sceneManager.addScene(gameNs.game.play);
@@ -129,10 +123,6 @@ class Game
         //  Clear previous frame.
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
         //  Render game objects here.
-        gameNs.game.sceneManager.draw()
-
-
-
-
+        gameNs.game.sceneManager.draw();
     }
 }
