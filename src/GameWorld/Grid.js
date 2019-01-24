@@ -66,4 +66,11 @@ class Grid {
   getTile(x, y) {
     return this.tiles[x][y];
   }
+
+  /**
+   * @param {Vector2} position
+   */
+  screenToGridCoords(position){
+    return new Vector2((position.x - position.x % this.tileSize) / this.tileSize, (position.y - position.y % this.tileSize) / this.tileSize);
+  }
 }
