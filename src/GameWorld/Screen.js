@@ -33,4 +33,14 @@ class Screen {
   leave(){
 
   }
+
+  /**
+   * 
+   * @param {*} worldPos 
+   */
+  worldToScreen(worldPos){
+    let localPos = worldPos;
+
+    return localPos;
+  }
 }

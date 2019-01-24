@@ -10,7 +10,7 @@ class Play
 {
   constructor()
   {
-    this.overworld = [[]];
+    this.overworld = [];
     this.activeScreen = {
       x: 0,
       y: 0
@@ -39,6 +39,14 @@ class Play
     for(i = 0; i < overworld[active.x][active.y].grid.enemyList.length(); i++){
       overworld[active.x][active.y].grid.enemyList[i];
     }
+  }
+
+  /**
+   * Moves the camera from the current screen to the new screen
+   * @param {Screen} newScreen The screen the player's entering
+   */
+  transition(newScreen){
+
   }
 
   render()

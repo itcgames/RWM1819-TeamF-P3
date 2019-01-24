@@ -14,8 +14,8 @@ class Game
         //  Initialise the canvas
         gameNs.game.canvas = document.createElement("canvas");
         gameNs.game.canvas.id = 'mycanvas';
-        gameNs.game.canvas.width = window.innerWidth;
-        gameNs.game.canvas.height = window.innerHeight;
+        gameNs.game.canvas.width = 64 * 16;
+        gameNs.game.canvas.height = 64 * 13;
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
         document.body.appendChild(gameNs.game.canvas);
 
@@ -25,6 +25,7 @@ class Game
 
         //gameNs.game.tileGrid = new Grid(64, "Screen01");  
         gameNs.game.testScreen = new Screen("Screen01");
+        gameNs.game.testScreen2 = new Screen("Screen02");
 
         //gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
         gameNs.game.testScreen.enemyList.push(
@@ -91,8 +92,8 @@ class Game
         gameNs.game.testKey = new Key(550,600);
 
         this.camera = new Camera(
-            0,
-            0,
+            gameNs.game.canvas.width/2,
+            gameNs.game.canvas.height/2,
             gameNs.game.canvas.width,
             gameNs.game.canvas.height
         );
@@ -138,7 +139,7 @@ class Game
     draw() {
         //  Clear previous frame.
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
-        //this.camera.draw(0,this.ctx);
+        this.camera.draw(0,this.ctx);
 
         //  Render game objects here.
         gameNs.game.testScreen.grid.draw(this.ctx);
@@ -158,6 +159,5 @@ class Game
         gameNs.game.player.draw(this.ctx);
 
         gameNs.game.interface.render(this.ctx);
-
     }
 }
