@@ -14,8 +14,8 @@ class Game
         //  Initialise the canvas
         gameNs.game.canvas = document.createElement("canvas");
         gameNs.game.canvas.id = 'mycanvas';
-        gameNs.game.canvas.width = window.innerWidth;
-        gameNs.game.canvas.height = window.innerHeight;
+        gameNs.game.canvas.width = 64 * 16;
+        gameNs.game.canvas.height = 64 * 11;
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
         gameNs.game.ctx.fillStyle = "green";
         gameNs.game.ctx.font = "30px Pixel-Emulator.otf";
@@ -32,7 +32,7 @@ class Game
         gameNs.game.sceneManager.addScene(gameNs.game.splash);
         gameNs.game.sceneManager.addScene(gameNs.game.menu);
         gameNs.game.sceneManager.addScene(gameNs.game.play);
-        gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
+        gameNs.game.sceneManager.goToScene(gameNs.game.play.title);
         this.update = this.update.bind(this);
 
         // Interface testing
@@ -72,17 +72,22 @@ class Game
         gameNs.game.dt = (now - gameNs.game.prevTime);
         gameNs.game.prevTime = now;
 
+        
         //  Update Game here.
         gameNs.game.sceneManager.update();
-        gameNs.game.collisionManager.checkBoxColliderArray();
         gameNs.game.globalInput.update();
 
-        if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
-            gameNs.game.input.update();
-            gameNs.game.player.update(gameNs.game.dt);
+        switch(gameNs.game.sceneManager.getScene()){
+            case "Play":
+                gameNs.game.collisionManager.checkBoxColliderArray();
+                if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
+                    gameNs.game.input.update();
+                    gameNs.game.player.update(gameNs.game.dt);
+                }
+                
+                gameNs.game.interface.update();
+                break;
         }
-
-        gameNs.game.interface.update();
 
         //  Draw new frame.
         gameNs.game.draw();
@@ -100,14 +105,19 @@ class Game
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 
         //  Render game objects here.
-        this.tileGrid.draw(this.ctx);
-        this.collisionManager.render(this.ctx);
+        this.sceneManager.draw();
 
-        gameNs.game.player.draw(this.ctx);
-        gameNs.game.testHeart.render(this.ctx);
-        gameNs.game.testBomb.render(this.ctx);
-        gameNs.game.testRupee.render(this.ctx);
-        gameNs.game.testKey.render(this.ctx);
-        gameNs.game.interface.render(this.ctx);
+        switch(gameNs.game.sceneManager.getScene()){
+            case "Play":
+                this.tileGrid.draw(this.ctx);
+                this.collisionManager.render(this.ctx);
+                gameNs.game.player.draw(this.ctx);
+                gameNs.game.testHeart.render(this.ctx);
+                gameNs.game.testBomb.render(this.ctx);
+                gameNs.game.testRupee.render(this.ctx);
+                gameNs.game.testKey.render(this.ctx);
+                gameNs.game.interface.render(this.ctx);
+                break;
+        }
     }
 }
