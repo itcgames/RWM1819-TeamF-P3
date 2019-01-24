@@ -26,6 +26,9 @@ class Objects {
       y: y,
     };
 
+    this.alive = true;
+    this.type = type;
+
     // sprite
     this.sprite = new AssetManager(
       this.pos.x,
@@ -46,7 +49,8 @@ class Objects {
       ),
       w,
       h,
-      [type]
+      ['pickup'],
+      ['sword', 'enemy']
     );
     gameNs.game.collisionManager.addBoxCollider(this.bounds);
   }
@@ -64,7 +68,14 @@ class Objects {
    * @param {context} ctx context
    */
   render(ctx) {
-    this.sprite.draw(ctx);
+    if(this.alive)
+    {
+      if (gameNs.game.collisionManager.boxCollidedWithTag(this.bounds, 'player')) {
+        this.alive = false;
+        gameNs.game.player.processPickup(this.type);
+      }
+      this.sprite.draw(ctx);
+    }
   }
 }
 

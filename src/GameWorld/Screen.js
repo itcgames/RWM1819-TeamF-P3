@@ -19,19 +19,12 @@ class Screen {
 
 
   /**
-   * Called when the player enters the screen.
-   * Creates enemies on screen
+   * Renders the tiles. If the screen is active, render the enemies/pickups
+   * @param {context} ctx canvas context
+   * @param {bool} active Whether the screen is active
    */
-  enter(){
-    
-  }
-
-  /**
-   * Called when the player leaves the screen.
-   * Destroys enemies on screen
-   */
-  leave(){
-
+  render(ctx, active){
+    this.grid.draw(ctx);
   }
 
   /**

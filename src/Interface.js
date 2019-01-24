@@ -45,7 +45,7 @@ class Interface {
 
   /**
    * Triggers the pause menu. Starts it moving in the opposite direction.
-   * 
+   *
    */
   trigger() {
 
@@ -97,8 +97,6 @@ class Interface {
       this.moving = false;
 
       /* resume gameplay */
-      console.log("TOP HEIGHT:");
-      console.log(this.pos.y);
     }
 
     // Check if the UI is at the bottom
@@ -107,10 +105,8 @@ class Interface {
       this.pos.y = 0;
       this.moving = false;
       this.active = true;
-      
+
       /* update menu logic */
-      console.log("BOTTOM HEIGHT:");
-      console.log(this.pos.y);
     }
 
     console.log(this.pos.y);
@@ -134,8 +130,8 @@ class Interface {
 
     //ctx.font = "60px comic sans"
     ctx.fillText(
-      "Inventory", 
-      50 + this.pos.x, 
+      "Inventory",
+      50 + this.pos.x,
       70 + this.pos.y);
 
     ctx.fillText(
@@ -154,7 +150,7 @@ class Interface {
       790 + this.pos.y
     )
     ctx.fillText(
-      "will to live: "+0+"   :^(",
+      "will to live: "+1+"   :^)",
       50 + this.pos.x,
       810 + this.pos.y
     )
