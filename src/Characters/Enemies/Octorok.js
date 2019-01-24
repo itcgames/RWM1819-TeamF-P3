@@ -46,6 +46,12 @@ class Octorok extends Npc {
                     this.alive = false;
                 }
             }
+            if(gameNs.game.player.boomerang.alive){
+                if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'boomerang')) {
+                    this.alive = false;
+                    gameNs.game.player.boomerang.alive = false;
+                }
+            }
         }
     }
 

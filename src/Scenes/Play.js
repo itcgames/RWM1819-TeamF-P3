@@ -18,7 +18,8 @@ class Play
   */
   initWorld()
   {
-    gameNs.game.tileGrid = new Grid(64, "Screen01");
+    gameNs.game.tileGrid = new Grid(64, "Screen11");
+    gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
     console.log("intiWOrld");
     // Interface testing
     gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
@@ -37,7 +38,7 @@ class Play
         gameNs.game.player.update(gameNs.game.dt, cols);
 
     gameNs.game.interface.update()
-
+  }
   }
 
   draw()
