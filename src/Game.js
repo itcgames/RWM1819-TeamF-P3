@@ -23,7 +23,7 @@ class Game
         gameNs.game.prevTime = Date.now();
         gameNs.game.collisionManager = new CollisionManager();
 
-        gameNs.game.tileGrid = new Grid(64, "Screen01");    
+        gameNs.game.tileGrid = new Grid(64, "Screen11");    
         gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
 
         gameNs.game.input = new Input();
@@ -106,7 +106,7 @@ class Game
         this.tileGrid.draw(this.ctx);
         this.octo.draw(this.ctx);
 
-        this.collisionManager.render(this.ctx);
+        //this.collisionManager.render(this.ctx);
 
         gameNs.game.player.draw(this.ctx);
         gameNs.game.testHeart.render(this.ctx);
