@@ -17,17 +17,24 @@ class Grid {
     this.height = this.screenData.height;
 
     this.TileEnum = Object.freeze({
-      "Sand"              : 3,
-      "Door"              : 23,
-      "Green_Wall_Top"    : 43,
-      "Right_Green_Wall"  : 60,
-      "Green_Wall"        : 61,
-      "Left_Green_Wall"   : 62
+      "Brown_Rock"        :   2,
+      "Sand"              :   3,
+      "Green_Rock"        :   8,
+      "Dead_Tree"         :  20,
+      "Door"              :  23,
+      "Tree"              :  26,
+      "Green_Wall_Top"    :  43,
+      "Right_Green_Wall"  :  60,
+      "Green_Wall"        :  61,
+      "Left_Green_Wall"   :  62,
+      "Water"             :  98,
+      "Bridge"            : 132,
     });
 
     this.TraversableTiles = Object.freeze([
       this.TileEnum.Sand, 
-      this.TileEnum.Door
+      this.TileEnum.Door,
+      this.TileEnum.Bridge
     ]);
 
     //  Initialise the grid with tiles.
@@ -65,5 +72,12 @@ class Grid {
    */
   getTile(x, y) {
     return this.tiles[x][y];
+  }
+
+  /**
+   * @param {Vector2} position
+   */
+  screenToGridCoords(position){
+    return new Vector2((position.x - position.x % this.tileSize) / this.tileSize, (position.y - position.y % this.tileSize) / this.tileSize);
   }
 }
