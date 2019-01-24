@@ -11,7 +11,7 @@
 
     <body onload=main()>
 
-        <!--Collision Submodule-->
+        <!--            Collision Submodule         -->
         <script src="submodules/RWM1819-Collision-A/src/Vector2.js"></script>
         <script src="submodules/RWM1819-Collision-A/src/MathHelper.js"></script>
         <script src="submodules/RWM1819-Collision-A/src/Shape/Shape.js"></script>
@@ -24,29 +24,42 @@
         <script src="submodules/RWM1819-Collision-A/src/Collider/PolygonCollider.js"></script>
         <script src="submodules/RWM1819-Collision-A/src/CollisionManager.js"></script>
 
-        <!--          Submodules        -->
+        <!--            Submodules                  -->
         <script src="submodules\RWM1819-Asset-B\AssetManager.js"></script>
         <script src="submodules\RWM1819-Input-A\src\input.js"></script>
 
-        <!--            Game            -->
+        <!--            Grid                        -->
+        <script src="resources/Levels/Screens.js"></script>
         <script src="src/GameWorld/Tile.js"></script>
         <script src="src/GameWorld/Grid.js"></script>
         <script src="src/GameWorld/Screen.js"></script>
 
+        
+        <!--            Character                   -->
+        <script src="src/Characters/Character.js"></script>       
+        <script src="src/Characters/Npc.js"></script>       
+        <script src="src/Characters/Enemies/Octorok.js"></script>  
+        <script src="src//Characters/Player.js"></script>     
+
+        <!--            Scenes                      -->
+        <script src="src/Scenes/SceneManager.js"></script>
+        <script src="src/Scenes/SplashScreen.js"></script>
+        <script src="src/Scenes/Play.js"></script>
+        <script src="src/Scenes/MenuScene.js"></script>
+
+        <!--            Objects                     -->
         <script src="src/Objects/Objects.js"></script>
         <script src="src/Objects/Pickups.js"></script>
 
-        <script src="src/Game.js"></script>
-        <script src="src/Interface.js"></script>
-        <script src="src/Player.js"></script>
+        <!--            Misc                        -->
+        <script src="src/Interface.js"></script>        
         <script src="src/gestureManager.js"></script>
-        <script src="src/SplashScreen.js"></script>
-        <script src="src/Play.js"></script>
-        <script src="src/SceneManager.js"></script>
-        <script src="src/MenuScene.js"></script>
 
-        <!--         Entry point        -->
+        <!--            Game                        -->
+        <script src="src/Game.js"></script>        
 
+        <!--         Entry point                    -->
         <script src="src/Main.js"></script>
+
     </body>
 </html>

@@ -18,7 +18,7 @@ class Character {
         });
 
         this.position = position;
-        this.gridPosition = new Vector2();
+        this.gridPosition = new Vector2(0, 0);
         this.orientation = this.OrientationEnum.North;
         this.alive = true;
         this.collider = collider;
@@ -28,8 +28,8 @@ class Character {
     /**
      * 
      */
-    updateGridPosition(tileSize){
-        this.gridPosition = new Vector2((this.gridPosition.x - this.gridPosition.x % tileSize) / tileSize, (this.gridPosition.y - this.gridPosition.y % tileSize) / tileSize);
+    updateGridPosition(tileSize) {
+        this.gridPosition = new Vector2((this.position.x - this.position.x % tileSize) / tileSize, (this.position.y - this.position.y % tileSize) / tileSize);
     }
 
     /**
