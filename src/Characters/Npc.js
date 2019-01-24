@@ -312,6 +312,10 @@ class Npc extends Character {
         } else if (this.gridPosition.y > this.targetPos.y) {
             this.checkMovement(new Vector2(0, -this.tileSize));
         }
+
+        if(this.collider !== null){
+            this.collider.shape.position = new Vector2(this.position.x, this.position.y);
+        }
     }    
 
     /**
