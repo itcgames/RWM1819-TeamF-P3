@@ -32,8 +32,6 @@ class MenuScene
     ///this.playBtn.load("resources/img/play_button.png");
     //this.playBtn.setSpriteSheet(false, 3, 10);
       this.startingPosition = [];
-      this.gestureManager = new GestureManager();
-      this.gestureManager.init();
 
 
   }
@@ -41,18 +39,6 @@ class MenuScene
 
   update()
   {
-    if (this.gestureManager.getOnePointDetection())
-    {
-      this.gestureManager.getTouchPosition()
-
-      this.startingPosition = this.gestureManager.getTouchPosition()
-      //console.log( this.startingPosition)
-      if (this.checkCollisionBetween(300, 50, 300, 300))
-      {
-        gameNs.sceneManager.goToScene(gameNs.game.title)
-        console.log("change scene");
-      }
-    }
 
     this.time++;
     if (this.time >= 30)
@@ -71,18 +57,6 @@ class MenuScene
 
 
   }
-
-  checkCollisionBetween(x,y,width,height)
-  {
-   var collides = false;
-   if ((this.startingPosition[0] < x + width) &&
-     (this.startingPosition[0] > x) &&
-     (this.startingPosition[1] < y + height) &&
-     (this.startingPosition[1] > y)){
-       collides = true;
-     }
-   return collides;
- }
 
 cursorMoveUp()
 {
@@ -126,28 +100,9 @@ cursorMoveDown()
   }
 }
 
-goToPlay()
-{
-  gameNs.game.play.initWorld();
-  if (gameNs.game.spaceAlive === true)
-  {
-      gameNs.game.sceneManager.goToScene("Play");
-
-  }
-
-}
-
-goToInstructions()
-{
-  if (gameNs.game.spaceAlive === true)
-  {
-      gameNs.game.sceneManager.goToScene("Instructions");
-  }
-}
-
 navigation()
 {
-  if (gameNs.game.curY === 675)
+  if (gameNs.game.curY === 675 && gameNs.game.sceneManager.getScene() === "Menu")
   {
     gameNs.game.sceneManager.goToScene("Play");
   }

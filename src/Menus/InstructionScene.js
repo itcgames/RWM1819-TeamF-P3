@@ -28,7 +28,10 @@ class InstructionsScene
 
   comeBack()
   {
-    gameNs.game.sceneManager.goToScene("Menu");
+    if (gameNs.game.sceneManager.getScene() === "Instructions")
+    {
+      gameNs.game.sceneManager.goToScene("Menu");
+    }
   }
 /**
   * creates a canvas and context
