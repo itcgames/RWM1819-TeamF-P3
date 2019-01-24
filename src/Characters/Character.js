@@ -34,18 +34,23 @@ class Character {
 
     /**
      * 
-     * @param {Integer} screenWidth 
-     * @param {Integer} screenHeight 
      * @param {Vector2} attemptedMovement 
      */
-    keepOnScreen(screenWidth, screenHeight, attemptedMovement){
-        if (this.position.x + attemptedMovement.x < 0 || this.position.x + attemptedMovement.x > screenWidth) {
+    keepOnScreen(attemptedMovement){
+        var grid = gameNs.game.tileGrid;
+        var tempGridPosition = grid.screenToGridCoords(this.position.add(attemptedMovement));
+        if (attemptedMovement.x < 0) {
+
+        } else {
+
+        }
+        if (this.position.x + attemptedMovement.x < 0 || this.position.x + this.width + attemptedMovement.x > grid.width * grid.tileSize || !grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
             /*  Do Nothing  */
         } else {
             this.position.x += attemptedMovement.x; 
         }
 
-        if (this.position.y + attemptedMovement.y < 0 || this.position.y + attemptedMovement.y > screenHeight) {
+        if (this.position.y + attemptedMovement.y < 0 || this.position.y + this.height + attemptedMovement.y > grid.height * grid.tileSize || !grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
             /*  Do Nothing  */
         } else {
             this.position.y += attemptedMovement.y;

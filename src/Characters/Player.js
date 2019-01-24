@@ -127,8 +127,7 @@ class Player extends Character{
      */
     moveUp(){
         if(!this.animating || !this.attacking){
-            this.keepOnScreen(64*15, 64*11, new Vector2(0, -5));
-            //this.position.y -= 5;
+            this.keepOnScreen(new Vector2(0, -5));
             this.orientation = this.OrientationEnum.North;
             this.sprite = this.north;
             this.animating = true;
@@ -140,7 +139,7 @@ class Player extends Character{
      */
     moveDown(){
         if(!this.animating || !this.attacking){
-            this.keepOnScreen(64*15, 64*11, new Vector2(0, 5));
+            this.keepOnScreen(new Vector2(0, 5));
             this.orientation = this.OrientationEnum.South;
             this.sprite = this.south;
             this.animating = true;
@@ -152,7 +151,7 @@ class Player extends Character{
      */
     moveLeft(){
         if(!this.animating || !this.attacking){
-            this.keepOnScreen(64*15, 64*11, new Vector2(-5, 0));
+            this.keepOnScreen(new Vector2(-5, 0));
             this.orientation = this.OrientationEnum.West;
             this.sprite = this.west;
             this.animating = true;
@@ -164,7 +163,7 @@ class Player extends Character{
      */
     moveRight(){
         if(!this.animating || !this.attacking){
-            this.keepOnScreen(64*15, 64*12, new Vector2(5, 0));
+            this.keepOnScreen(new Vector2(5, 0));
             this.orientation = this.OrientationEnum.East;
             this.sprite = this.east;
             this.animating = true;
