@@ -1,3 +1,4 @@
+
 /**
  * @description Player class that manages player entity
  * @author John O'Grady
@@ -23,6 +24,8 @@ class Player extends Character{
         this.animating = false;
         this.attacking = false;
         this.attacked = false;
+        this.hasSword = false;
+        this.swordBeam = false;
 
         // binding functions for key handling
         this.moveUp = this.moveUp.bind(this);
@@ -33,6 +36,8 @@ class Player extends Character{
         this.plantBomb = this.plantBomb.bind(this);
 
         this.sword = new Sword(64, 24);
+        this.projectile = new Sword(64, 24);
+        this.bomb = new Bombs(50,61);
 
         this.health = 6;
         this.rupees = 0;
@@ -101,30 +106,19 @@ class Player extends Character{
                 this.attacked = false;
             }
         }
+        if(this.bomb.alive){
+            this.bomb.update(dt);
+        }
 
-        if(this.attacking || this.sword.inFlight){
+        if(this.attacking){
             this.sword.update(dt);
+        }
+        if(this.projectile.inFlight){
+            this.projectile.update(dt);
         }
 
         this.sprite.setPos(this.position.x, this.position.y);
         this.collider.shape.position = new Vector2(this.position.x, this.position.y);
-
-        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'heart')) {
-            if(this.health < 6){
-                this.health += 1;
-            }
-        }
-        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'bomb')) {
-            this.bombs++;
-        }
-        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'rupee')) {
-            this.rupees++;
-        }
-        if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'key')) {
-            this.keys++;
-        }
-
-
         this.animating = false;
     }
 
@@ -178,15 +172,38 @@ class Player extends Character{
     }
 
     launchSword(){
-        if(!this.sword.inFlight){
+        if(!this.swordBeam){
             this.swordCharges = this.swordCharges - 1;
-            this.sword.setPos(this.position.x, this.position.y);
-            this.sword.fire(this.orientation);
+            this.projectile.setPos(this.position.x, this.position.y);
+            this.projectile.fire(this.orientation);
+            this.swordBeam = true;
         }
     }
 
     plantBomb(){
+        if(!this.bomb.alive){
+            this.bombs--;
+            this.bomb.plantBomb(this.orientation, this.position);
+        }
+    }
 
+    processPickup(type){
+        switch(type){
+            case "rupee":
+                this.rupees++;
+                break;
+            case "key":
+                this.keys++;
+                break;
+            case "bomb":
+                this.bombs++;
+                break;
+            case "heart":
+                if(this.health < 6){
+                    this.health++;
+                }
+                break;
+        }
     }
 
     /**
@@ -211,11 +228,9 @@ class Player extends Character{
                     break;
             }
             
+            this.sword.melee(this.orientation, this.position);
             if(this.swordCharges >= 0 ){
                 this.launchSword();
-            } else {
-                this.sword.inFlight = false;
-                this.sword.melee(this.orientation, this.position);
             }
 
             this.attackWindow = 10;
@@ -228,8 +243,14 @@ class Player extends Character{
      * sizing up the sprite and rendering it
      */
     draw(ctx){
-        if(this.attacking || this.sword.inFlight){
+        if(this.attacking){
             this.sword.draw(ctx);
+        }
+        if(this.bomb.alive){
+            this.bomb.draw(ctx);
+        }
+        if(this.swordBeam){
+            this.projectile.draw(ctx);
         }
         this.sprite.horizontalSheet = false;
         this.sprite.draw(ctx);

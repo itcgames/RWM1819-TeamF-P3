@@ -17,9 +17,9 @@ class MenuScene
     this.playBtn = new Image();
     this.cursorBtn = new Image();
     this.instructionsBtn = new Image();
-    this.playBtn.src = "resources/images/play.png";
-    this.cursorBtn.src = "resources/images/cursor.png";
-    this.instructionsBtn.src = "resources/images/instructions.png"
+    this.playBtn.src = "resources/play.png";
+    this.cursorBtn.src = "resources/cursor.png";
+    this.instructionsBtn.src = "resources/instructions.png"
 
     ///this.playBtn.load("resources/img/play_button.png");
     //this.playBtn.setSpriteSheet(false, 3, 10);

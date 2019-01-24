@@ -28,15 +28,16 @@ class Sword extends Utility{
             this.collider.shape.width = 64;
             this.collider.shape.height = 24;
         }
-
+        
         this.setPos(this.position.x + this.updateVector.x, this.position.y + this.updateVector.y);
         this.collider.position = new Vector2(this.position.x, this.position.y);
         this.sprite.setPos(this.position.x, this.position.y);
         this.sprite.update();
 
         if(this.inFlight){
-            if((this.position.x + this.collider.shape.width  > 64 * 15 || this.position.x < 64 ||
-                this.position.y + this.collider.shape.height > 64 * 12 || this.position.y < 64 * 3) && this.collided == false){
+            if((((this.position.x + this.collider.shape.width  > 64 * 15 || this.position.x < 64 ||
+                this.position.y + this.collider.shape.height > 64 * 12 || this.position.y < 64 * 3)
+                || gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'enemy')) && this.collided == false) ){
                     this.processCollision();
                 }
             if(this.collided){
@@ -45,6 +46,7 @@ class Sword extends Utility{
                 if(this.clock > 200){
                     this.collided = false;
                     this.inFlight = false;
+                    gameNs.game.player.swordBeam = false;
                     this.clock = 0;
                 }
             }
@@ -163,7 +165,7 @@ class Sword extends Utility{
             this.height,
             this.width,
             ['sword'],
-            ['player', 'pickup', 'obstacle']
+            ['player', 'pickup', 'obstacle', 'sword']
         );
         
         gameNs.game.collisionManager.addBoxCollider(this.collider);

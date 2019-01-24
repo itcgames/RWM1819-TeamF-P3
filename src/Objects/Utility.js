@@ -15,6 +15,7 @@ class Utility{
             "South":3,
             "West":4
         });
+        
         this.width = width;
         this.height = height;
         this.collider = {};
