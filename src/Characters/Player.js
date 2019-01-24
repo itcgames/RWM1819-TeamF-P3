@@ -172,40 +172,40 @@ class Player{
     setUpSprites(){
         // testing
         this.west = new AssetManager(this.position.x, this.position.y, this.width, this.height,0,240);
-        this.west.setSpriteSheet("assets/test.png", 3, 8);
+        this.west.setSpriteSheet("resources/test.png", 3, 8);
 
         this.east = new AssetManager(this.position.x, this.position.y, this.width, this.height,0,240);
-        this.east.setSpriteSheet("assets/test.png", 3, 8);
+        this.east.setSpriteSheet("resources/test.png", 3, 8);
         this.east.flipped = true;
 
         this.north = new AssetManager(this.position.x, this.position.y, this.width, this.height,120,0);
-        this.north.setSpriteSheet("assets/test.png", 3, 8);
+        this.north.setSpriteSheet("resources/test.png", 3, 8);
         this.north.width = 30;
         this.north.height = 30;
 
         this.south = new AssetManager(this.position.x, this.position.y, this.width, this.height,32,0);
-        this.south.setSpriteSheet("assets/test.png", 3, 8);
+        this.south.setSpriteSheet("resources/test.png", 3, 8);
         this.south.width = 30;
         this.south.height = 30;
 
         this.attackWest = new AssetManager(this.position.x, this.position.y, this.width, this.height, 90, 294);
-        this.attackWest.setSpriteSheet("assets/test.png", 3, 1)
+        this.attackWest.setSpriteSheet("resources/test.png", 3, 1)
         this.attackWest.width = 32;
         this.attackWest.height = 32;
 
         this.attackEast = new AssetManager(this.position.x, this.position.y, this.width, this.height, 90, 294);
-        this.attackEast.setSpriteSheet("assets/test.png", 3, 1)
+        this.attackEast.setSpriteSheet("resources/test.png", 3, 1)
         this.attackEast.width = 32;
         this.attackEast.height = 32;
         this.attackEast.flipped = true;
 
         this.attackNorth = new AssetManager(this.position.x, this.position.y, this.width, this.height, 176, 54);
-        this.attackNorth.setSpriteSheet("assets/test.png", 3, 1)
+        this.attackNorth.setSpriteSheet("resources/test.png", 3, 1)
         this.attackNorth.width = 28;
         this.attackNorth.height = 34;
 
         this.attackSouth = new AssetManager(this.position.x, this.position.y, this.width, this.height, 88, 86);
-        this.attackSouth.setSpriteSheet("assets/test.png", 3, 1)
+        this.attackSouth.setSpriteSheet("resources/test.png", 3, 1)
         this.attackSouth.width = 28;
         this.attackSouth.height = 32;
 

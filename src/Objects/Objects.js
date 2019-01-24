@@ -2,7 +2,7 @@
  * @description Items that appear on overworld and can be interacted with
  * @author John O'Meara
  */
-class Object {
+class Objects {
 
   /**
    * Constructs the base object class
@@ -36,6 +36,7 @@ class Object {
       frameLeft
     );
     this.sprite.setSpriteSheet(filepath, ticksperframe, numberperframe);
+    this.sprite.setScale(w/frameWidth, h/frameHeight);
 
     // collider
     this.bounds = new BoxCollider(
