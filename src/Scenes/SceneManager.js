@@ -47,7 +47,6 @@ class SceneManager
    */
   goToScene(title)
   {
-    gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
 
     if(this.dontPlayFirst === false)
     {
@@ -64,6 +63,8 @@ class SceneManager
     }
     this.scenetitle = this.titles[this.index]
     this.currentScene = this.dictionary[this.index];
+
+    console.log(this.currentScene);
 
   }
   /**
@@ -87,6 +88,7 @@ class SceneManager
 
   changeScene(title)
   {
+    gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     this.currentScene = this.titles[title]
   }
   update()

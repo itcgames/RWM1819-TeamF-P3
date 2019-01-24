@@ -47,7 +47,7 @@ class Interface {
 
   /**
    * Triggers the pause menu. Starts it moving in the opposite direction.
-   * 
+   *
    */
   trigger() {
 
@@ -98,7 +98,7 @@ class Interface {
       this.moving = false;
 
       /* resume gameplay */
-      
+
     }
 
     // Check if the UI is at the bottom
@@ -107,9 +107,9 @@ class Interface {
       this.pos.y = 0;
       this.moving = false;
       this.active = true;
-      
+
       /* update menu logic */
-      
+
     }
 
     this.pos.y += this.scrollSpeed;
@@ -133,8 +133,8 @@ class Interface {
 
     //ctx.font = "60px comic sans"
     ctx.fillText(
-      "Inventory", 
-      50 + this.pos.x, 
+      "Inventory",
+      50 + this.pos.x,
       70 + this.pos.y);
 
     ctx.fillText(

@@ -18,6 +18,11 @@ class Play
   */
   initWorld()
   {
+    gameNs.game.tileGrid = new Grid(64, "Screen01");
+    console.log("intiWOrld");
+    // Interface testing
+    gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
+    gameNs.game.input.bind(gameNs.game.interface.trigger, "p");
   }
 
   /**
@@ -26,11 +31,25 @@ class Play
  */
   update()
   {
-    console.log("updating play");
+    gameNs.game.player.update(gameNs.game.dt);
+
+    gameNs.game.interface.update()
+
   }
 
   draw()
   {
+    gameNs.game.tileGrid.draw(gameNs.game.ctx);
+    gameNs.game.octo.draw(gameNs.game.ctx);
 
+    gameNs.game.collisionManager.render(gameNs.game.ctx);
+
+    gameNs.game.player.draw(gameNs.game.ctx);
+    gameNs.game.testHeart.render(gameNs.game.ctx);
+    gameNs.game.testBomb.render(gameNs.game.ctx);
+    gameNs.game.testRupee.render(gameNs.game.ctx);
+    gameNs.game.testKey.render(gameNs.game.ctx);
+
+    gameNs.game.interface.render(gameNs.game.ctx);
   }
 }
