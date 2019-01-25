@@ -19,12 +19,10 @@ class SplashScreen
 
     ///this.playBtn.load("resources/img/play_button.png");
     //this.playBtn.setSpriteSheet(false, 3, 10);
-      this.startingPosition = [];
+    this.startingPosition = [];
 
-      var text;
-      this.text = "Space to Start";
-
-
+    var text;
+    this.text = "Space to Start";
   }
 
 

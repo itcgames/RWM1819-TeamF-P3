@@ -88,7 +88,6 @@ class Key extends Objects {
       0,
       "resources/objects.png",
       )
-      //this.sprite.setScale(25/512, 25/512);
   }
 }
 
@@ -96,18 +95,18 @@ class Key extends Objects {
  * @description Stopwatch pickup, picking one up stops the enemies updating for a couple of seconds
  * @author Conor O'Toole
  */
-class Key extends Objects {
+class StopWatch extends Objects {
   constructor(x,y) {
     super(
       "stopwatch",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      512,    // frameWidth
-      512,    // frameHeight
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
       0,      // frameTop
-      0,      // frameLeft
+      256,      // frameLeft
       0,
       0,
       "resources/objects.png",
@@ -120,23 +119,22 @@ class Key extends Objects {
  * relative to the player
  * @author Conor O'Toole
  */
-class Key extends Objects {
+class Compass extends Objects {
   constructor(x,y) {
     super(
-      "compas",
+      "compass",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      512,    // frameWidth
-      512,    // frameHeight
-      0,      // frameTop
-      0,      // frameLeft
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      64,      // frameTop
+      128,      // frameLeft
       0,
       0,
       "resources/objects.png",
       )
-      //this.sprite.setScale(25/512, 25/512);
   }
 }
 
@@ -144,18 +142,18 @@ class Key extends Objects {
  * @description Map pickup, picking one up shows the whole map on a minimap
  * @author Conor O'Toole
  */
-class Key extends Objects {
+class MapPickup extends Objects {
   constructor(x,y) {
     super(
       "map",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      512,    // frameWidth
-      512,    // frameHeight
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
       0,      // frameTop
-      0,      // frameLeft
+      128,      // frameLeft
       0,
       0,
       "resources/objects.png",
@@ -167,23 +165,22 @@ class Key extends Objects {
  * @description sword pickup, picking one up gives the player a sword
  * @author Conor O'Toole
  */
-class Key extends Objects {
+class SwordPickup extends Objects {
   constructor(x,y) {
     super(
-      "sword",
+      "swordPickup",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      512,    // frameWidth
-      512,    // frameHeight
-      0,      // frameTop
-      0,      // frameLeft
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      64,      // frameTop
+      192,      // frameLeft
       0,
       0,
       "resources/objects.png",
       )
-      //this.sprite.setScale(25/512, 25/512);
   }
 }
 
@@ -191,23 +188,22 @@ class Key extends Objects {
  * @description Triforce pickup
  * @author Conor O'Toole
  */
-class Key extends Objects {
+class TriForce extends Objects {
   constructor(x,y) {
     super(
-      "triforcePiece",
+      "triforce",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      512,    // frameWidth
-      512,    // frameHeight
-      0,      // frameTop
-      0,      // frameLeft
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      64,      // frameTop
+      256,      // frameLeft
       0,
       0,
       "resources/objects.png",
       )
-      //this.sprite.setScale(25/512, 25/512);
   }
 }
 
@@ -215,21 +211,21 @@ class Key extends Objects {
  * @description fairy pickup, picking one up gives the player full health.
  * @author Conor O'Toole
  */
-class Key extends Objects {
+class Fairy extends Objects {
   constructor(x,y) {
     super(
       "fairy",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      512,    // frameWidth
-      512,    // frameHeight
-      0,      // frameTop
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      128,      // frameTop
       0,      // frameLeft
       0,
       0,
-      "resources/objects.png",
+      "resources/npcSprites.png",
       )
       //this.sprite.setScale(25/512, 25/512);
   }
@@ -239,22 +235,21 @@ class Key extends Objects {
  * @description Heart container pickup, picking one up gives the player a greater maximum health
  * @author Conor O'Toole
  */
-class Key extends Objects {
+class HeartContainer extends Objects {
   constructor(x,y) {
     super(
       "heartContainer",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      512,    // frameWidth
-      512,    // frameHeight
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
       0,      // frameTop
-      0,      // frameLeft
+      64,      // frameLeft
       0,
       0,
       "resources/objects.png",
       )
-      //this.sprite.setScale(25/512, 25/512);
   }
 }

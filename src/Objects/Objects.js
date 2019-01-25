@@ -81,7 +81,7 @@ class Objects {
    * Renders the object to the screen
    * @param {context} ctx context
    */
-  render(ctx) {
+  draw(ctx) {
     if(this.alive)
     {
       this.sprite.draw(ctx);

@@ -33,7 +33,7 @@ class Octorok extends Npc {
     update(dt){
         if(this.alive){
             this.timer += dt;     
-            if (this.timer > 500){
+            if (this.timer > 200){
                 this.wander();
                 this.timer = 0;
             }
@@ -49,7 +49,6 @@ class Octorok extends Npc {
             if(gameNs.game.player.boomerang.alive){
                 if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'boomerang')) {
                     this.alive = false;
-                    gameNs.game.player.boomerang.alive = false;
                 }
             }
         }

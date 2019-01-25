@@ -19,7 +19,6 @@ class Game
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
         document.body.appendChild(gameNs.game.canvas);
 
-
        //   Initialise game variables.
        gameNs.game.collisionManager = new CollisionManager();
        gameNs.game.input = new Input();
@@ -39,54 +38,13 @@ class Game
 
         //   Initialise game variables.
         gameNs.game.prevTime = Date.now();
-
-        gameNs.game.sceneManager.addScene(gameNs.game.splash);
-        gameNs.game.sceneManager.addScene(gameNs.game.menu);
-        gameNs.game.sceneManager.addScene(gameNs.game.play);
-        gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
-        this.update = this.update.bind(this);
-
-        // Interface testing
-        gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
-        gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
-
-        //   Initialise game variables.
-        gameNs.game.player = new Player(new Vector2(400,400), new BoxCollider(new Vector2(400,400), 42, 64), null);
-        gameNs.game.player.init(gameNs.game.canvas.ctx);
-
-        gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
-        gameNs.game.input.bind(gameNs.game.player.moveUp, "W");
-        gameNs.game.input.bind(gameNs.game.player.moveLeft, "a");
-        gameNs.game.input.bind(gameNs.game.player.moveLeft, "A");
-        gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
-        gameNs.game.input.bind(gameNs.game.player.moveDown, "S");
-        gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
-        gameNs.game.input.bind(gameNs.game.player.moveRight, "D");
-        gameNs.game.input.bind(gameNs.game.player.plantBomb, "q");
-        gameNs.game.input.bind(gameNs.game.player.plantBomb, "Q");
-        gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
         gameNs.game.globalInput.bind(gameNs.game.menu.cursorMoveUp, "ArrowUp");
         gameNs.game.globalInput.bind(gameNs.game.menu.cursorMoveDown, "ArrowDown");
-
-
         gameNs.game.globalInput.bind(gameNs.game.menu.navigation, "Enter");
         gameNs.game.globalInput.bind(gameNs.game.instructions.comeBack, "Escape");
-        gameNs.game.globalInput.bind(gameNs.game.splash.goNext, " ")
+        gameNs.game.globalInput.bind(gameNs.game.splash.goNext, " ");
 
-        gameNs.game.input.setHoldValue(1000);
         gameNs.game.play.initWorld();
-
-        gameNs.game.pickups = [];
-
-        gameNs.game.testHeart = new Heart(350,400);
-        gameNs.game.testBomb = new Bomb(550,400);
-        gameNs.game.testRupee = new Rupee(350,600);
-        gameNs.game.testKey = new Key(550,600);
-
-        gameNs.game.pickups.push(gameNs.game.testHeart);
-        gameNs.game.pickups.push(gameNs.game.testBomb);
-        gameNs.game.pickups.push(gameNs.game.testRupee);
-        gameNs.game.pickups.push(gameNs.game.testKey);
     }
 
     /**
@@ -101,16 +59,6 @@ class Game
 
         gameNs.game.sceneManager.update();
         gameNs.game.globalInput.update();
-
-        
-        }
-
-        for(var i = 0; i < gameNs.game.pickups.length; i++){
-            gameNs.game.pickups[i].update();
-        }
-
-        gameNs.game.input.update();
-        gameNs.game.sceneManager.update();
 
         //  Draw new frame.
         gameNs.game.draw();

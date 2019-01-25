@@ -12,20 +12,17 @@ class Player extends Character{
      */
     constructor(position, collider, sprite){
         super(position, collider, sprite);
-
+        
+        this.CurrentUtility = Object.freeze({
+            "Boomerang":1,
+            "Bomb":2
+        });
     }
 
     /**
      * initialise the player entity - bind functions for key handling and setup sprite
      */
     init(){
-
-        this.UseItem = Object.freeze({
-            "Boomerang":1,
-            "Bomb":2
-        });
-        
-        this.util = this.UseItem.Bomb;
         console.log(this.util);
 
         //testing
@@ -35,7 +32,7 @@ class Player extends Character{
         this.attacking = false;
         this.attacked = false;
         this.swordBeam = false;
-        this.active = true;
+        this.currentUtil = this.CurrentUtility.Bomb;
 
         // binding functions for key handling
         this.moveUp = this.moveUp.bind(this);
@@ -43,7 +40,7 @@ class Player extends Character{
         this.moveLeft = this.moveLeft.bind(this);
         this.moveRight = this.moveRight.bind(this);
         this.meleeAttack = this.meleeAttack.bind(this);
-        this.plantBomb = this.plantBomb.bind(this);
+        this.useUtility = this.useUtility.bind(this);
 
         this.sword = new Sword('sword', 64, 24);
         this.projectile = new Sword('flying sword',64, 24);
@@ -51,15 +48,17 @@ class Player extends Character{
         this.boomerang = new Boomerang(64,64);
 
         //collectable variables and player info
+        this.clock = 0;
         this.health = 6;
         this.maxHealth = 6;
         this.rupees = 0;
         this.bombs = 0;
         this.keys = 0;
-        this.stopwatch = false;
+        this.stopWatch = false;
         this.compass = false;
         this.map = false;
         this.hasSword = false;
+        this.hasBoomerang = false;
 
         this.collider = new BoxCollider(
             new Vector2(
@@ -136,6 +135,14 @@ class Player extends Character{
             this.boomerang.update();
         }
 
+        if(this.stopWatch){
+            this.clock += dt;
+            if(this.clock > 5000){
+                this.clock = 0;
+                this.stopWatch = false;
+            }
+        }
+
         this.sprite.setPos(this.position.x, this.position.y);
         this.collider.shape.position = new Vector2(this.position.x, this.position.y);
         this.animating = false;
@@ -199,7 +206,6 @@ class Player extends Character{
 
     launchSword(){
         if(!this.swordBeam){
-            this.swordCharges = this.swordCharges - 1;
             this.projectile.setPos(this.position.x, this.position.y);
             this.projectile.fire(this.orientation);
             this.swordBeam = true;
@@ -207,28 +213,27 @@ class Player extends Character{
     }
 
     plantBomb(){
-        if(!this.bomb.alive){
+        if(!this.bomb.alive && this.bombs > 0){
             this.bombs--;
             this.bomb.plantBomb(this.orientation, this.position);
         }
     }
 
     throwBoomerang(){
-        this.boomerang.throw(this.position, this.orientation);
+        if(!this.boomerang.alive && this.hasBoomerang){
+            this.boomerang.throw(this.orientation, this.position);
+        }
     }
 
     useUtility(){
-       /* if(this.active){
-            switch(this.util){
-                case this.UseItem.Boomerang:
-                    this.throwBoomerang();
-                    break;
-                case this.UseItem.Boomerang:
-                    this.plantBomb();
-                    break;
-            }
+        switch(this.currentUtil){
+            case this.CurrentUtility.Boomerang:
+                this.throwBoomerang();
+                break;
+            case this.CurrentUtility.Bomb:
+                this.plantBomb();
+                break;
         }
-        */
     }
 
     processPickup(type){
@@ -243,12 +248,12 @@ class Player extends Character{
                 this.bombs++;
                 break;
             case "heart":
-                if(this.health < 6){
+                if(this.health < this.maxHealth){
                     this.health++;
                 }
                 break;
             case "stopwatch":
-                this.stopwatch = true;
+                this.stopWatch = true;
                 break;
             case "compass":
                 this.compass = true;
@@ -261,7 +266,7 @@ class Player extends Character{
                 break;
             case "triforcePiece":
                 break;
-            case "sword":
+            case "swordPickup":
                 this.hasSword = true;
                 break;
             case "fairy":
@@ -276,7 +281,7 @@ class Player extends Character{
      * attack lasts
      */
     meleeAttack(){
-      if (hasSword === true)
+      if (this.hasSword === true)
       {
         if(!this.animating && !this.attacked){
             switch(this.orientation){
@@ -286,7 +291,7 @@ class Player extends Character{
                 case this.OrientationEnum.West:
                     this.sprite = this.attackWest;
                     break;
-                case this.OrientationEnum.North:
+                case this.OrientationEnum.North:    
                     this.sprite = this.attackNorth;
                     break;
                 case this.OrientationEnum.South:
@@ -295,7 +300,7 @@ class Player extends Character{
             }
 
             this.sword.melee(this.orientation, this.position);
-            if(this.swordCharges >= 0 ){
+            if(this.health === this.maxHealth ){
                 this.launchSword();
             }
 
@@ -348,20 +353,19 @@ class Player extends Character{
         this.south.horizontalSheet = false;
 
         // attack animations
-        this.attackWest = new AssetManager(this.position.x, this.position.y, 38, 63, 63, 36);
+        this.attackWest = new AssetManager(this.position.x, this.position.y, 48, 64, 64, 48);
         this.attackWest.setSpriteSheet("resources/link.png", 4, 1);
         this.attackWest.flipped = true;
 
-        this.attackEast = new AssetManager(this.position.x, this.position.y, 38, 63, 63, 36);
+        this.attackEast = new AssetManager(this.position.x, this.position.y, 48, 64, 64, 48);
         this.attackEast.setSpriteSheet("resources/link.png", 4, 1);
 
-        this.attackNorth = new AssetManager(this.position.x, this.position.y, 32, 63, 0, 0);
+        this.attackNorth = new AssetManager(this.position.x, this.position.y, 48, 64, 0, 144);
         this.attackNorth.setSpriteSheet("resources/link.png", 3, 1);
 
-        this.attackSouth = new AssetManager(this.position.x, this.position.y, 32, 63, 0, 82);
+        this.attackSouth = new AssetManager(this.position.x, this.position.y, 48, 64, 64, 144);
         this.attackSouth.setSpriteSheet("resources/link.png", 3, 1);
 
         this.sprite = this.north;
-        this.swordCharges = 5;
     }
 }
