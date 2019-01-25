@@ -50,7 +50,7 @@ class Objects {
       w,
       h,
       ['pickup'],
-      ['sword', 'enemy']
+      ['flying sword', 'enemy']
     );
     gameNs.game.collisionManager.addBoxCollider(this.bounds);
   }
@@ -63,17 +63,27 @@ class Objects {
     this.bounds.setPos(this.pos.x, this.pos.y);
   }
 
+  update(){
+    if(this.alive)
+    {
+      this.sprite.update();
+      if (gameNs.game.collisionManager.boxCollidedWithTag(this.bounds, 'player') 
+      || gameNs.game.collisionManager.boxCollidedWithTag(this.bounds, 'sword')) {
+        this.alive = false;
+        gameNs.game.player.processPickup(this.type);
+        gameNs.game.collisionManager.removeBoxCollider(this.bounds);
+        gameNs.game.collisionManager.checkBoxColliderArray();
+      }
+    }
+  }
+
   /**
    * Renders the object to the screen
    * @param {context} ctx context
    */
-  render(ctx) {
+  draw(ctx) {
     if(this.alive)
     {
-      if (gameNs.game.collisionManager.boxCollidedWithTag(this.bounds, 'player')) {
-        this.alive = false;
-        gameNs.game.player.processPickup(this.type);
-      }
       this.sprite.draw(ctx);
     }
   }

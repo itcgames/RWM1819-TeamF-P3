@@ -90,17 +90,6 @@ class Game
         gameNs.game.player = new Player(new Vector2(2520, 3200), new BoxCollider(new Vector2(400,400), 42, 64), null);
         gameNs.game.player.init(gameNs.game.canvas.ctx);
 
-        gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
-        gameNs.game.input.bind(gameNs.game.player.moveUp, "W");
-        gameNs.game.input.bind(gameNs.game.player.moveLeft, "a");
-        gameNs.game.input.bind(gameNs.game.player.moveLeft, "A");
-        gameNs.game.input.bind(gameNs.game.player.moveDown, "s");
-        gameNs.game.input.bind(gameNs.game.player.moveDown, "S");
-        gameNs.game.input.bind(gameNs.game.player.moveRight, "d");
-        gameNs.game.input.bind(gameNs.game.player.moveRight, "D");
-        gameNs.game.input.bind(gameNs.game.player.plantBomb, "q");
-        gameNs.game.input.bind(gameNs.game.player.plantBomb, "Q");
-        gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
         gameNs.game.globalInput.bind(gameNs.game.menu.cursorMoveUp, "ArrowUp");
         gameNs.game.globalInput.bind(gameNs.game.menu.cursorMoveDown, "ArrowDown");
 
@@ -110,12 +99,6 @@ class Game
 
         gameNs.game.input.setHoldValue(1000);
         gameNs.game.play.initWorld();
-
-
-        gameNs.game.testHeart = new Heart(350,400);
-        gameNs.game.testBomb = new Bomb(550,400);
-        gameNs.game.testRupee = new Rupee(350,600);
-        gameNs.game.testKey = new Key(550,600);
 
     }
 
@@ -132,19 +115,6 @@ class Game
         gameNs.game.sceneManager.update();
 
         gameNs.game.globalInput.update();
-
-        if((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
-
-            gameNs.game.input.update();
-
-            let cols = gameNs.game.collisionManager.checkBoxColliderArray();
-            gameNs.game.player.update(gameNs.game.dt, cols);
-
-            // for(let i = 0; i < gameNs.game.testScreen.enemyList.length; i++){
-            //     gameNs.game.testScreen.enemyList[i].update(gameNs.game.dt);
-            // }
-            //gameNs.game.octo.update(gameNs.game.dt);
-        }
 
 
         //gameNs.game.input.update();

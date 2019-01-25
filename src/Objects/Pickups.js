@@ -1,6 +1,6 @@
 /**
  * @description Recovery heart, picking one up heals the player
- * @author John O'Meara
+ * @author John O'Meara & Conor O'Toole
  */
 class Heart extends Objects {
 
@@ -11,16 +11,14 @@ class Heart extends Objects {
     y,
     25,     // Width
     25,     // Height
-    48,    // frameWidth
-    45,    // frameHeight
-    0,      // frameTop
-    0,      // frameLeft
+    64,    // frameWidth
+    64,    // frameHeight
+    128,      // frameTop
+    256,      // frameLeft
     0,
     0,
-    "resources/heart.png",
+    "resources/objects.png",
     )
-    //this.sprite.setScale(0.03, 0.03);
-    //this.sprite.setScale(25/847, 25/768);
   }
 }
 
@@ -34,17 +32,16 @@ class Bomb extends Objects {
       "bomb",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      50,    // frameWidth
-      61,    // frameHeight
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
       0,      // frameTop
       0,      // frameLeft
       0,
       0,
-      "resources/bomb.png",
+      "resources/objects.png",
       )
-      //this.sprite.setScale(1, 0.1);
   }
 }
 
@@ -58,17 +55,16 @@ class Rupee extends Objects {
       "rupee",
       x,
       y,
-      15,     // Width
+      30,     // Width
       30,     // Height
-      40,    // frameWidth
-      60,    // frameHeight
-      0,      // frameTop
+      64,    // frameWidth
+      64,    // frameHeight
+      64,      // frameTop
       0,      // frameLeft
-      0,
-      0,
-      "resources/rupee.png",
+      4,
+      2,
+      "resources/objects.png",
       )
-      //this.sprite.setScale(25/342, 25/569);
   }
 }
 
@@ -82,16 +78,178 @@ class Key extends Objects {
       "key",
       x,
       y,
-      25,     // Width
-      25,     // Height
-      512,    // frameWidth
-      512,    // frameHeight
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
       0,      // frameTop
+      192,      // frameLeft
+      0,
+      0,
+      "resources/objects.png",
+      )
+  }
+}
+
+/**
+ * @description Stopwatch pickup, picking one up stops the enemies updating for a couple of seconds
+ * @author Conor O'Toole
+ */
+class StopWatch extends Objects {
+  constructor(x,y) {
+    super(
+      "stopwatch",
+      x,
+      y,
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      0,      // frameTop
+      256,      // frameLeft
+      0,
+      0,
+      "resources/objects.png",
+      )
+  }
+}
+
+/**
+ * @description Compass pickup, picking one up shows the goal destination
+ * relative to the player
+ * @author Conor O'Toole
+ */
+class Compass extends Objects {
+  constructor(x,y) {
+    super(
+      "compass",
+      x,
+      y,
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      64,      // frameTop
+      128,      // frameLeft
+      0,
+      0,
+      "resources/objects.png",
+      )
+  }
+}
+
+/**
+ * @description Map pickup, picking one up shows the whole map on a minimap
+ * @author Conor O'Toole
+ */
+class MapPickup extends Objects {
+  constructor(x,y) {
+    super(
+      "map",
+      x,
+      y,
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      0,      // frameTop
+      128,      // frameLeft
+      0,
+      0,
+      "resources/objects.png",
+      )
+      //this.sprite.setScale(25/512, 25/512);
+  }
+}
+/**
+ * @description sword pickup, picking one up gives the player a sword
+ * @author Conor O'Toole
+ */
+class SwordPickup extends Objects {
+  constructor(x,y) {
+    super(
+      "swordPickup",
+      x,
+      y,
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      64,      // frameTop
+      192,      // frameLeft
+      0,
+      0,
+      "resources/objects.png",
+      )
+  }
+}
+
+/**
+ * @description Triforce pickup
+ * @author Conor O'Toole
+ */
+class TriForce extends Objects {
+  constructor(x,y) {
+    super(
+      "triforce",
+      x,
+      y,
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      64,      // frameTop
+      256,      // frameLeft
+      0,
+      0,
+      "resources/objects.png",
+      )
+  }
+}
+
+/**
+ * @description fairy pickup, picking one up gives the player full health.
+ * @author Conor O'Toole
+ */
+class Fairy extends Objects {
+  constructor(x,y) {
+    super(
+      "fairy",
+      x,
+      y,
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      128,      // frameTop
       0,      // frameLeft
       0,
       0,
-      "resources/key.png",
+      "resources/npcSprites.png",
       )
       //this.sprite.setScale(25/512, 25/512);
+  }
+}
+
+/**
+ * @description Heart container pickup, picking one up gives the player a greater maximum health
+ * @author Conor O'Toole
+ */
+class HeartContainer extends Objects {
+  constructor(x,y) {
+    super(
+      "heartContainer",
+      x,
+      y,
+      30,     // Width
+      30,     // Height
+      64,    // frameWidth
+      64,    // frameHeight
+      0,      // frameTop
+      64,      // frameLeft
+      0,
+      0,
+      "resources/objects.png",
+      )
   }
 }

@@ -8,8 +8,9 @@ class Sword extends Utility{
      * @param {*} width 
      * @param {*} height 
      */
-    constructor(width, height){
+    constructor(tag, width, height){
         super(width, height);
+        this.tag = tag;
         this.setUpSprites();
         this.updateVector = new Vector2();
         this.inFlight = false;
@@ -164,8 +165,8 @@ class Sword extends Utility{
             ),
             this.height,
             this.width,
-            ['sword'],
-            ['player', 'pickup', 'obstacle', 'sword']
+            [this.tag],
+            ['player', 'obstacle', 'sword']
         );
         
         gameNs.game.collisionManager.addBoxCollider(this.collider);
