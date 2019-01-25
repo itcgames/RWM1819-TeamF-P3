@@ -28,8 +28,8 @@ class Character {
   /**
    * 
    */
-  updateGridPosition(tileSize) {
-    this.gridPosition = new Vector2((this.position.x - this.position.x % tileSize) / tileSize, (this.position.y - this.position.y % tileSize) / tileSize);
+  updateGridPosition(grid) {
+    this.gridPosition = grid.screenToGridCoords(this.position);
   }
 
   /**
@@ -38,17 +38,41 @@ class Character {
    */
   keepOnScreen(attemptedMovement) {
     var grid = gameNs.game.tileGrid;
-    var tempGridPosition = grid.screenToGridCoords(this.position.add(attemptedMovement));
-    if (this.position.x + attemptedMovement.x < 0 || this.position.x + this.width + attemptedMovement.x > grid.width * grid.tileSize || !grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
-      /*  Do Nothing  */
+    var leftTopGridPosition = grid.screenToGridCoords(new Vector2(this.position.x + attemptedMovement.x, this.position.y + attemptedMovement.y));
+    var rightBottomGridPosition = grid.screenToGridCoords(new Vector2(this.position.x + this.width + attemptedMovement.x, this.position.y + this.height + attemptedMovement.y));
+
+    //  Moving right.
+    if (attemptedMovement.x > 0){
+      if ( this.position.x + this.width + attemptedMovement.x < grid.width * grid.tileSize && 
+           grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable && 
+           grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable) {
+        this.position.x += attemptedMovement.x;
+      }    
     } else {
-      this.position.x += attemptedMovement.x;
+      //  Moving left.
+      if ( this.position.x + attemptedMovement.x > 0 && 
+           grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable && 
+           grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable) {
+        this.position.x += attemptedMovement.x;
+      }
     }
 
-    if (this.position.y + attemptedMovement.y < 0 || this.position.y + this.height + attemptedMovement.y > grid.height * grid.tileSize || !grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
-      /*  Do Nothing  */
+    //  Moving down.
+    if (attemptedMovement.y > 0){
+      if ( this.position.y + this.height + attemptedMovement.y < grid.height * grid.tileSize && 
+           grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable && 
+           grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable ) {
+        this.position.y += attemptedMovement.y;
+      }
     } else {
-      this.position.y += attemptedMovement.y;
+      //  Moving up.
+    if ( this.position.y + attemptedMovement.y > 0 && 
+         grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable &&
+         grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable ){
+        this.position.y += attemptedMovement.y;
+      }
     }
+
+    
   }
 }

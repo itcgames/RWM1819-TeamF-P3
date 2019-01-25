@@ -20,7 +20,7 @@ class Player extends Character{
     init(){
         //testing
         this.width = 34;
-        this.height = 64;
+        this.height = 56;
         this.animating = false;
         this.attacking = false;
         this.attacked = false;
@@ -127,7 +127,7 @@ class Player extends Character{
      */
     moveUp(){
         if(!this.animating || !this.attacking){
-            this.keepOnScreen(new Vector2(0, -5));
+            this.keepOnScreen(new Vector2(0, -2));
             this.orientation = this.OrientationEnum.North;
             this.sprite = this.north;
             this.animating = true;
@@ -139,7 +139,7 @@ class Player extends Character{
      */
     moveDown(){
         if(!this.animating || !this.attacking){
-            this.keepOnScreen(new Vector2(0, 5));
+            this.keepOnScreen(new Vector2(0, 2));
             this.orientation = this.OrientationEnum.South;
             this.sprite = this.south;
             this.animating = true;
@@ -151,7 +151,7 @@ class Player extends Character{
      */
     moveLeft(){
         if(!this.animating || !this.attacking){
-            this.keepOnScreen(new Vector2(-5, 0));
+            this.keepOnScreen(new Vector2(-2, 0));
             this.orientation = this.OrientationEnum.West;
             this.sprite = this.west;
             this.animating = true;
@@ -163,7 +163,7 @@ class Player extends Character{
      */
     moveRight(){
         if(!this.animating || !this.attacking){
-            this.keepOnScreen(new Vector2(5, 0));
+            this.keepOnScreen(new Vector2(2, 0));
             this.orientation = this.OrientationEnum.East;
             this.sprite = this.east;
             this.animating = true;

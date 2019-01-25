@@ -6,20 +6,17 @@
  * It initialises the first scene alsos
  */
 
-class Play
-{
-  constructor(title)
-  {
+class Play {
+  constructor(title) {
     this.title = title;
   }
-    /**
-  * initWorld
-  * @desc Initialises game world
-  */
-  initWorld()
-  {
+  /**
+   * initWorld
+   * @desc Initialises game world
+   */
+  initWorld() {
     gameNs.game.tileGrid = new Grid(64, "Screen11");
-    gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
+    gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
     console.log("intiWOrld");
     // Interface testing
     gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
@@ -27,19 +24,17 @@ class Play
   }
 
   /**
- * update
- * @desc calls draw and itself recursively also updates animations
- */
-  update()
-  {
+   * update
+   * @desc calls draw and itself recursively also updates animations
+   */
+  update() {
     gameNs.game.player.update(gameNs.game.dt);
 
-    gameNs.game.interface.update()
+    gameNs.game.interface.update();
 
   }
 
-  draw()
-  {
+  draw() {
     gameNs.game.tileGrid.draw(gameNs.game.ctx);
     gameNs.game.octo.draw(gameNs.game.ctx);
 
