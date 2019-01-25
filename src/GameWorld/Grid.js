@@ -134,28 +134,34 @@ class Grid {
           //  Brown Walls.
           case this.TileEnum.Top_Brown_Wall:
             tileColour = "SandyBrown";
+            tempSprite = new AssetManager(tilePosition.x, tilePosition.y, 64, 64, 320, 0);
             break;
 
           case this.TileEnum.Brown_Wall:
             tileColour = "Sienna";
+            tempSprite = new AssetManager(tilePosition.x, tilePosition.y, 64, 64, 320, 64);
             break;
 
           //  Green Walls.
           case this.TileEnum.Top_Green_Wall:
             tileColour = "DarkOliveGreen";
+            tempSprite = new AssetManager(tilePosition.x, tilePosition.y, 64, 64, 192, 128);
             break;
 
           case this.TileEnum.Green_Wall:
             tileColour = "DarkGreen";
-            
+            tempSprite = new AssetManager(tilePosition.x, tilePosition.y, 64, 64, 192, 320);
             break;
 
           case this.TileEnum.Right_Green_Wall:
             tileColour = "DarkOliveGreen";
+            tempSprite = new AssetManager(tilePosition.x, tilePosition.y, 64, 64, 192, 192);
             break;
 
           case this.TileEnum.Left_Green_Wall:
             tileColour = "DarkOliveGreen";
+            tempSprite = new AssetManager(tilePosition.x, tilePosition.y, 64, 64, 192, 256);
+            
             break;
 
           //  Water.
@@ -167,6 +173,7 @@ class Grid {
           //  Bridge
           case this.TileEnum.Bridge:
             tileColour = "SaddleBrown";
+            tempSprite = new AssetManager(tilePosition.x, tilePosition.y, 64, 64, 256, 192);
             break;
 
           //  Big Dead Tree.
@@ -222,7 +229,7 @@ class Grid {
 
   /**
    * @param {Integer} x
-   * @param {Integer} y
+   * @param {Integer} y 
    */
   getTile(x, y) {
     return (this.tiles[x] !== undefined ? this.tiles[x][y] : null);
