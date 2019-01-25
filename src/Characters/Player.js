@@ -12,7 +12,7 @@ class Player extends Character{
      */
     constructor(position, collider, sprite){
         super(position, collider, sprite);
-        
+
         this.CurrentUtility = Object.freeze({
             "Boomerang":1,
             "Bomb":2
@@ -32,6 +32,7 @@ class Player extends Character{
         this.attacking = false;
         this.attacked = false;
         this.swordBeam = false;
+        this.alive = true;
         this.currentUtil = this.CurrentUtility.Bomb;
 
         // binding functions for key handling
@@ -59,6 +60,7 @@ class Player extends Character{
         this.map = false;
         this.hasSword = false;
         this.hasBoomerang = false;
+        gameNs.game.result = "win";
 
         this.collider = new BoxCollider(
             new Vector2(
@@ -142,6 +144,11 @@ class Player extends Character{
                 this.stopWatch = false;
             }
         }
+        if (this.alive === false)
+        {
+          gameNs.game.result = "lose";
+          this.changeScene("Ending");
+        }
 
         this.sprite.setPos(this.position.x, this.position.y);
         this.collider.shape.position = new Vector2(this.position.x, this.position.y);
@@ -155,6 +162,10 @@ class Player extends Character{
 
     }
 
+    changeScene(title)
+    {
+      gameNs.game.sceneManager.goToScene(title)
+    }
     /**
      * function to move the player up and update the sprite
      */
@@ -291,7 +302,7 @@ class Player extends Character{
                 case this.OrientationEnum.West:
                     this.sprite = this.attackWest;
                     break;
-                case this.OrientationEnum.North:    
+                case this.OrientationEnum.North:
                     this.sprite = this.attackNorth;
                     break;
                 case this.OrientationEnum.South:

@@ -28,11 +28,13 @@ class Game
        gameNs.game.menu = new MenuScene("Menu");
        gameNs.game.instructions = new InstructionsScene("Instructions");
        gameNs.game.play = new Play("Play");
+       gameNs.game.EndScene = new EndScene("Ending");
 
        gameNs.game.sceneManager.addScene(gameNs.game.instructions);
        gameNs.game.sceneManager.addScene(gameNs.game.splash);
        gameNs.game.sceneManager.addScene(gameNs.game.play);
        gameNs.game.sceneManager.addScene(gameNs.game.menu);
+       gameNs.game.sceneManager.addScene(gameNs.game.EndScene);
        gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
        this.update = this.update.bind(this);
 

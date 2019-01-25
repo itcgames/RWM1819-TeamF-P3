@@ -1,6 +1,6 @@
 /**
  * @description Recovery heart, picking one up heals the player
- * @author John O'Meara & Conor O'Toole
+ * @author John O'Meara
  */
 class Heart extends Objects {
 
