@@ -4,17 +4,15 @@
  * The scene class parent of the other scenes
  */
 
-class SceneManager
- {
-/**
- * sets the current scene to null
- * initialises a dictionary
- * initialises a list
- * initialises the index to -1
- * initialises the number of scenes to -1
- */
-  constructor()
-  {
+class SceneManager {
+  /**
+   * sets the current scene to null
+   * initialises a dictionary
+   * initialises a list
+   * initialises the index to -1
+   * initialises the number of scenes to -1
+   */
+  constructor() {
     this.currentScene = null;
     this.dictionary = {};
     this.titles = [];
@@ -26,17 +24,16 @@ class SceneManager
     this.dontPlayFirst = true;
   }
 
-/**
- * @param {scene} object the scene being added
- * pushes the scene title to the list
- * increments the number of scenes
- * adds the scene to the dictionary
- */
-  addScene(scene)
-  {
+  /**
+   * @param {scene} object the scene being added
+   * pushes the scene title to the list
+   * increments the number of scenes
+   * adds the scene to the dictionary
+   */
+  addScene(scene) {
     this.titles.push(scene.title);
     this.numOfScenes++;
-    this.dictionary[this.numOfScenes] =scene;
+    this.dictionary[this.numOfScenes] = scene;
     this.scenetitle = scene.title;
   }
   /**
@@ -45,19 +42,15 @@ class SceneManager
    * in this case Initialises the first scene to the title scene
    * sets the current scene to the scene in the dictionary
    */
-  goToScene(title)
-  {
+  goToScene(title) {
 
-    if(this.dontPlayFirst === false)
-    {
+    if (this.dontPlayFirst === false) {
       /*this.audioManager.loadSoundFile("BUTTONCLICK","resources/audio/buttonClick.mp3");
       this.audioManager.playAudio("BUTTONCLICK",false,0.5);*/
     }
-    this.dontPlayFirst =false;
-    for (var i = 0; i < this.titles.length; i++)
-    {
-      if (this.titles[i] == title)
-      {
+    this.dontPlayFirst = false;
+    for (var i = 0; i < this.titles.length; i++) {
+      if (this.titles[i] == title) {
         this.index = i;
       }
     }
@@ -73,12 +66,10 @@ class SceneManager
    * otherwise the index is set back to 0
    * sets the current scene to the scene in the dictionary
    */
-  goToNextScene()
-  {
+  goToNextScene() {
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     this.index++;
-    if (this.index > this.numOfScenes)
-    {
+    if (this.index > this.numOfScenes) {
       this.index = 0;
     }
     this.currentScene = this.dictionary[this.index];
@@ -86,13 +77,11 @@ class SceneManager
   }
 
 
-  changeScene(title)
-  {
+  changeScene(title) {
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     this.currentScene = this.titles[title]
   }
-  update()
-  {
+  update() {
     this.currentScene.update()
   }
 
@@ -100,23 +89,12 @@ class SceneManager
    *  logs the current scene
    * draws the current scene
    */
-  draw()
-  {
-  //  var curScene = this.dictionary[this.index];
-      this.currentScene.draw();
+  draw() {
+    //  var curScene = this.dictionary[this.index];
+    this.currentScene.draw();
   }
 
-  getScene()
-  {
-     return this.scenetitle
+  getScene() {
+    return this.scenetitle
   }
-
-
-
-
-
-
-
-
-
 }

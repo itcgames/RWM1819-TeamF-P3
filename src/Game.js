@@ -28,11 +28,13 @@ class Game
        gameNs.game.menu = new MenuScene("Menu");
        gameNs.game.instructions = new InstructionsScene("Instructions");
        gameNs.game.play = new Play("Play");
+       gameNs.game.name = new NameScene("NameScene");
 
        gameNs.game.sceneManager.addScene(gameNs.game.instructions);
        gameNs.game.sceneManager.addScene(gameNs.game.splash);
        gameNs.game.sceneManager.addScene(gameNs.game.play);
        gameNs.game.sceneManager.addScene(gameNs.game.menu);
+       gameNs.game.sceneManager.addScene(gameNs.game.name);
        gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
        this.update = this.update.bind(this);
 
@@ -43,6 +45,7 @@ class Game
         gameNs.game.globalInput.bind(gameNs.game.menu.navigation, "Enter");
         gameNs.game.globalInput.bind(gameNs.game.instructions.comeBack, "Escape");
         gameNs.game.globalInput.bind(gameNs.game.splash.goNext, " ");
+        gameNs.game.globalInput.bind(gameNs.game.name.returnToMain, "Shift");
 
         gameNs.game.play.initWorld();
     }

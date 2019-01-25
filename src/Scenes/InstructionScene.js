@@ -16,8 +16,6 @@ class InstructionsScene
     //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
     this.instructions = new Image();
     this.instructions.src = "resources/InstructionMenu.png";
-
-
   }
 
 
@@ -40,15 +38,12 @@ class InstructionsScene
   */
   draw()
   {
-
-
     //ctx.font = '100px serif'; //48
     //this.playBtn.draw();
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     gameNs.game.ctx.drawImage(this.instructions,0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
 
   // the outline
-
     // the fill color
     gameNs.game.ctx.font= "100px VT323"; //48
     gameNs.game.ctx.fillText(this.title, 100,900);

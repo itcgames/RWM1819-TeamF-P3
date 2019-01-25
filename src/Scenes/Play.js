@@ -47,7 +47,7 @@ class Play
     gameNs.game.pickups.push(new StopWatch(250,750));
     gameNs.game.pickups.push(new SwordPickup(250,750));
 
-    gameNs.game.tileGrid = new Grid(64, "Screen11");
+    gameNs.game.tileGrid = new Grid(64, "Screen01");
     gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
     console.log("intiWOrld");
 

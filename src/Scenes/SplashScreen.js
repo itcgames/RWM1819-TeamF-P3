@@ -56,6 +56,4 @@ class SplashScreen
     gameNs.game.ctx.fillText(this.text, 700,900);
 
   }
-
-
 }
