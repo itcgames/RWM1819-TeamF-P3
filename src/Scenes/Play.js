@@ -6,10 +6,8 @@
  * It initialises the first scene alsos
  */
 
-class Play
-{
-  constructor(title)
-  {
+class Play {
+  constructor(title) {
     this.title = title;
   }
     /**
@@ -78,8 +76,7 @@ class Play
     }
   }
 
-  draw()
-  {
+  draw() {
     gameNs.game.tileGrid.draw(gameNs.game.ctx);
     gameNs.game.octo.draw(gameNs.game.ctx); // enemy test
 

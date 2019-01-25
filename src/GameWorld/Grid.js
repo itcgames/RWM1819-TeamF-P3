@@ -222,7 +222,7 @@ class Grid {
    * @param {Integer} y
    */
   getTile(x, y) {
-    return this.tiles[x][y];
+    return (this.tiles[x] !== undefined ? this.tiles[x][y] : null);
   }
 
   /**
