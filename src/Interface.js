@@ -11,12 +11,10 @@ class Interface {
    */
   constructor(screenWidth,screenHeight) {
 
+    console.log(screenWidth);
+    console.log(screenHeight);
     this.active = false;
     this.moving = false;
-
-    this.rupeeCount = 0;
-    this.bombCount = 0;
-    this.keyCount = 0;
 
     this.screen = {
       w: screenWidth,
@@ -50,7 +48,6 @@ class Interface {
    *
    */
   trigger() {
-
 
     if(!this.moving){
       if(this.active) {
@@ -91,6 +88,8 @@ class Interface {
    * state of the UI.
    */
   move(){
+    
+    this.pos.y += this.scrollSpeed;
     // Check if the UI is at the top of the screen
     if(this.pos.y < this.defaultHeight){
       console.log("HIT TOP");
@@ -98,7 +97,6 @@ class Interface {
       this.moving = false;
 
       /* resume gameplay */
-
     }
 
     // Check if the UI is at the bottom
@@ -109,10 +107,9 @@ class Interface {
       this.active = true;
 
       /* update menu logic */
-
     }
 
-    this.pos.y += this.scrollSpeed;
+    console.log(this.pos.y);
   }
 
   /**
@@ -120,9 +117,15 @@ class Interface {
    * Positions are relative to the position of the pause menu screen's position
    * @param {ctx} ctx Context
    */
-  render(ctx) {
+  render(ctx, camera) {
     ctx.fillStyle = "#000000";
-    ctx.fillRect(this.pos.x,this.pos.y,this.screen.w,this.screen.h);
+    ctx.fillRect(
+      this.pos.x + (camera.pos.x + camera.size.width/2),
+      this.pos.y + (camera.pos.y + camera.size.height/2),
+      this.screen.w,
+      this.screen.h
+    );
+
     ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(
       this.map.x + this.pos.x,
@@ -140,35 +143,22 @@ class Interface {
     ctx.fillText(
       "Bombs: "+gameNs.game.player.bombs,
       50 + this.pos.x,
-      800 + this.pos.y
+      750 + this.pos.y
     )
     ctx.fillText(
       "Rupees: "+gameNs.game.player.rupees,
       50 + this.pos.x,
-      820 + this.pos.y
+      770 + this.pos.y
     )
     ctx.fillText(
       "Keys: "+gameNs.game.player.keys,
       50 + this.pos.x,
-      840 + this.pos.y
+      790 + this.pos.y
     )
     ctx.fillText(
-      "will to live: "+0,
+      "will to live: "+1+"   :^)",
       50 + this.pos.x,
-      860 + this.pos.y
+      810 + this.pos.y
     )
-  }
-
-  /**
-   * Called whenever player collects/spends an item so that the UI can
-   * reflect the current state
-   * @param {number} rupees Total rupee count
-   * @param {number} bombs Total bomb count
-   * @param {number} keys Total key count
-   */
-  updateCounts(rupees, bombs, keys) {
-    this.rupeeCount = rupees;
-    this.bombCount = bombs;
-    this.keyCount = keys;
   }
 }
