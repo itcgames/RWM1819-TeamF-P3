@@ -87,8 +87,8 @@ class Game
         //gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
 
         //   Initialise game variables.
-        gameNs.game.player = new Player(new Vector2(2520, 3200), new BoxCollider(new Vector2(400,400), 42, 64), null);
-        gameNs.game.player.init(gameNs.game.canvas.ctx);
+        //gameNs.game.player = new Player(new Vector2(2520, 3200), new BoxCollider(new Vector2(400,400), 42, 64), null);
+        //gameNs.game.player.init(gameNs.game.canvas.ctx);
 
         gameNs.game.globalInput.bind(gameNs.game.menu.cursorMoveUp, "ArrowUp");
         gameNs.game.globalInput.bind(gameNs.game.menu.cursorMoveDown, "ArrowDown");

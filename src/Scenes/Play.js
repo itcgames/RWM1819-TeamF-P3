@@ -25,8 +25,9 @@ class Play
   */
   initWorld()
   {
+    this.overworld.push(new Screen("Screen01"));
     this.overworld.push(
-      new Screen("Screen01"),
+      //new Screen("Screen01"),
       new Screen("Screen02"),
       new Screen("Screen03"),
       new Screen("Screen04"),
@@ -42,7 +43,7 @@ class Play
     gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
     gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
     //   Initialise game variables.
-    gameNs.game.player = new Player(new Vector2(400,400), new BoxCollider(new Vector2(400,400), 42, 64), null);
+    gameNs.game.player = new Player(new Vector2(2520, 3200), new BoxCollider(new Vector2(400,400), 42, 64), null);
     gameNs.game.player.init();
 
     gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
@@ -70,8 +71,8 @@ class Play
     gameNs.game.pickups.push(new StopWatch(250,750));
     gameNs.game.pickups.push(new SwordPickup(250,750));
 
-    gameNs.game.tileGrid = new Grid(64, "Screen11");
-    gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
+    //gameNs.game.tileGrid = new Grid(64, "Screen11");
+    //gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
     console.log("intiWOrld");
   }
 
