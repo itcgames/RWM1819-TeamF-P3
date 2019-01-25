@@ -58,7 +58,7 @@ class Player extends Character{
         this.stopWatch = false;
         this.compass = false;
         this.map = false;
-        this.hasSword = false;
+        this.hasSword = true;
         this.hasBoomerang = false;
         gameNs.game.result = "win";
 
@@ -142,6 +142,7 @@ class Player extends Character{
             if(this.clock > 5000){
                 this.clock = 0;
                 this.stopWatch = false;
+                this.alive = false;
             }
         }
         if (this.alive === false)
@@ -162,6 +163,10 @@ class Player extends Character{
 
     }
 
+    setAlive()
+    {
+      this.alive = true;
+    }
     changeScene(title)
     {
       gameNs.game.sceneManager.goToScene(title)

@@ -49,11 +49,11 @@ class SplashScreen
     //this.playBtn.draw();
     gameNs.game.ctx.drawImage(this.splash,0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
 
-    //gameNs.game.ctx.fill();
+    gameNs.game.ctx.fill();
 
     //gameNs.game.ctx.globalAlpha = 0.1;
     gameNs.game.ctx.font= "100px VT323"; //48
-    gameNs.game.ctx.fillText(this.text, 700,900);
+    gameNs.game.ctx.fillText(this.text, 350,700);
 
   }
 

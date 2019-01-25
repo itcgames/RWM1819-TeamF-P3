@@ -35,7 +35,7 @@ class Game
        gameNs.game.sceneManager.addScene(gameNs.game.play);
        gameNs.game.sceneManager.addScene(gameNs.game.menu);
        gameNs.game.sceneManager.addScene(gameNs.game.EndScene);
-       gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
+       gameNs.game.sceneManager.goToScene(gameNs.game.EndScene.title);
        this.update = this.update.bind(this);
 
         //   Initialise game variables.
@@ -45,6 +45,7 @@ class Game
         gameNs.game.globalInput.bind(gameNs.game.menu.navigation, "Enter");
         gameNs.game.globalInput.bind(gameNs.game.instructions.comeBack, "Escape");
         gameNs.game.globalInput.bind(gameNs.game.splash.goNext, " ");
+        gameNs.game.globalInput.bind(gameNs.game.EndScene.reset, "r");
 
         gameNs.game.play.initWorld();
     }

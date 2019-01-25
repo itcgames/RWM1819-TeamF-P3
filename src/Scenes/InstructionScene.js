@@ -49,11 +49,8 @@ class InstructionsScene
 
   // the outline
 
-    // the fill color
-    gameNs.game.ctx.font= "100px VT323"; //48
-    gameNs.game.ctx.fillText(this.title, 100,900);
     //gameNs.game.ctx.fill();
-
+    
     //ctx.fillText(this.title, 100,100);
   }
 

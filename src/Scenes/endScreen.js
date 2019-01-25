@@ -17,6 +17,9 @@ class EndScene
     this.lose = new Image();
     this.win.src = "resources/win.png";
     this.lose.src = "resources/lose.png";
+    this.tipText = "Press 'r' to return";
+    this.winText = "Congrats on beating Zelda";
+    this.flash = 0;
 
 
   }
@@ -29,8 +32,10 @@ class EndScene
 
   reset()
   {
-    if (gameNs.game.sceneManager.getScene() === "EndScene")
+    if (gameNs.game.sceneManager.getScene() === "Ending")
     {
+      gameNs.game.play.initWorld();
+      gameNs.game.player.setAlive();
       gameNs.game.sceneManager.goToScene("Menu");
     }
   }
@@ -46,8 +51,9 @@ class EndScene
     //ctx.font = '100px serif'; //48
     //this.playBtn.draw();
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
-    gameNs.game.ctx.fillRect(0,0,gameNs.game.canvas.width, gameNs.game.canvas.height);
     gameNs.game.ctx.fillStyle = "Black";
+    gameNs.game.ctx.fillRect(0,0,gameNs.game.canvas.width, gameNs.game.canvas.height);
+
     if ( gameNs.game.result === "win")
     {
       gameNs.game.ctx.drawImage(this.win,50, 75, 1000, 400);
@@ -58,13 +64,30 @@ class EndScene
     }
 
   // the outline
-
-    // the fill color
+    gameNs.game.ctx.fillStyle = "green"; //yellow
     gameNs.game.ctx.font= "100px VT323"; //48
-    gameNs.game.ctx.fillText(this.title, 100,900);
-    //gameNs.game.ctx.fill();
+    gameNs.game.ctx.fillText(this.winText, 0,500);
 
-    //ctx.fillText(this.title, 100,100);
+    // the prompt text
+    gameNs.game.ctx.fillStyle = "#FFCC00"; //yellow
+
+
+    if (this.flash >= 60 && this.flash <= 120 )
+    {
+        gameNs.game.ctx.fillText(this.tipText, 100,600);
+    }
+    if (this.flash < 120)
+    {
+      this.flash++;
+    }
+    if (this.flash >= 120)
+      {
+        this.flash = 0;
+      }
+
+
+
+
   }
 
 

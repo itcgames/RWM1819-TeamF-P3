@@ -20,13 +20,11 @@ class MenuScene
     this.curX = 250;
     gameNs.game.curY = 200;
     //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
-    this.playBtn = new Image();
     this.cursorBtn = new Image();
-    this.instructionsBtn = new Image();
-    this.playBtn.src = "resources/play.png";
     this.cursorBtn.src = "resources/cursor.png";
-    this.instructionsBtn.src = "resources/instructions.png"
 
+    this.playText = "Play";
+    this.instructiontTxt = "Instructions";
 
 
     ///this.playBtn.load("resources/img/play_button.png");
@@ -124,11 +122,10 @@ navigation()
     //ctx.font = '100px serif'; //48
     //this.playBtn.draw();
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
-    gameNs.game.ctx.drawImage(this.playBtn,325, 650, 150, 100);
-    gameNs.game.ctx.drawImage(this.instructionsBtn,325, 750, 300, 100);
+    gameNs.game.ctx.fillStyle = "Black";
+    gameNs.game.ctx.fillRect(0,0,gameNs.game.canvas.width, gameNs.game.canvas.height);
 
-    gameNs.game.ctx.drawImage(this.cursorBtn, this.curX, gameNs.game.curY, 50, 50);
-
+    //gameNs.game.ctx.drawImage(this.cursor, this.curX, gameNs.game.curY, 50, 50);
     gameNs.game.ctx.beginPath();
     gameNs.game.ctx.moveTo(200, 125);
     gameNs.game.ctx.lineTo(900, 125);
@@ -138,14 +135,19 @@ navigation()
 
   // the outline
     gameNs.game.ctx.lineWidth = 25;
-    gameNs.game.ctx.strokeStyle = '#666666';
+    gameNs.game.ctx.strokeStyle = "Blue";
     gameNs.game.ctx.stroke();
+
 
   // the fill color
     gameNs.game.ctx.fillStyle = "#FFCC00";
     //gameNs.game.ctx.fill();
 
-    //ctx.fillText(this.title, 100,100);
+    gameNs.game.ctx.font= "100px VT323";
+    gameNs.game.ctx.fillText(this.playText, 325,725);
+    gameNs.game.ctx.fillText(this.instructiontTxt, 325,825);
+
+    gameNs.game.ctx.drawImage(this.cursorBtn,this.curX, gameNs.game.curY, 40,40);
   }
 
 
