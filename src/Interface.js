@@ -117,9 +117,15 @@ class Interface {
    * Positions are relative to the position of the pause menu screen's position
    * @param {ctx} ctx Context
    */
-  render(ctx) {
+  render(ctx, camera) {
     ctx.fillStyle = "#000000";
-    ctx.fillRect(this.pos.x,this.pos.y,this.screen.w,this.screen.h);
+    ctx.fillRect(
+      this.pos.x + (camera.pos.x + camera.size.width/2),
+      this.pos.y + (camera.pos.y + camera.size.height/2),
+      this.screen.w,
+      this.screen.h
+    );
+
     ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(
       this.map.x + this.pos.x,

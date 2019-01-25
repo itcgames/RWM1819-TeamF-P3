@@ -120,6 +120,11 @@ class Player extends Character{
         this.sprite.setPos(this.position.x, this.position.y);
         this.collider.shape.position = new Vector2(this.position.x, this.position.y);
         this.animating = false;
+
+        //console.log("World:  "+this.position.x+","+this.position.y);
+        //console.log("Screen: "+Screen.worldToScreen(this.position).x+","+Screen.worldToScreen(this.position).y);
+        console.log(this.position);
+        console.log(Screen.worldToScreen(this.position,1));
     }
 
     /**

@@ -14,7 +14,8 @@ class Play
     this.activeScreen = 0;
     this.scrolling = false;
 
-    //this.camera = new Camera(0,0,64*16,64*13);
+    this.camera = new Camera(0,0,64*16,64*13);
+    this.camera.setBounds(-10000,-10000,10000,10000);
     this.title = title;
   }
 
@@ -54,7 +55,7 @@ class Play
     for(let i = 0; i < this.overworld[this.activeScreen].enemyList.length; i++){
       this.overworld[this.activeScreen].enemyList[i].update(dt);
     }
-    //this.camera.follow(gameNs.game.player.position.x, gameNs.game.player.position.y);
+    this.camera.follow(gameNs.game.player.position.x, gameNs.game.player.position.y);
     gameNs.game.player.update(gameNs.game.dt);
 
     gameNs.game.interface.update();
@@ -74,10 +75,13 @@ class Play
     //gameNs.game.tileGrid.draw(gameNs.game.ctx);
     //gameNs.game.octo.draw(gameNs.game.ctx);
 
-    //this.camera.draw(0,gameNs.game.ctx);
+    this.camera.draw(0,gameNs.game.ctx);
+
     for(let i = 0; i < this.overworld.length; i++){
-      this.overworld[this.activeScreen].render(gameNs.game.ctx, true);
+      this.overworld[i].render(gameNs.game.ctx);
     }
+
+    this.overworld[this.activeScreen].renderActive(gameNs.game.ctx, true);
 
     gameNs.game.collisionManager.render(gameNs.game.ctx);
 
@@ -88,6 +92,6 @@ class Play
     gameNs.game.testRupee.render(gameNs.game.ctx);
     gameNs.game.testKey.render(gameNs.game.ctx);
 
-    gameNs.game.interface.render(gameNs.game.ctx);
+    gameNs.game.interface.render(gameNs.game.ctx, this.camera);
   }
 }

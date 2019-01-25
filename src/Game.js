@@ -14,8 +14,8 @@ class Game
         //  Initialise the canvas
         gameNs.game.canvas = document.createElement("canvas");
         gameNs.game.canvas.id = 'mycanvas';
-        gameNs.game.canvas.width = 64 * 16;
-        gameNs.game.canvas.height = 64 * 13;
+        gameNs.game.canvas.width = (64 * 16)*4;
+        gameNs.game.canvas.height = (64 * 13)*5;
         gameNs.game.ctx = gameNs.game.canvas.getContext("2d");
         document.body.appendChild(gameNs.game.canvas);
 
@@ -44,39 +44,42 @@ class Game
         gameNs.game.testScreen2 = new Screen("Screen02");
 
         //gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);  
-        gameNs.game.testScreen.enemyList.push(
-            new Octorok(
-                new Vector2(
-                    5 * gameNs.game.testScreen.grid.tileSize, 
-                    4 * gameNs.game.testScreen.grid.tileSize), 
-                null, 
-                null, 
-                gameNs.game.testScreen.grid
-            ),
-            new Octorok(
-                new Vector2(
-                    5 * gameNs.game.testScreen.grid.tileSize, 
-                    4 * gameNs.game.testScreen.grid.tileSize), 
-                null, 
-                null, 
-                gameNs.game.testScreen.grid
-            ),
-            new Octorok(
-                new Vector2(
-                    5 * gameNs.game.testScreen.grid.tileSize, 
-                    4 * gameNs.game.testScreen.grid.tileSize), 
-                null, 
-                null, 
-                gameNs.game.testScreen.grid
-            )
-        );
+        // gameNs.game.testScreen.enemyList.push(
+        //     new Octorok(
+        //         new Vector2(
+        //             5 * gameNs.game.testScreen.grid.tileSize, 
+        //             4 * gameNs.game.testScreen.grid.tileSize), 
+        //         null, 
+        //         null, 
+        //         gameNs.game.testScreen.grid
+        //     ),
+        //     new Octorok(
+        //         new Vector2(
+        //             5 * gameNs.game.testScreen.grid.tileSize, 
+        //             4 * gameNs.game.testScreen.grid.tileSize), 
+        //         null, 
+        //         null, 
+        //         gameNs.game.testScreen.grid
+        //     ),
+        //     new Octorok(
+        //         new Vector2(
+        //             5 * gameNs.game.testScreen.grid.tileSize, 
+        //             4 * gameNs.game.testScreen.grid.tileSize), 
+        //         null, 
+        //         null, 
+        //         gameNs.game.testScreen.grid
+        //     )
+        // );
 
 
 
         gameNs.game.sceneManager.addScene(gameNs.game.splash);
         gameNs.game.sceneManager.addScene(gameNs.game.menu);
         gameNs.game.sceneManager.addScene(gameNs.game.play);
-        gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
+
+        //gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
+        gameNs.game.sceneManager.goToScene(gameNs.game.play.title);
+
         this.update = this.update.bind(this);
 
         // Interface testing
@@ -84,7 +87,7 @@ class Game
         //gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
 
         //   Initialise game variables.
-        gameNs.game.player = new Player(new Vector2(400,400), new BoxCollider(new Vector2(400,400), 42, 64), null);
+        gameNs.game.player = new Player(new Vector2(2520, 3200), new BoxCollider(new Vector2(400,400), 42, 64), null);
         gameNs.game.player.init(gameNs.game.canvas.ctx);
 
         gameNs.game.input.bind(gameNs.game.player.moveUp, "w");

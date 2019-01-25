@@ -19,20 +19,38 @@ class Screen {
 
 
   /**
-   * Renders the tiles. If the screen is active, render the enemies/pickups
+   * Renders the tiles.
    * @param {context} ctx canvas context
-   * @param {bool} active Whether the screen is active
    */
-  render(ctx, active){
+  render(ctx){
     this.grid.draw(ctx);
   }
 
   /**
-   * 
-   * @param {*} worldPos 
+   * Renders the monsters, pickups
+   * @param {context} ctx canvas context
    */
-  worldToScreen(worldPos){
-    let localPos = worldPos;
+  renderActive(ctx){
+    for(let i = 0; i < this.enemyList.length; i++){
+      this.enemyList[i].render(ctx);
+    }
+    for(let i = 0; i < this.pickupList.length; i++){
+      this.pickupList[i].render(ctx);
+    }
+  }
+
+  
+  static worldToScreen(worldPos, index){
+    const i = index || gameNs.game.play.activeScreen;
+
+    const scr = gameNs.game.play.overworld[i];
+    let localPos = new Vector2(
+      worldPos.x,
+      worldPos.y
+    );
+
+    localPos.x -= scr.grid.position.x;
+    localPos.y -= scr.grid.position.y;
 
     return localPos;
   }

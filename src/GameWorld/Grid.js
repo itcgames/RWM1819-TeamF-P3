@@ -12,7 +12,10 @@ class Grid {
   constructor(tileSize, screen) {
     this.tileSize = tileSize;
     this.screenData = ScreenData[screen];
-    this.position = new Vector2(this.screenData.x, this.screenData.y);
+    this.position = new Vector2(
+      this.screenData.x*this.screenData.width*64, 
+      this.screenData.y*this.screenData.height*64
+      );
     this.width = this.screenData.width;
     this.height = this.screenData.height;
 

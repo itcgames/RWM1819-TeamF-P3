@@ -39,13 +39,14 @@ class Character {
      * @param {Vector2} attemptedMovement 
      */
     keepOnScreen(screenWidth, screenHeight, attemptedMovement){
-        if (this.position.x + attemptedMovement.x < 0 || this.position.x + attemptedMovement.x > screenWidth) {
+        const pos = Screen.worldToScreen(this.position);
+        if (pos.x + attemptedMovement.x < 0 || pos.x + attemptedMovement.x > screenWidth) {
             /*  Do Nothing  */
         } else {
             this.position.x += attemptedMovement.x; 
         }
 
-        if (this.position.y + attemptedMovement.y < 0 || this.position.y + attemptedMovement.y > screenHeight) {
+        if (pos.y + attemptedMovement.y < 0 || pos.y + attemptedMovement.y > screenHeight) {
             /*  Do Nothing  */
         } else {
             this.position.y += attemptedMovement.y;
