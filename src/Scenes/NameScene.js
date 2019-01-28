@@ -17,7 +17,7 @@ class NameScene {
     this.return = false;
     this.enterText;
 
-    var position = new Vector2(gameNs.game.canvas.width / 2 - 48 * 5,gameNs.game.canvas.height / 2 - 48 * 5);  
+    var position = new Vector2(gameNs.game.canvas.width / 2 - (48 * 2.5),gameNs.game.canvas.height / 2 - 48 * 5);  
     var xOffSet = 10;
     var yOffSet = 10;
     for(var i = 0; i < 5; i++){
@@ -32,7 +32,8 @@ class NameScene {
     }
     
     document.addEventListener("mouseup", this.checkValid.bind(this), true);
-    this.text = "Press Shift to Return to the Main Menu"
+    this.text = "Press Shift to Return to the Main Menu";
+    this.instructions = "Drag and drop letters in to the top box to create your name.";
     this.returnToMain = this.returnToMain.bind(this);
     this.nameArea = new DropArea(250, 48, new Vector2(position.x, position.y - 100));
     this.nameArea.draggable = new DropZone(this.nameArea);
@@ -92,6 +93,9 @@ class NameScene {
   draw() {
     
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
+    gameNs.game.ctx.fillStyle = "Black";
+    gameNs.game.ctx.fillRect(0,0,gameNs.game.canvas.width, gameNs.game.canvas.height);
+
     for(var i = 0; i < this.letters.length; i++){
       this.letters[i].draw(gameNs.game.ctx);
     }
@@ -100,19 +104,27 @@ class NameScene {
     gameNs.game.ctx.beginPath();
     if(this.text !== null){
       gameNs.game.ctx.font = "34px VT323";
+      gameNs.game.ctx.fillStyle = "White";
       gameNs.game.ctx.fillText(
       this.text,
-      175,
-      600);
+      gameNs.game.canvas.width / 2 - 250,
+      gameNs.game.canvas.height - 200);
+    }
+
+    if(this.instructions !== null){
+      gameNs.game.ctx.font = "34px VT323";
+      gameNs.game.ctx.fillStyle = "White";
+      gameNs.game.ctx.fillText(
+      this.instructions,
+      gameNs.game.canvas.width / 2 - 400,
+      gameNs.game.canvas.height - 250);
     }
 
     // the outline
     gameNs.game.ctx.lineWidth = 5;
-    gameNs.game.ctx.strokeRect(gameNs.game.canvas.width / 2 - 48 * 5.5, gameNs.game.canvas.height / 2 - 48 * 5.5, 48 * 6, 48 * 7);
+    gameNs.game.ctx.strokeRect(gameNs.game.canvas.width / 2 - 150, gameNs.game.canvas.height / 2 - 32 * 8, 48 * 6, 48 * 7);
 
-    gameNs.game.ctx.closePath();  
-    // the fill color
-    gameNs.game.ctx.fillStyle = "#000000 ";
+    gameNs.game.ctx.closePath();
     gameNs.game.ctx.fill();     
   }
 }

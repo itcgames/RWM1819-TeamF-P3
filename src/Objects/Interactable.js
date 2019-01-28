@@ -35,15 +35,16 @@ class Interactable {
     if(this.sprite === null){
       if(this.text !== null){
         ctx.beginPath();
-        ctx.font = "64px VT323";
+        gameNs.game.ctx.fillStyle = "White";
+        gameNs.game.ctx.font = "34px VT323";
         ctx.fillText(
           this.text,
-          this.position.x,
-          this.position.y + this.height);       
+          this.position.x + this.width / 4.5,
+          this.position.y + this.height / 1.25);       
       }
       if(this.renderBorder){
         gameNs.game.ctx.lineWidth = 1;
-        gameNs.game.ctx.strokeRect(this.position.x - 4, this.position.y + 5, 34, 50);
+        gameNs.game.ctx.strokeRect(this.position.x - 4, this.position.y + 5, this.width, this.height);
       }
       ctx.closePath();
 

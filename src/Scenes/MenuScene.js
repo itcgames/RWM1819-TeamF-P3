@@ -20,14 +20,9 @@ class MenuScene
     this.curX = 250;
     gameNs.game.curY = 200;
     
-    this.playBtn = new Image();
     this.cursorBtn = new Image();
-    this.instructionsBtn = new Image();
-    this.playBtn.src = "resources/play.png";
     this.cursorBtn.src = "resources/cursor.png";
-    this.instructionsBtn.src = "resources/instructions.png";
-    ///this.playBtn.load("resources/img/play_button.png");
-    //this.playBtn.setSpriteSheet(false, 3, 10);
+    this.instructiontTxt = "Instructions";
     this.startingPosition = [];
 
     gameNs.game.nameSlotOne = "";
@@ -127,16 +122,18 @@ navigation()
   draw()
   {
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
-    gameNs.game.ctx.drawImage(this.instructionsBtn,325, 650, 250 , 100);
-
     gameNs.game.ctx.drawImage(this.cursorBtn, this.curX, gameNs.game.curY, 50, 50);
+    gameNs.game.ctx.fillStyle = "Black";
+    gameNs.game.ctx.fillRect(0,0,gameNs.game.canvas.width, gameNs.game.canvas.height);
+
+    //gameNs.game.ctx.drawImage(this.cursor, this.curX, gameNs.game.curY, 50, 50);
     gameNs.game.ctx.beginPath();
     gameNs.game.ctx.lineWidth = 15;
     gameNs.game.ctx.strokeStyle = '#666666';
     gameNs.game.ctx.moveTo(100, 125);
-    gameNs.game.ctx.lineTo(800, 125);
-    gameNs.game.ctx.lineTo(800, 525);
-    gameNs.game.ctx.lineTo(100, 525);
+    gameNs.game.ctx.lineTo(gameNs.game.canvas.width - 100, 125);
+    gameNs.game.ctx.lineTo(gameNs.game.canvas.width - 100, gameNs.game.canvas.height - 250);
+    gameNs.game.ctx.lineTo(100, gameNs.game.canvas.height - 250);
     gameNs.game.ctx.lineTo(100, 125);
     gameNs.game.ctx.stroke();
     gameNs.game.ctx.closePath();
@@ -144,6 +141,7 @@ navigation()
     if(gameNs.game.nameSlotOne !== null){
       gameNs.game.ctx.beginPath();
       gameNs.game.ctx.font = "64px VT323";
+      gameNs.game.ctx.fillStyle = "White";
       gameNs.game.ctx.fillText(
       gameNs.game.nameSlotOne ,
       300,
@@ -154,6 +152,7 @@ navigation()
     if(gameNs.game.nameSlotTwo !== null){
       gameNs.game.ctx.beginPath();
       gameNs.game.ctx.font = "64px VT323";
+      gameNs.game.ctx.fillStyle = "White";
       gameNs.game.ctx.fillText(
       gameNs.game.nameSlotTwo,
       300,
@@ -164,6 +163,7 @@ navigation()
     if(gameNs.game.nameSlotThree !== null){
       gameNs.game.ctx.beginPath();
       gameNs.game.ctx.font = "64px VT323";
+      gameNs.game.ctx.fillStyle = "White";
       gameNs.game.ctx.fillText(
       gameNs.game.nameSlotThree,
       300,
@@ -171,10 +171,15 @@ navigation()
       gameNs.game.ctx.closePath();
     }
     
-
   // the outline
+    gameNs.game.ctx.lineWidth = 25;
+    gameNs.game.ctx.strokeStyle = "Blue";
+    gameNs.game.ctx.stroke();
 
   // the fill color
     gameNs.game.ctx.fillStyle = "#FFCC00";
+    gameNs.game.ctx.font= "100px VT323";
+    gameNs.game.ctx.fillText(this.instructiontTxt, gameNs.game.canvas.width / 2 - 250,725);
+    gameNs.game.ctx.drawImage(this.cursorBtn,this.curX, gameNs.game.curY, 40,40);
   }
 }
