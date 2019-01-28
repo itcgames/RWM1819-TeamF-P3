@@ -13,12 +13,8 @@ class SplashScreen
   constructor(title)
   {
     this.title = title;
-    //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
     this.splash = new Image();
     this.splash.src = "resources/splash.jpg";
-
-    ///this.playBtn.load("resources/img/play_button.png");
-    //this.playBtn.setSpriteSheet(false, 3, 10);
     this.startingPosition = [];
 
     var text;
@@ -46,16 +42,9 @@ class SplashScreen
   */
   draw()
   {
-    //this.playBtn.draw();
     gameNs.game.ctx.drawImage(this.splash,0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
-
-    gameNs.game.ctx.fill();
-
-    //gameNs.game.ctx.globalAlpha = 0.1;
     gameNs.game.ctx.font= "100px VT323"; //48
-    gameNs.game.ctx.fillText(this.text, 350,700);
-
+    gameNs.game.ctx.fillText(this.text, gameNs.game.canvas.width / 2 - 250,gameNs.game.canvas.height - 50);
+    gameNs.game.ctx.fill();
   }
-
-
 }

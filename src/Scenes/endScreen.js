@@ -20,8 +20,6 @@ class EndScene
     this.tipText = "Press 'r' to return";
     this.winText = "Congrats on beating Zelda";
     this.flash = 0;
-
-
   }
 
 
@@ -46,10 +44,6 @@ class EndScene
   */
   draw()
   {
-
-
-    //ctx.font = '100px serif'; //48
-    //this.playBtn.draw();
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     gameNs.game.ctx.fillStyle = "Black";
     gameNs.game.ctx.fillRect(0,0,gameNs.game.canvas.width, gameNs.game.canvas.height);

@@ -134,9 +134,6 @@ class Player extends Character {
       this.boomerang.update();
     }
 
-
-
-
         if(this.stopWatch){
             this.clock += dt;
             if(this.clock > 5000){
@@ -162,8 +159,6 @@ class Player extends Character {
     if ((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false) && (this.stopwatch === false)) {
       gameNs.game.octo.update(gameNs.game.dt);
     }
-
-
   }
 
   /**

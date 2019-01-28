@@ -71,8 +71,8 @@ class Play
     gameNs.game.pickups.push(new StopWatch(250,750));
     gameNs.game.pickups.push(new SwordPickup(250,750));
 
-    //gameNs.game.tileGrid = new Grid(64, "Screen11");
-    //gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
+    gameNs.game.tileGrid = new Grid(64, "Screen01");
+    gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
     console.log("intiWOrld");
   }
 
@@ -112,6 +112,7 @@ class Play
 
   draw()
   {
+    gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     //gameNs.game.tileGrid.draw(gameNs.game.ctx);
     //gameNs.game.octo.draw(gameNs.game.ctx);
 
@@ -130,7 +131,6 @@ class Play
       gameNs.game.pickups[i].draw(gameNs.game.ctx);
     }
     gameNs.game.player.draw(gameNs.game.ctx);
-
 
     gameNs.game.interface.render(gameNs.game.ctx, this.camera);
   }

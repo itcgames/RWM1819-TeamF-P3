@@ -13,18 +13,14 @@ class InstructionsScene
   constructor(title)
   {
     this.title = title;
-    //this.playBtn = new AssetManager(200, 200, 500, 250, "mycanvas");
     this.instructions = new Image();
     this.instructions.src = "resources/InstructionMenu.png";
-
-
   }
 
 
   update()
   {
   }
-
 
   comeBack()
   {
@@ -40,18 +36,8 @@ class InstructionsScene
   */
   draw()
   {
-
-
-    //ctx.font = '100px serif'; //48
-    //this.playBtn.draw();
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     gameNs.game.ctx.drawImage(this.instructions,0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
-
-  // the outline
-
-    //gameNs.game.ctx.fill();
-    
-    //ctx.fillText(this.title, 100,100);
   }
 
 

@@ -6,18 +6,18 @@ class Heart extends Objects {
 
   constructor(x, y) {
     super(
-    "heart",
-    x,
-    y,
-    25,     // Width
-    25,     // Height
-    64,    // frameWidth
-    64,    // frameHeight
-    128,      // frameTop
-    256,      // frameLeft
-    0,
-    0,
-    "resources/objects.png",
+      "heart",
+      x,
+      y,
+      25, // Width
+      25, // Height
+      64, // frameWidth
+      64, // frameHeight
+      128, // frameTop
+      256, // frameLeft
+      0,
+      0,
+      "resources/objects.png",
     )
   }
 }
@@ -27,21 +27,21 @@ class Heart extends Objects {
  * @author John O'Meara
  */
 class Bomb extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "bomb",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      0,      // frameTop
-      0,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      0, // frameTop
+      0, // frameLeft
       0,
       0,
       "resources/objects.png",
-      )
+    )
   }
 }
 
@@ -50,21 +50,21 @@ class Bomb extends Objects {
  * @author John O'Meara
  */
 class Rupee extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "rupee",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      64,      // frameTop
-      0,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      64, // frameTop
+      0, // frameLeft
       4,
       2,
       "resources/objects.png",
-      )
+    )
   }
 }
 
@@ -73,21 +73,21 @@ class Rupee extends Objects {
  * @author John O'Meara
  */
 class Key extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "key",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      0,      // frameTop
-      192,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      0, // frameTop
+      192, // frameLeft
       0,
       0,
       "resources/objects.png",
-      )
+    )
   }
 }
 
@@ -96,21 +96,21 @@ class Key extends Objects {
  * @author Conor O'Toole
  */
 class StopWatch extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "stopwatch",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      0,      // frameTop
-      256,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      0, // frameTop
+      256, // frameLeft
       0,
       0,
       "resources/objects.png",
-      )
+    )
   }
 }
 
@@ -120,21 +120,21 @@ class StopWatch extends Objects {
  * @author Conor O'Toole
  */
 class Compass extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "compass",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      64,      // frameTop
-      128,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      64, // frameTop
+      128, // frameLeft
       0,
       0,
       "resources/objects.png",
-      )
+    )
   }
 }
 
@@ -143,22 +143,22 @@ class Compass extends Objects {
  * @author Conor O'Toole
  */
 class MapPickup extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "map",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      0,      // frameTop
-      128,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      0, // frameTop
+      128, // frameLeft
       0,
       0,
       "resources/objects.png",
-      )
-      //this.sprite.setScale(25/512, 25/512);
+    )
+    //this.sprite.setScale(25/512, 25/512);
   }
 }
 /**
@@ -166,21 +166,21 @@ class MapPickup extends Objects {
  * @author Conor O'Toole
  */
 class SwordPickup extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "swordPickup",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      64,      // frameTop
-      192,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      64, // frameTop
+      192, // frameLeft
       0,
       0,
       "resources/objects.png",
-      )
+    )
   }
 }
 
@@ -189,21 +189,21 @@ class SwordPickup extends Objects {
  * @author Conor O'Toole
  */
 class TriForce extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "triforce",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      64,      // frameTop
-      256,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      64, // frameTop
+      256, // frameLeft
       0,
       0,
       "resources/objects.png",
-      )
+    )
   }
 }
 
@@ -212,22 +212,22 @@ class TriForce extends Objects {
  * @author Conor O'Toole
  */
 class Fairy extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "fairy",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      128,      // frameTop
-      0,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      128, // frameTop
+      0, // frameLeft
       0,
       0,
       "resources/npcSprites.png",
-      )
-      //this.sprite.setScale(25/512, 25/512);
+    )
+    //this.sprite.setScale(25/512, 25/512);
   }
 }
 
@@ -236,20 +236,20 @@ class Fairy extends Objects {
  * @author Conor O'Toole
  */
 class HeartContainer extends Objects {
-  constructor(x,y) {
+  constructor(x, y) {
     super(
       "heartContainer",
       x,
       y,
-      30,     // Width
-      30,     // Height
-      64,    // frameWidth
-      64,    // frameHeight
-      0,      // frameTop
-      64,      // frameLeft
+      30, // Width
+      30, // Height
+      64, // frameWidth
+      64, // frameHeight
+      0, // frameTop
+      64, // frameLeft
       0,
       0,
       "resources/objects.png",
-      )
+    )
   }
 }
