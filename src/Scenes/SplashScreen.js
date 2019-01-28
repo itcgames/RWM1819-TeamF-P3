@@ -3,7 +3,6 @@
  * C00206724
  * The scene for the Splash Screen
  */
-
 class SplashScreen
 {
 /**
@@ -21,11 +20,16 @@ class SplashScreen
     this.text = "Space to Start";
   }
 
-
+  /**
+   * blank update loop - require for scene manager
+   */
   update()
   {
   }
 
+  /**
+   * go to the next scene after the splash screen
+   */
   goNext()
   {
     if (gameNs.game.sceneManager.getScene() === "Splash")
@@ -33,7 +37,6 @@ class SplashScreen
       gameNs.game.sceneManager.goToScene("Menu");
     }
   }
-
 
 /**
   * Draws an image

@@ -3,7 +3,6 @@
  * C00206724
  * The scene class parent of the other scenes
  */
-
 class SceneManager {
   /**
    * sets the current scene to null
@@ -17,11 +16,8 @@ class SceneManager {
     this.dictionary = {};
     this.titles = [];
     this.index = -1;
-    this.numOfScenes = -1
-    this.scenetitle = null
-    //this.audioManager = new AudioManager();
-    //this.audioManager.init();
-    this.dontPlayFirst = true;
+    this.numOfScenes = -1;
+    this.scenetitle = null;
   }
 
   /**
@@ -43,12 +39,6 @@ class SceneManager {
    * sets the current scene to the scene in the dictionary
    */
   goToScene(title) {
-
-    if (this.dontPlayFirst === false) {
-      /*this.audioManager.loadSoundFile("BUTTONCLICK","resources/audio/buttonClick.mp3");
-      this.audioManager.playAudio("BUTTONCLICK",false,0.5);*/
-    }
-    this.dontPlayFirst = false;
     for (var i = 0; i < this.titles.length; i++) {
       if (this.titles[i] == title) {
         this.index = i;
@@ -56,8 +46,6 @@ class SceneManager {
     }
     this.scenetitle = this.titles[this.index]
     this.currentScene = this.dictionary[this.index];
-
-    console.log(this.currentScene);
 
   }
   /**
@@ -73,7 +61,6 @@ class SceneManager {
       this.index = 0;
     }
     this.currentScene = this.dictionary[this.index];
-    //console.log(  this.currentScene )
   }
 
 
@@ -81,8 +68,7 @@ class SceneManager {
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     this.currentScene = this.titles[title]
   }
-  update(dt)
-  {
+  update(dt) {
     this.currentScene.update(dt)
   }
 
@@ -91,7 +77,6 @@ class SceneManager {
    * draws the current scene
    */
   draw() {
-    //  var curScene = this.dictionary[this.index];
     this.currentScene.draw();
   }
 

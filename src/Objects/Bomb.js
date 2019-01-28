@@ -3,6 +3,11 @@
  * @author John O'Grady
  */
 class Bombs extends Utility {
+  /**
+   * constructor
+   * @param {Width} width 
+   * @param {Height} height 
+   */
   constructor(width, height) {
     super(width, height);
 
@@ -24,8 +29,8 @@ class Bombs extends Utility {
   }
 
   /**
-   * 
-   * @param {*} dt 
+   * update loop - count for 1 sec then explode the bomb
+   * @param {Delta Time} dt 
    */
   update(dt) {
     this.clock += dt;
@@ -45,9 +50,9 @@ class Bombs extends Utility {
   }
 
   /**
-   * 
-   * @param {*} orientation 
-   * @param {*} position
+   * creates the bomb object and positions it in the world depending on the players orientation and position
+   * @param {Direction} orientation 
+   * @param {Vector2} position
    */
   plantBomb(orientation, position) {
     this.alive = true;
@@ -68,6 +73,9 @@ class Bombs extends Utility {
     this.collider.position = new Vector2(this.position.x - this.collider.width / 2.5, this.position.y - this.collider.height / 2.5);
   }
 
+  /**
+   * set up sprite sheet for the bomb and its explosion
+   */
   setUpSprites() {
     this.sprite = new AssetManager(0, 0, this.width, this.height, 0, 0);
     this.sprite.setSpriteSheet("resources/objects.png", 3, 1);
@@ -82,8 +90,8 @@ class Bombs extends Utility {
   }
 
   /**
-   * 
-   * @param {*} ctx 
+   * render the sprite or the explosion sprite
+   * @param {Canvas Context} ctx 
    */
   draw(ctx) {
     this.sprite.draw(ctx);

@@ -2,7 +2,6 @@
  * @author John O'Grady
  * The scene for naming the character
  */
-
 class NameScene {
   /**
    * @param {title} string title of the nameScenes.
@@ -39,19 +38,31 @@ class NameScene {
     this.nameArea.draggable = new DropZone(this.nameArea);
   }
 
+  /**
+   * blank but required for scene manager
+   */
   update(){
   }
 
+  /**
+   * method that's called when this scene is called - clears the name area and resets the return detection
+   */
   goToScene(){
     this.return = false;
     this.nameArea.text = "";
   }
 
+  /**
+   * update which row in the main menu is being updated
+   * @param {*} row which row the name lies on in the main menu to ensure proper value updated
+   */
   updateName(row) {
-    console.log(row);
     this.row = row;
   }
 
+  /**
+   * when a mouse up is detected make sure that the interactable letters and the drop area box are colliding
+   */
   checkValid(){
     if(this.letters == undefined || this.letters.length <=0){
       // do nothing
@@ -71,6 +82,9 @@ class NameScene {
       }
   }
 
+  /**
+   * return to the main menu scene and update the row of names
+   */
   returnToMain(){
     if(this.nameArea.text !== "" && gameNs.game.sceneManager.getScene() === "NameScene"){
       if(this.row === 1){

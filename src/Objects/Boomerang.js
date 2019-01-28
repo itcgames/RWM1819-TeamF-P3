@@ -3,6 +3,11 @@
  * @author John O'Grady
  */
 class Boomerang extends Utility {
+    /**
+     * constructor
+     * @param {*} width width of the boomerang object
+     * @param {*} height height of the boomerang object
+     */
     constructor(width, height) {
         super(width, height);
         this.collider = new BoxCollider(
@@ -15,7 +20,7 @@ class Boomerang extends Utility {
             ['boomerang'],
             ['pickup', 'obstacle']
         );
-        this.collider.shape.height = 30;
+        this.collider.shape.height = 30; // collider dimensions
         this.collider.shape.width = 30;
 
         gameNs.game.collisionManager.addBoxCollider(this.collider);
@@ -23,8 +28,7 @@ class Boomerang extends Utility {
     }
 
     /**
-     * 
-     * @param {*} dt 
+     * update the boomerangs position and collider position
      */
     update() {
         this.setPos(this.position.x + this.updateVector.x, this.position.y + this.updateVector.y)
@@ -40,9 +44,9 @@ class Boomerang extends Utility {
     }
 
     /**
-     * 
-     * @param {*} orientation 
-     * @param {*} position
+     * throw the boomerang in a direction
+     * @param {*} orientation direction for the boomerang to travel in
+     * @param {*} position position reference for spawning the boomerang
      */
     throw (orientation, position) {
         this.alive = true;
@@ -67,10 +71,16 @@ class Boomerang extends Utility {
         this.collider.position = new Vector2(this.position.x - this.collider.width / 2.5, this.position.y - this.collider.height / 2.5);
     }
 
+    /**
+     * check to stop rendering the boomerang
+     */
     processCollision() {
         this.alive = false;
     }
 
+    /**
+     * set up the sprite sheet for the boomerang animation
+     */
     setUpSprites() {
         this.sprite = new AssetManager(0, 0, this.width, this.height, 128, 0);
         this.sprite.setSpriteSheet("resources/objects.png", 5, 4);
@@ -78,8 +88,8 @@ class Boomerang extends Utility {
     }
 
     /**
-     * 
-     * @param {*} ctx 
+     * render the entity
+     * @param {*} ctx canvas contex
      */
     draw(ctx) {
         this.sprite.draw(ctx);

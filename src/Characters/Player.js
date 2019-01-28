@@ -4,7 +4,7 @@
  */
 class Player extends Character {
   /**
-   *
+   * constructor for plater class calling the Character super constructor
    * @param {Vector2} position
    * @param {Collider} collider
    * @param {Sprite} sprite
@@ -22,9 +22,6 @@ class Player extends Character {
    * initialise the player entity - bind functions for key handling and setup sprite
    */
   init() {
-    console.log(this.util);
-
-    //testing
     this.width = 48;
     this.height = 56;
     this.animating = false;
@@ -69,8 +66,8 @@ class Player extends Character {
       ['player'],
       ['sword']
     );
-    gameNs.game.collisionManager.addBoxCollider(this.collider);
 
+    gameNs.game.collisionManager.addBoxCollider(this.collider);
     this.setUpSprites();
   }
 
@@ -134,19 +131,18 @@ class Player extends Character {
       this.boomerang.update();
     }
 
-        if(this.stopWatch){
-            this.clock += dt;
-            if(this.clock > 5000){
-                this.clock = 0;
-                this.stopWatch = false;
-                this.alive = false;
-            }
-        }
-        if (this.alive === false)
-        {
-          gameNs.game.result = "lose";
-          this.changeScene("Ending");
-        }
+    if (this.stopWatch) {
+      this.clock += dt;
+      if (this.clock > 5000) {
+        this.clock = 0;
+        this.stopWatch = false;
+        this.alive = false;
+      }
+    }
+    if (this.alive === false) {
+      gameNs.game.result = "lose";
+      this.changeScene("Ending");
+    }
 
     this.sprite.setPos(this.position.x, this.position.y);
     this.collider.shape.position = new Vector2(this.position.x, this.position.y);
@@ -173,14 +169,20 @@ class Player extends Character {
     }
 
   }
-    setAlive()
-    {
-      this.alive = true;
-    }
-    changeScene(title)
-    {
-      gameNs.game.sceneManager.goToScene(title)
-    }
+
+  /**
+   * set the player to be alive
+   */
+  setAlive() {
+    this.alive = true;
+  }
+
+  /**
+   * change to the given scene from the scene manager
+   */
+  changeScene(title) {
+    gameNs.game.sceneManager.goToScene(title)
+  }
 
   /**
    * function to move the player down and update the sprite
@@ -218,6 +220,9 @@ class Player extends Character {
     }
   }
 
+  /**
+   * method that fires a sword projectile when the characters health is full
+   */
   launchSword() {
     if (!this.swordBeam) {
       this.projectile.setPos(this.position.x, this.position.y);
@@ -226,6 +231,9 @@ class Player extends Character {
     }
   }
 
+  /**
+   * plants a bomb beside the character if a bomb doesnt exist and the player has enough
+   */
   plantBomb() {
     if (!this.bomb.alive && this.bombs > 0) {
       this.bombs--;
@@ -233,12 +241,18 @@ class Player extends Character {
     }
   }
 
+  /**
+   * throw the characters boomerang if collected
+   */
   throwBoomerang() {
     if (!this.boomerang.alive && this.hasBoomerang) {
       this.boomerang.throw(this.orientation, this.position);
     }
   }
 
+  /**
+   * use the characters currently selected utility
+   */
   useUtility() {
     switch (this.currentUtil) {
       case this.CurrentUtility.Boomerang:
@@ -250,6 +264,10 @@ class Player extends Character {
     }
   }
 
+  /**
+   * depending on the type of pickup the player collided with alter the characters inventory / status
+   * @param {Pickup Type} type 
+   */
   processPickup(type) {
     switch (type) {
       case "rupee":
