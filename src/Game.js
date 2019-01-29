@@ -35,7 +35,8 @@ class Game {
         gameNs.game.sceneManager.addScene(gameNs.game.menu);
         gameNs.game.sceneManager.addScene(gameNs.game.name);
         gameNs.game.sceneManager.addScene(gameNs.game.EndScene);
-        gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
+        //gameNs.game.sceneManager.goToScene(gameNs.game.splash.title);
+        gameNs.game.sceneManager.goToScene(gameNs.game.play.title);
         this.update = this.update.bind(this);
 
         //   Initialise game variables.

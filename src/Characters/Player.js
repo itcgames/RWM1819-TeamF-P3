@@ -149,12 +149,9 @@ class Player extends Character {
     this.animating = false;
 
     //console.log("World:  "+this.position.x+","+this.position.y);
-    //console.log("Screen: "+Screen.worldToScreen(this.position).x+","+Screen.worldToScreen(this.position).y);
-    console.log(this.position);
-    console.log(Screen.worldToScreen(this.position, 1));
-    if ((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false) && (this.stopwatch === false)) {
-      gameNs.game.octo.update(gameNs.game.dt);
-    }
+    // //console.log("Screen: "+Screen.worldToScreen(this.position).x+","+Screen.worldToScreen(this.position).y);
+    // console.log(this.position);
+    // console.log(Screen.worldToScreen(this.position, 1));
   }
 
   /**

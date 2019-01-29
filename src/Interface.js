@@ -27,10 +27,10 @@ class Interface {
 
     this.scrollSpeed = 10;
 
-    this.pos = {
-      x: 0,
-      y: this.defaultHeight,
-    };
+    this.pos = new Vector2(
+      0,
+      this.defaultHeight
+    );
 
     this.map = {
       x: 50,
@@ -75,6 +75,7 @@ class Interface {
    * functionality
    */
   update() {
+    console.log(this.pos.y);
     if(this.moving) {
       this.move();
     }
@@ -91,7 +92,7 @@ class Interface {
     
     this.pos.y += this.scrollSpeed;
     // Check if the UI is at the top of the screen
-    if(this.pos.y < this.defaultHeight){
+    if(Screen.worldToScreen(this.pos).y < this.defaultHeight){
       console.log("HIT TOP");
       this.pos.y = this.defaultHeight;
       this.moving = false;
@@ -100,7 +101,7 @@ class Interface {
     }
 
     // Check if the UI is at the bottom
-    else if (this.pos.y > 0){
+    else if (Screen.worldToScreen(this.pos).y > 0){
       console.log("HIT BOTTOM");
       this.pos.y = 0;
       this.moving = false;
@@ -120,8 +121,8 @@ class Interface {
   render(ctx, camera) {
     ctx.fillStyle = "#000000";
     ctx.fillRect(
-      this.pos.x + (camera.pos.x + camera.size.width/2),
-      this.pos.y + (camera.pos.y + camera.size.height/2),
+      this.pos.x,// - (camera.pos.x + camera.size.width/2),
+      this.pos.y,// - (camera.pos.y + camera.size.height/2),
       this.screen.w,
       this.screen.h
     );
@@ -144,21 +145,16 @@ class Interface {
       "Bombs: "+gameNs.game.player.bombs,
       50 + this.pos.x,
       750 + this.pos.y
-    )
+    );
     ctx.fillText(
       "Rupees: "+gameNs.game.player.rupees,
       50 + this.pos.x,
       770 + this.pos.y
-    )
+    );
     ctx.fillText(
       "Keys: "+gameNs.game.player.keys,
       50 + this.pos.x,
       790 + this.pos.y
-    )
-    ctx.fillText(
-      "will to live: "+1+"   :^)",
-      50 + this.pos.x,
-      810 + this.pos.y
-    )
+    );
   }
 }

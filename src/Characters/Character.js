@@ -37,11 +37,15 @@ class Character {
    * @param {Vector2} attemptedMovement 
    */
   keepOnScreen(attemptedMovement) {
-    const pos = Screen.worldToScreen(this.position,0);
+    const pos = Screen.worldToScreen(
+      this.position,
+      gameNs.game.play.activeScreen
+    );
     var grid = gameNs.game.play.overworld[gameNs.game.play.activeScreen].grid;
+    // var leftTopGridPosition = grid.screenToGridCoords(new Vector2(pos.x + attemptedMovement.x, pos.y + attemptedMovement.y));
+    // var rightBottomGridPosition = grid.screenToGridCoords(new Vector2(pos.x + this.width + attemptedMovement.x, pos.y + this.height + attemptedMovement.y));
     var leftTopGridPosition = grid.screenToGridCoords(new Vector2(pos.x + attemptedMovement.x, pos.y + attemptedMovement.y));
     var rightBottomGridPosition = grid.screenToGridCoords(new Vector2(pos.x + this.width + attemptedMovement.x, pos.y + this.height + attemptedMovement.y));
-
     //  Moving right.
     if (attemptedMovement.x > 0){
       if ( pos.x + this.width + attemptedMovement.x < grid.width * grid.tileSize && 

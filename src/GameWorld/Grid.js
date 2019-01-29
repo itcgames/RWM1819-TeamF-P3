@@ -19,6 +19,67 @@ class Grid {
     this.width = this.screenData.width;
     this.height = this.screenData.height;
 
+    this.forwardPush;
+    this.backwardPush;
+
+    // set up enter/exit zones 
+    this.col = new BoxCollider(0,0,0,0,[],[]);
+
+    switch (this.screenData.exit) {
+      case "right":
+        this.col = new BoxCollider(
+          new Vector2(
+            this.position.x + this.width - 10,
+            this.position.y
+          ),
+          10,
+          this.height*64,
+          ["exit"]
+        );
+        this.forwardPush = new Vector2(1,0);
+        break;
+      case "left":
+        this.col = new BoxCollider(
+          new Vector2(
+            this.position.x,
+            this.position.y
+          ),
+          10,
+          this.height*64,
+          ["exit"]
+        );
+        this.forwardPush = new Vector2(-1,0);
+        break;
+      case "top":
+        this.col = new BoxCollider(
+          new Vector2(
+            this.position.x,
+            this.position.y
+          ),
+          this.width*64,
+          10,
+          ["exit"]
+        );
+        this.forwardPush = new Vector2(0,-1);
+        break;
+      case "bottom":
+        this.col = new BoxCollider(
+          new Vector2(
+            this.position.x,
+            this.position.y + this.height - 10
+          ),
+          this.width*64,
+          10,
+          ["exit"]
+        );
+        this.forwardPush = new Vector2(0,1);
+        break;
+      default:
+        break;
+    }
+
+    gameNs.game.collisionManager.addBoxCollider(this.col);
+
     this.TileEnum = Object.freeze({      
       //  Sand.
       "Sand"                          :   3,
@@ -213,6 +274,14 @@ class Grid {
         }
       }
     }
+
+    this.safetyTile = new Tile(
+      new Vector2(0,0),
+      null,
+      false,
+      0,
+      ""
+    );
   }
 
   /**
@@ -232,7 +301,7 @@ class Grid {
    * @param {Integer} y 
    */
   getTile(x, y) {
-    return (this.tiles[x] !== undefined ? this.tiles[x][y] : null);
+    return (this.tiles[x] !== undefined ? this.tiles[x][y] : this.safetyTile);
   }
 
   /**
