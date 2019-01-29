@@ -11,8 +11,8 @@ class Npc extends Character {
    * @param {Sprite} sprite 
    * @param {Grid} grid
    */
-  constructor(position, collider, sprite, grid) {
-    super(position.add(grid.position), collider, sprite);
+  constructor(position, collider, grid) {
+    super(position.add(grid.position), collider);
     this.grid = grid;
     this.tileSize = this.grid.tileSize;
     this.updateGridPosition(grid);

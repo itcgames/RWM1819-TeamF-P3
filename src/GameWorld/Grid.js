@@ -13,8 +13,8 @@ class Grid {
     this.tileSize = tileSize;
     this.screenData = ScreenData[screen];
     this.position = new Vector2(
-      this.screenData.x*this.screenData.width*64, 
-      this.screenData.y*this.screenData.height*64
+      this.screenData.x * this.screenData.width * 64, 
+      this.screenData.y * this.screenData.height * 64
       );
     this.width = this.screenData.width;
     this.height = this.screenData.height;
@@ -239,6 +239,7 @@ class Grid {
    * @param {Vector2} position
    */
   screenToGridCoords(position){
-    return new Vector2((position.x - position.x % this.tileSize) / this.tileSize, (position.y - position.y % this.tileSize) / this.tileSize);
+    var transformToOrigin = new Vector2(position.x - this.position.x, position.y - this.position.y);
+    return new Vector2((transformToOrigin.x - transformToOrigin.x % this.tileSize) / this.tileSize, (transformToOrigin.y - transformToOrigin.y % this.tileSize) / this.tileSize);
   }
 }

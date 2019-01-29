@@ -15,6 +15,8 @@ class Screen {
 
     this.enemyList = [];
     this.pickupList = [];
+
+    this.enemyList.push(new Octorok(new Vector2(this.grid.position.x + (5 * this.grid.tileSize), this.grid.position.y + (5 * this.grid.tileSize)), new BoxCollider(), this.grid));
   }
 
 
@@ -32,7 +34,7 @@ class Screen {
    */
   renderActive(ctx){
     for(let i = 0; i < this.enemyList.length; i++){
-      this.enemyList[i].render(ctx);
+      this.enemyList[i].draw(ctx);
     }
     for(let i = 0; i < this.pickupList.length; i++){
       this.pickupList[i].render(ctx);

@@ -7,9 +7,8 @@ class Character {
    * 
    * @param {Vector2} position 
    * @param {Vector2} collider 
-   * @param {Vector2} sprite 
    */
-  constructor(position, collider, sprite) {
+  constructor(position, collider) {
     this.OrientationEnum = Object.freeze({
       "North": 1,
       "East": 2,
@@ -22,7 +21,6 @@ class Character {
     this.orientation = this.OrientationEnum.North;
     this.alive = true;
     this.collider = collider;
-    this.sprite = sprite;
   }
 
   /**

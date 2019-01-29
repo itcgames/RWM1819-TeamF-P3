@@ -4,25 +4,15 @@ class Octorok extends Npc {
    * 
    * @param {Vector2} position 
    * @param {Collider} collider 
-   * @param {Sprite} sprite 
    * @param {Grid} grid 
    */
-  constructor(position, collider, sprite, grid) {
-    super(position, collider, sprite, grid);
-
+  constructor(position, collider, grid) {
+    super(position, collider, grid);
     this.timer = 0;
     this.alive = true;
-
-    this.collider = new BoxCollider(
-      new Vector2(
-        this.position.x,
-        this.position.y,
-      ),
-      this.tileSize,
-      this.tileSize,
-      ['enemy']
-    );
-
+    this.collider = new BoxCollider(new Vector2(this.position.x,this.position.y,),this.tileSize,this.tileSize,['enemy']);
+    this.sprite = new AssetManager(this.position.x, this.position.y, 64, 64, 64, 0);
+    this.sprite.setSpriteSheet('resources/npcSprites.png', 1, 1);
     gameNs.game.collisionManager.addBoxCollider(this.collider);
   }
 
@@ -37,6 +27,8 @@ class Octorok extends Npc {
         this.wander();
         this.timer = 0;
       }
+      this.sprite.x = this.position.x;
+      this.sprite.y = this.position.y;
 
       if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'sword')) {
         this.alive = false;

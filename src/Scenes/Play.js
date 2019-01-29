@@ -40,7 +40,7 @@ class Play {
     gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
     gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
     //   Initialise game variables.
-    gameNs.game.player = new Player(new Vector2(2520, 3200), new BoxCollider(new Vector2(400, 400), 42, 64), null);
+    gameNs.game.player = new Player(new Vector2(2520, 3200), new BoxCollider(new Vector2(400, 400), 42, 64));
     gameNs.game.player.init();
 
     gameNs.game.input.bind(gameNs.game.player.moveUp, "w");
@@ -69,7 +69,6 @@ class Play {
     gameNs.game.pickups.push(new SwordPickup(250, 750));
 
     gameNs.game.tileGrid = new Grid(64, "Screen01");
-    gameNs.game.octo = new Octorok(new Vector2(5 * gameNs.game.tileGrid.tileSize, 4 * gameNs.game.tileGrid.tileSize), null, null, gameNs.game.tileGrid);
     console.log("intiWOrld");
   }
 
@@ -77,23 +76,16 @@ class Play {
    * update
    * @desc calls draw and itself recursively also updates animations
    */
-  update(dt) {
-    // for(let i = 0; i < overworld[active.x][active.y].grid.enemyList.length(); i++){
-    //   overworld[active.x][active.y].grid.enemyList[i];
-    // }
-    for (let i = 0; i < this.overworld[this.activeScreen].enemyList.length; i++) {
-      this.overworld[this.activeScreen].enemyList[i].update(dt);
-    }
+  update(dt) {    
     this.camera.follow(gameNs.game.player.position.x, gameNs.game.player.position.y);
-    // gameNs.game.player.update(gameNs.game.dt);
-
-    // gameNs.game.interface.update();
 
     if ((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
       gameNs.game.input.update();
       gameNs.game.collisionManager.checkBoxColliderArray();
       if (!gameNs.game.player.stopWatch) {
-        //gameNs.game.octo.update(gameNs.game.dt);
+        for (let i = 0; i < this.overworld[this.activeScreen].enemyList.length; i++) {
+          this.overworld[this.activeScreen].enemyList[i].update(dt);
+        }
       }
       gameNs.game.player.update(gameNs.game.dt);
 
@@ -102,13 +94,11 @@ class Play {
       }
     }
     gameNs.game.interface.update();
-
   }
 
   draw() {
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
     //gameNs.game.tileGrid.draw(gameNs.game.ctx);
-    //gameNs.game.octo.draw(gameNs.game.ctx);
 
     this.camera.draw(0, gameNs.game.ctx);
 
@@ -118,9 +108,8 @@ class Play {
 
     this.overworld[this.activeScreen].renderActive(gameNs.game.ctx, true);
 
-    gameNs.game.collisionManager.render(gameNs.game.ctx);
-
     //gameNs.game.collisionManager.render(gameNs.game.ctx); // collision test
+    
     for (var i = 0; i < gameNs.game.pickups.length; i++) {
       gameNs.game.pickups[i].draw(gameNs.game.ctx);
     }

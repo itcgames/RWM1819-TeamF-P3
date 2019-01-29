@@ -67,12 +67,12 @@ class NameScene {
     if(this.letters == undefined || this.letters.length <=0){
       // do nothing
     } else {
-      console.log(this.nameArea.getBoundingBox());
+      //console.log(this.nameArea.getBoundingBox());
       for(var j = 0; j < this.letters.length; j++){ // first iterate through all the draggables
           var dropzone = this.nameArea.getBoundingBox(); // get the bounds of the dropzone
           var draggable = this.letters[j].getBoundingBox();
           if(utilities.boundingBoxCollision(draggable, dropzone)){ 
-            console.log(draggable);
+            //console.log(draggable);
             this.nameArea.validDrop(); 
             this.nameArea.addLetter(this.letters[j].text);
           }
