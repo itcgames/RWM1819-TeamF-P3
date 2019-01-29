@@ -7,9 +7,8 @@ class Character {
    * 
    * @param {Vector2} position 
    * @param {Vector2} collider 
-   * @param {Vector2} sprite 
    */
-  constructor(position, collider, sprite) {
+  constructor(position, collider) {
     this.OrientationEnum = Object.freeze({
       "North": 1,
       "East": 2,
@@ -22,7 +21,6 @@ class Character {
     this.orientation = this.OrientationEnum.North;
     this.alive = true;
     this.collider = collider;
-    this.sprite = sprite;
   }
 
   /**
@@ -47,37 +45,37 @@ class Character {
     var leftTopGridPosition = grid.screenToGridCoords(new Vector2(pos.x + attemptedMovement.x, pos.y + attemptedMovement.y));
     var rightBottomGridPosition = grid.screenToGridCoords(new Vector2(pos.x + this.width + attemptedMovement.x, pos.y + this.height + attemptedMovement.y));
     //  Moving right.
-    if (attemptedMovement.x > 0){
-      if ( pos.x + this.width + attemptedMovement.x < grid.width * grid.tileSize && 
-           grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable && 
-           grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable) {
+    if (attemptedMovement.x > 0) {
+      if (pos.x + this.width + attemptedMovement.x < grid.width * grid.tileSize &&
+        grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable &&
+        grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable) {
         this.position.x += attemptedMovement.x;
-      }    
+      }
     } else {
       //  Moving left.
-      if ( pos.x + attemptedMovement.x > 0 && 
-           grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable && 
-           grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable) {
+      if (pos.x + attemptedMovement.x > 0 &&
+        grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable &&
+        grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable) {
         this.position.x += attemptedMovement.x;
       }
     }
 
     //  Moving down.
-    if (attemptedMovement.y > 0){
-      if ( pos.y + this.height + attemptedMovement.y < grid.height * grid.tileSize && 
-           grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable && 
-           grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable ) {
+    if (attemptedMovement.y > 0) {
+      if (pos.y + this.height + attemptedMovement.y < grid.height * grid.tileSize &&
+        grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable &&
+        grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable) {
         this.position.y += attemptedMovement.y;
       }
     } else {
       //  Moving up.
-    if ( pos.y + attemptedMovement.y > 0 && 
-         grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable &&
-         grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable ){
+      if (pos.y + attemptedMovement.y > 0 &&
+        grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable &&
+        grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable) {
         this.position.y += attemptedMovement.y;
       }
     }
 
-    
+
   }
 }

@@ -149,9 +149,18 @@ class Player extends Character {
     this.animating = false;
 
     //console.log("World:  "+this.position.x+","+this.position.y);
+<<<<<<< HEAD
     // //console.log("Screen: "+Screen.worldToScreen(this.position).x+","+Screen.worldToScreen(this.position).y);
     // console.log(this.position);
     // console.log(Screen.worldToScreen(this.position, 1));
+=======
+    //console.log("Screen: "+Screen.worldToScreen(this.position).x+","+Screen.worldToScreen(this.position).y);
+    //console.log(this.position);
+    //console.log(Screen.worldToScreen(this.position, 1));
+    if ((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false) && (this.stopwatch === false)) {
+      gameNs.game.octo.update(gameNs.game.dt);
+    }
+>>>>>>> master
   }
 
   /**
@@ -159,7 +168,9 @@ class Player extends Character {
    */
   moveUp() {
     if (!this.animating || !this.attacking) {
-      this.keepOnScreen(new Vector2(0, -2));
+      //  Keep this line commented out while camera is broken.
+      //this.keepOnScreen(new Vector2(0, -2));
+      this.position.y += -2;
       this.orientation = this.OrientationEnum.North;
       this.sprite = this.north;
       this.animating = true;
@@ -186,7 +197,9 @@ class Player extends Character {
    */
   moveDown() {
     if (!this.animating || !this.attacking) {
-      this.keepOnScreen(new Vector2(0, 2));
+      //  Keep this line commented out while camera is broken.
+      //this.keepOnScreen(new Vector2(0, 2));
+      this.position.y += 2;
       this.orientation = this.OrientationEnum.South;
       this.sprite = this.south;
       this.animating = true;
@@ -198,7 +211,9 @@ class Player extends Character {
    */
   moveLeft() {
     if (!this.animating || !this.attacking) {
-      this.keepOnScreen(new Vector2(-2, 0));
+      //  Keep this line commented out while camera is broken.
+      //this.keepOnScreen(new Vector2(-2, 0));
+      this.position.x += -2;
       this.orientation = this.OrientationEnum.West;
       this.sprite = this.west;
       this.animating = true;
@@ -210,7 +225,9 @@ class Player extends Character {
    */
   moveRight() {
     if (!this.animating || !this.attacking) {
-      this.keepOnScreen(new Vector2(2, 0));
+      //  Keep this line commented out while camera is broken.
+      //this.keepOnScreen(new Vector2(2, 0));
+      this.position.x += 2;
       this.orientation = this.OrientationEnum.East;
       this.sprite = this.east;
       this.animating = true;

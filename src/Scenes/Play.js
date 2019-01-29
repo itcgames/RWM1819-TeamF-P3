@@ -44,8 +44,7 @@ class Play
       this.overworld[this.activeScreen].grid.position.y + gameNs.game.interface.defaultHeight
     );
     //   Initialise game variables.
-    
-    gameNs.game.player = new Player(new Vector2(2520, 3200), new BoxCollider(new Vector2(400,400), 42, 64), null);
+    gameNs.game.player = new Player(new Vector2(2520, 3200), new BoxCollider(new Vector2(400, 400), 42, 64));
     gameNs.game.player.init();
 
     
@@ -121,7 +120,6 @@ class Play
     }
 
     gameNs.game.interface.update();
-
   }
 
   transition(){
@@ -149,7 +147,6 @@ class Play
   draw()
   {
     //gameNs.game.tileGrid.draw(gameNs.game.ctx);
-    //gameNs.game.octo.draw(gameNs.game.ctx);
 
     this.camera.draw(0,gameNs.game.ctx);
 
@@ -159,10 +156,9 @@ class Play
 
     this.overworld[this.activeScreen].renderActive(gameNs.game.ctx, true);
 
-    gameNs.game.collisionManager.render(gameNs.game.ctx);
-
     //gameNs.game.collisionManager.render(gameNs.game.ctx); // collision test
-    for(var i = 0; i < gameNs.game.pickups.length; i++){
+    
+    for (var i = 0; i < gameNs.game.pickups.length; i++) {
       gameNs.game.pickups[i].draw(gameNs.game.ctx);
     }
     gameNs.game.player.draw(gameNs.game.ctx);
