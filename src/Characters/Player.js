@@ -134,22 +134,18 @@ class Player extends Character {
       this.boomerang.update();
     }
 
-
-
-
-        if(this.stopWatch){
-            this.clock += dt;
-            if(this.clock > 5000){
-                this.clock = 0;
-                this.stopWatch = false;
-                this.alive = false;
-            }
-        }
-        if (this.alive === false)
-        {
-          gameNs.game.result = "lose";
-          this.changeScene("Ending");
-        }
+    if (this.stopWatch) {
+      this.clock += dt;
+      if (this.clock > 5000) {
+        this.clock = 0;
+        this.stopWatch = false;
+        this.alive = false;
+      }
+    }
+    if (this.alive === false) {
+      gameNs.game.result = "lose";
+      this.changeScene("Ending");
+    }
 
     this.sprite.setPos(this.position.x, this.position.y);
     this.collider.shape.position = new Vector2(this.position.x, this.position.y);
@@ -171,28 +167,30 @@ class Player extends Character {
    */
   moveUp() {
     if (!this.animating || !this.attacking) {
-      this.keepOnScreen(new Vector2(0, -2));
+      //  Keep this line commented out while camera is broken.
+      //this.keepOnScreen(new Vector2(0, -2));
+      this.position.y += -2;
       this.orientation = this.OrientationEnum.North;
       this.sprite = this.north;
       this.animating = true;
     }
 
   }
-    setAlive()
-    {
-      this.alive = true;
-    }
-    changeScene(title)
-    {
-      gameNs.game.sceneManager.goToScene(title)
-    }
+  setAlive() {
+    this.alive = true;
+  }
+  changeScene(title) {
+    gameNs.game.sceneManager.goToScene(title)
+  }
 
   /**
    * function to move the player down and update the sprite
    */
   moveDown() {
     if (!this.animating || !this.attacking) {
-      this.keepOnScreen(new Vector2(0, 2));
+      //  Keep this line commented out while camera is broken.
+      //this.keepOnScreen(new Vector2(0, 2));
+      this.position.y += 2;
       this.orientation = this.OrientationEnum.South;
       this.sprite = this.south;
       this.animating = true;
@@ -204,7 +202,9 @@ class Player extends Character {
    */
   moveLeft() {
     if (!this.animating || !this.attacking) {
-      this.keepOnScreen(new Vector2(-2, 0));
+      //  Keep this line commented out while camera is broken.
+      //this.keepOnScreen(new Vector2(-2, 0));
+      this.position.x += -2;
       this.orientation = this.OrientationEnum.West;
       this.sprite = this.west;
       this.animating = true;
@@ -216,7 +216,9 @@ class Player extends Character {
    */
   moveRight() {
     if (!this.animating || !this.attacking) {
-      this.keepOnScreen(new Vector2(2, 0));
+      //  Keep this line commented out while camera is broken.
+      //this.keepOnScreen(new Vector2(2, 0));
+      this.position.x += 2;
       this.orientation = this.OrientationEnum.East;
       this.sprite = this.east;
       this.animating = true;

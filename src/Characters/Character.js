@@ -37,43 +37,43 @@ class Character {
    * @param {Vector2} attemptedMovement 
    */
   keepOnScreen(attemptedMovement) {
-    const pos = Screen.worldToScreen(this.position,0);
+    const pos = Screen.worldToScreen(this.position, 0);
     var grid = gameNs.game.play.overworld[gameNs.game.play.activeScreen].grid;
     var leftTopGridPosition = grid.screenToGridCoords(new Vector2(pos.x + attemptedMovement.x, pos.y + attemptedMovement.y));
     var rightBottomGridPosition = grid.screenToGridCoords(new Vector2(pos.x + this.width + attemptedMovement.x, pos.y + this.height + attemptedMovement.y));
 
     //  Moving right.
-    if (attemptedMovement.x > 0){
-      if ( pos.x + this.width + attemptedMovement.x < grid.width * grid.tileSize && 
-           grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable && 
-           grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable) {
+    if (attemptedMovement.x > 0) {
+      if (pos.x + this.width + attemptedMovement.x < grid.width * grid.tileSize &&
+        grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable &&
+        grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable) {
         this.position.x += attemptedMovement.x;
-      }    
+      }
     } else {
       //  Moving left.
-      if ( pos.x + attemptedMovement.x > 0 && 
-           grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable && 
-           grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable) {
+      if (pos.x + attemptedMovement.x > 0 &&
+        grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable &&
+        grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable) {
         this.position.x += attemptedMovement.x;
       }
     }
 
     //  Moving down.
-    if (attemptedMovement.y > 0){
-      if ( pos.y + this.height + attemptedMovement.y < grid.height * grid.tileSize && 
-           grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable && 
-           grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable ) {
+    if (attemptedMovement.y > 0) {
+      if (pos.y + this.height + attemptedMovement.y < grid.height * grid.tileSize &&
+        grid.getTile(leftTopGridPosition.x, rightBottomGridPosition.y).isTraversable &&
+        grid.getTile(rightBottomGridPosition.x, rightBottomGridPosition.y).isTraversable) {
         this.position.y += attemptedMovement.y;
       }
     } else {
       //  Moving up.
-    if ( pos.y + attemptedMovement.y > 0 && 
-         grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable &&
-         grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable ){
+      if (pos.y + attemptedMovement.y > 0 &&
+        grid.getTile(leftTopGridPosition.x, leftTopGridPosition.y).isTraversable &&
+        grid.getTile(rightBottomGridPosition.x, leftTopGridPosition.y).isTraversable) {
         this.position.y += attemptedMovement.y;
       }
     }
 
-    
+
   }
 }
