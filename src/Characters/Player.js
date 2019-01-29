@@ -37,6 +37,7 @@ class Player extends Character {
     this.moveRight = this.moveRight.bind(this);
     this.meleeAttack = this.meleeAttack.bind(this);
     this.useUtility = this.useUtility.bind(this);
+    this.jump = this.jump.bind(this);
 
     this.sword = new Sword('sword', 64, 24);
     this.projectile = new Sword('flying sword', 64, 24);
@@ -158,8 +159,7 @@ class Player extends Character {
   moveUp() {
     if (!this.animating || !this.attacking) {
       //  Keep this line commented out while camera is broken.
-      //this.keepOnScreen(new Vector2(0, -2));
-      this.position.y -= 2;
+      this.keepOnScreen(new Vector2(0, -2));
       this.orientation = this.OrientationEnum.North;
       this.sprite = this.north;
       this.animating = true;
@@ -186,9 +186,7 @@ class Player extends Character {
    */
   moveDown() {
     if (!this.animating || !this.attacking) {
-      //  Keep this line commented out while camera is broken.
-      //this.keepOnScreen(new Vector2(0, 2));
-      this.position.y += 2;
+      this.keepOnScreen(new Vector2(0, 2));
       this.orientation = this.OrientationEnum.South;
       this.sprite = this.south;
       this.animating = true;
@@ -200,9 +198,7 @@ class Player extends Character {
    */
   moveLeft() {
     if (!this.animating || !this.attacking) {
-      //  Keep this line commented out while camera is broken.
-      //this.keepOnScreen(new Vector2(-2, 0));
-      this.position.x -= 2;
+      this.keepOnScreen(new Vector2(-2, 0));
       this.orientation = this.OrientationEnum.West;
       this.sprite = this.west;
       this.animating = true;
@@ -214,9 +210,7 @@ class Player extends Character {
    */
   moveRight() {
     if (!this.animating || !this.attacking) {
-      //  Keep this line commented out while camera is broken.
-      //this.keepOnScreen(new Vector2(2, 0));
-      this.position.x += 2;
+      this.keepOnScreen(new Vector2(2, 0));
       this.orientation = this.OrientationEnum.East;
       this.sprite = this.east;
       this.animating = true;
@@ -263,6 +257,23 @@ class Player extends Character {
         break;
       case this.CurrentUtility.Bomb:
         this.plantBomb();
+        break;
+    }
+  }
+
+  jump() {
+    switch(this.orientation){
+      case this.OrientationEnum.North:
+        this.position.y -= 1;
+        break;
+      case this.OrientationEnum.South:
+        this.position.y += 1;
+        break;
+      case this.OrientationEnum.East:
+        this.position.x += 1;
+        break;
+      case this.OrientationEnum.West:
+        this.position.x -= 1;
         break;
     }
   }

@@ -54,6 +54,8 @@ class Play {
     gameNs.game.input.bind(gameNs.game.player.useUtility, "q");
     gameNs.game.input.bind(gameNs.game.player.useUtility, "Q");
     gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
+    gameNs.game.input.bind(gameNs.game.player.jump, "f");
+    gameNs.game.input.bind(gameNs.game.player.jump, "F");
     gameNs.game.input.setHoldValue(1000);
 
     gameNs.game.pickups = [];
@@ -70,10 +72,10 @@ class Play {
 
     console.log("intiWOrld");
 
-    this.overworld[this.activeScreen].enemyList.push(new Octorok(
-      new Vector2(this.overworld[this.activeScreen].grid.position.x + (5 * this.overworld[this.activeScreen].grid.tileSize), this.overworld[this.activeScreen].grid.position.y + (5 * this.overworld[this.activeScreen].grid.tileSize)), 
+    this.overworld[1].enemyList.push(new Octorok(
+      new Vector2(this.overworld[1].grid.position.x + (5 * this.overworld[1].grid.tileSize), this.overworld[1].grid.position.y + (5 * this.overworld[1].grid.tileSize)), 
       null, 
-      this.overworld[this.activeScreen].grid)
+      this.overworld[1].grid)
     );
   }
 
@@ -83,7 +85,7 @@ class Play {
    */
   update(dt) {    
     this.camera.follow(gameNs.game.player.position.x, gameNs.game.player.position.y);
-
+    this.setActiveScreen();
     if ((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false)) {
       gameNs.game.input.update();
       gameNs.game.collisionManager.checkBoxColliderArray();
@@ -148,5 +150,37 @@ class Play {
     gameNs.game.player.draw(gameNs.game.ctx);
 
     gameNs.game.interface.render(gameNs.game.ctx, this.camera);
+  }
+
+
+  overworldCoords(position) {
+    return new Vector2((position.x - position.x % 1024) / 1024, (position.y - position.y % 704) / 704);
+  }
+
+  setActiveScreen(){
+    var playerOverworldCoords = this.overworldCoords(gameNs.game.player.position);
+    if (playerOverworldCoords.x === 2 && playerOverworldCoords.y === 4) {
+      this.activeScreen = 0;
+    } else if (playerOverworldCoords.x === 2 && playerOverworldCoords.y === 3) {
+      this.activeScreen = 1;
+    } else if (playerOverworldCoords.x === 1 && playerOverworldCoords.y === 3) {
+      this.activeScreen = 2;
+    } else if (playerOverworldCoords.x === 0 && playerOverworldCoords.y === 3) {
+      this.activeScreen = 3;
+    } else if (playerOverworldCoords.x === 0 && playerOverworldCoords.y === 2) {
+      this.activeScreen = 4;
+    } else if (playerOverworldCoords.x === 1 && playerOverworldCoords.y === 2) {
+      this.activeScreen = 5;
+    } else if (playerOverworldCoords.x === 1 && playerOverworldCoords.y === 1) {
+      this.activeScreen = 6;
+    } else if (playerOverworldCoords.x === 2 && playerOverworldCoords.y === 1) {
+      this.activeScreen = 7;
+    } else if (playerOverworldCoords.x === 3 && playerOverworldCoords.y === 1) {
+      this.activeScreen = 8;
+    }  else if (playerOverworldCoords.x === 3 && playerOverworldCoords.y === 0) {
+      this.activeScreen = 9;
+    } else if (playerOverworldCoords.x === 2 && playerOverworldCoords.y === 0) {
+      this.activeScreen = 10;
+    }   
   }
 }
