@@ -13,7 +13,6 @@ class Play {
     this.scrolling = false;
 
     this.camera = new Camera(0, 0, 64 * 16, 64 * 13);
-    this.camera.setBounds(-10000, -10000, 10000, 10000);
     this.title = title;
   }
 
@@ -36,6 +35,7 @@ class Play {
       new Screen("Screen10"),
       new Screen("Screen11")
     );
+    
     // Interface testing
     gameNs.game.interface = new Interface(gameNs.game.canvas.width, gameNs.game.canvas.height);
     gameNs.game.globalInput.bind(gameNs.game.interface.trigger, "p");
@@ -94,17 +94,45 @@ class Play {
       }
       gameNs.game.player.update(gameNs.game.dt);
 
+      gameNs.game.collisionManager.checkBoxColliderArray();
       for (var i = 0; i < gameNs.game.pickups.length; i++) {
         gameNs.game.pickups[i].update();
       }
     }
+    
     gameNs.game.interface.update();
+  }
+
+  spawnPickup(type, position){
+    var pickup;
+      switch (type) {
+        case 0:
+          pickup = new Rupee(position.x, position.y);
+          break;
+        case 1:
+          pickup = new Key(position.x, position.y);
+          break;
+        case 2:
+          pickup = new Bomb(position.x, position.y);
+          break;
+        case 3:
+          pickup = new Heart(position.x, position.y);
+          break;
+        case 4:
+          pickup = new HeartContainer(position.x, position.y);
+          break;
+        case 5:
+          pickup = new Fairy(position.x, position.y);
+          break;
+      }
+
+      gameNs.game.pickups.push(pickup);
   }
 
   draw() {
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
 
-    this.camera.draw(0, gameNs.game.ctx);
+    //this.camera.draw(0, gameNs.game.ctx);
 
     for (let i = 0; i < this.overworld.length; i++) {
       this.overworld[i].render(gameNs.game.ctx);

@@ -51,7 +51,6 @@ class Game {
         gameNs.game.globalInput.bind(gameNs.game.EndScene.reset, "r");
         gameNs.game.input.setHoldValue(1000);
         gameNs.game.play.initWorld();
-
     }
 
     /**

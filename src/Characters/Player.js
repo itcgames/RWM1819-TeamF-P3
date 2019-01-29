@@ -48,12 +48,12 @@ class Player extends Character {
     this.health = 6;
     this.maxHealth = 6;
     this.rupees = 0;
-    this.bombs = 0;
+    this.bombs = 5;
     this.keys = 0;
     this.stopWatch = false;
     this.compass = false;
     this.map = false;
-    this.hasSword = false;
+    this.hasSword = true;
     this.hasBoomerang = false;
 
     this.collider = new BoxCollider(
@@ -136,9 +136,12 @@ class Player extends Character {
       if (this.clock > 5000) {
         this.clock = 0;
         this.stopWatch = false;
-        this.alive = false;
       }
     }
+    if(this.health <= 0){
+      this.alive = false;
+    }
+
     if (this.alive === false) {
       gameNs.game.result = "lose";
       this.changeScene("Ending");
@@ -147,14 +150,6 @@ class Player extends Character {
     this.sprite.setPos(this.position.x, this.position.y);
     this.collider.shape.position = new Vector2(this.position.x, this.position.y);
     this.animating = false;
-
-    //console.log("World:  "+this.position.x+","+this.position.y);
-    //console.log("Screen: "+Screen.worldToScreen(this.position).x+","+Screen.worldToScreen(this.position).y);
-    //console.log(this.position);
-    //console.log(Screen.worldToScreen(this.position, 1));
-    if ((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false) && (this.stopwatch === false)) {
-      gameNs.game.octo.update(gameNs.game.dt);
-    }
   }
 
   /**
@@ -164,7 +159,7 @@ class Player extends Character {
     if (!this.animating || !this.attacking) {
       //  Keep this line commented out while camera is broken.
       //this.keepOnScreen(new Vector2(0, -2));
-      this.position.y += -2;
+      this.position.y -= 2;
       this.orientation = this.OrientationEnum.North;
       this.sprite = this.north;
       this.animating = true;
@@ -207,7 +202,7 @@ class Player extends Character {
     if (!this.animating || !this.attacking) {
       //  Keep this line commented out while camera is broken.
       //this.keepOnScreen(new Vector2(-2, 0));
-      this.position.x += -2;
+      this.position.x -= 2;
       this.orientation = this.OrientationEnum.West;
       this.sprite = this.west;
       this.animating = true;
