@@ -239,7 +239,6 @@ class Grid {
    * @param {Vector2} position
    */
   screenToGridCoords(position){
-    //var indexOf = CollisionManager.IndexOfElement(, this);
     var screenCoords = Screen.worldToScreen(position, gameNs.game.play.activeScreen);
     return new Vector2((screenCoords.x - screenCoords.x % this.tileSize) / this.tileSize, (screenCoords.y - screenCoords.y % this.tileSize) / this.tileSize);
   }
