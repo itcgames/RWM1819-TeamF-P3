@@ -54,6 +54,8 @@ class Play {
     gameNs.game.input.bind(gameNs.game.player.useUtility, "q");
     gameNs.game.input.bind(gameNs.game.player.useUtility, "Q");
     gameNs.game.input.bind(gameNs.game.player.meleeAttack, " ");
+    gameNs.game.input.bind(gameNs.game.player.jump, "f");
+    gameNs.game.input.bind(gameNs.game.player.jump, "F");
     gameNs.game.input.setHoldValue(1000);
 
     gameNs.game.pickups = [];
