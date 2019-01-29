@@ -16,7 +16,7 @@ class Screen {
     this.enemyList = [];
     this.pickupList = [];
 
-    this.enemyList.push(new Octorok(new Vector2(this.grid.position.x + (5 * this.grid.tileSize), this.grid.position.y + (5 * this.grid.tileSize)), new BoxCollider(), this.grid));
+    this.enemyList.push(new Octorok(new Vector2(this.grid.position.x, this.grid.position.y), new BoxCollider(), this.grid));
   }
 
 
