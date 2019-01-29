@@ -4,7 +4,7 @@
  */
 class Player extends Character {
   /**
-   *
+   * constructor for plater class calling the Character super constructor
    * @param {Vector2} position
    * @param {Collider} collider
    * @param {Sprite} sprite
@@ -22,9 +22,6 @@ class Player extends Character {
    * initialise the player entity - bind functions for key handling and setup sprite
    */
   init() {
-    console.log(this.util);
-
-    //testing
     this.width = 48;
     this.height = 56;
     this.animating = false;
@@ -69,8 +66,8 @@ class Player extends Character {
       ['player'],
       ['sword']
     );
-    gameNs.game.collisionManager.addBoxCollider(this.collider);
 
+    gameNs.game.collisionManager.addBoxCollider(this.collider);
     this.setUpSprites();
   }
 
@@ -158,8 +155,6 @@ class Player extends Character {
     if ((gameNs.game.interface.active === false) && (gameNs.game.interface.moving === false) && (this.stopwatch === false)) {
       gameNs.game.octo.update(gameNs.game.dt);
     }
-
-
   }
 
   /**
@@ -176,9 +171,17 @@ class Player extends Character {
     }
 
   }
+
+  /**
+   * set the player to be alive
+   */
   setAlive() {
     this.alive = true;
   }
+
+  /**
+   * change to the given scene from the scene manager
+   */
   changeScene(title) {
     gameNs.game.sceneManager.goToScene(title)
   }
@@ -225,6 +228,9 @@ class Player extends Character {
     }
   }
 
+  /**
+   * method that fires a sword projectile when the characters health is full
+   */
   launchSword() {
     if (!this.swordBeam) {
       this.projectile.setPos(this.position.x, this.position.y);
@@ -233,6 +239,9 @@ class Player extends Character {
     }
   }
 
+  /**
+   * plants a bomb beside the character if a bomb doesnt exist and the player has enough
+   */
   plantBomb() {
     if (!this.bomb.alive && this.bombs > 0) {
       this.bombs--;
@@ -240,12 +249,18 @@ class Player extends Character {
     }
   }
 
+  /**
+   * throw the characters boomerang if collected
+   */
   throwBoomerang() {
     if (!this.boomerang.alive && this.hasBoomerang) {
       this.boomerang.throw(this.orientation, this.position);
     }
   }
 
+  /**
+   * use the characters currently selected utility
+   */
   useUtility() {
     switch (this.currentUtil) {
       case this.CurrentUtility.Boomerang:
@@ -257,6 +272,10 @@ class Player extends Character {
     }
   }
 
+  /**
+   * depending on the type of pickup the player collided with alter the characters inventory / status
+   * @param {Pickup Type} type 
+   */
   processPickup(type) {
     switch (type) {
       case "rupee":

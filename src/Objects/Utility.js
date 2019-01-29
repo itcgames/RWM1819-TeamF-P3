@@ -4,9 +4,9 @@
  */
 class Utility{
     /**
-     * 
-     * @param {*} width 
-     * @param {*} height 
+     * constrctuor
+     * @param {Width} width 
+     * @param {Height} height 
      */
     constructor(width, height){
         this.OrientationEnum = Object.freeze({
@@ -26,9 +26,9 @@ class Utility{
     }
 
     /**
-     * 
-     * @param {*} x 
-     * @param {*} y 
+     * update the x and y positions of the utilities vector component
+     * @param {X position} x 
+     * @param {Y position} y 
      */
     setPos(x, y){
         this.position.x = x;

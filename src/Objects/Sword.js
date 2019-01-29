@@ -18,7 +18,7 @@ class Sword extends Utility{
     }
 
     /**
-     * update for the sword projectile
+     * update for the sword projectile - check to see if it's inflight
      */
     update(dt){
 
@@ -54,6 +54,9 @@ class Sword extends Utility{
         }
     }
 
+    /**
+     * update the postion of the explosion sprite depending on where the sword collided
+     */
     processCollision(){
         switch(this.orientation){
             case this.OrientationEnum.North:
@@ -76,6 +79,11 @@ class Sword extends Utility{
         this.collided = true;
     }
 
+    /**
+     * orientation the sword depending on the attack direction
+     * @param {*} orientation orientationto attack
+     * @param {*} position position for the sword to use for reference
+     */
     melee(orientation, position){
         this.orientation = orientation;
         this.updateVector = new Vector2(0,0);
@@ -100,7 +108,8 @@ class Sword extends Utility{
     }
 
     /**
-     * @param {*} orientation 
+     * fire the sword in a direction
+     * @param {*} orientation direction for the sword to travel
      */
     fire(orientation){
         this.collided = false;
@@ -173,8 +182,8 @@ class Sword extends Utility{
     }
 
     /**
-     * 
-     * @param {*} ctx 
+     * draw the sword or the explosion animation of collision detected
+     * @param {*} ctx canvas context
      */
     draw(ctx){
         if(this.collided){
