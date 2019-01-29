@@ -68,8 +68,13 @@ class Play {
     gameNs.game.pickups.push(new StopWatch(250, 750));
     gameNs.game.pickups.push(new SwordPickup(250, 750));
 
-    gameNs.game.tileGrid = new Grid(64, "Screen01");
     console.log("intiWOrld");
+
+    this.overworld[this.activeScreen].enemyList.push(new Octorok(
+      new Vector2(this.overworld[this.activeScreen].grid.position.x + (5 * this.overworld[this.activeScreen].grid.tileSize), this.overworld[this.activeScreen].grid.position.y + (5 * this.overworld[this.activeScreen].grid.tileSize)), 
+      null, 
+      this.overworld[this.activeScreen].grid)
+    );
   }
 
   /**
@@ -98,7 +103,6 @@ class Play {
 
   draw() {
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
-    //gameNs.game.tileGrid.draw(gameNs.game.ctx);
 
     this.camera.draw(0, gameNs.game.ctx);
 

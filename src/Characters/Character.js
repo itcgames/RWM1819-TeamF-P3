@@ -71,7 +71,5 @@ class Character {
         this.position.y += attemptedMovement.y;
       }
     }
-
-
   }
 }

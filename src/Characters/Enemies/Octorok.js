@@ -27,8 +27,11 @@ class Octorok extends Npc {
         this.wander();
         this.timer = 0;
       }
-      this.sprite.x = this.position.x;
-      this.sprite.y = this.position.y;
+
+      if (this.sprite !== null){
+        this.sprite.x = this.position.x;
+        this.sprite.y = this.position.y;
+      }
 
       if (gameNs.game.collisionManager.boxCollidedWithTag(this.collider, 'sword')) {
         this.alive = false;

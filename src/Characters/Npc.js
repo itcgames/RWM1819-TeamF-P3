@@ -12,7 +12,7 @@ class Npc extends Character {
    * @param {Grid} grid
    */
   constructor(position, collider, grid) {
-    super(position.add(grid.position), collider);
+    super(position, collider);
     this.grid = grid;
     this.tileSize = this.grid.tileSize;
     this.updateGridPosition(grid);
@@ -332,14 +332,14 @@ class Npc extends Character {
    */
   checkMovement(attemptedMovement) {
     var tempGridPosition = this.grid.screenToGridCoords(this.position.add(attemptedMovement));
-    if (this.position.x + attemptedMovement.x < 0 || this.position.x + attemptedMovement.x > this.grid.width * this.tileSize || !this.grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
+    if (this.position.x + attemptedMovement.x < this.grid.position.x || this.position.x + attemptedMovement.x > this.grid.width * this.tileSize + this.grid.position.x || !this.grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
       //  If we can't do the movement set the target to our current position.
       this.targetPos = new Vector2(this.gridPosition.x, this.gridPosition.y);
     } else {
       this.position.x += attemptedMovement.x;
     }
 
-    if (this.position.y + attemptedMovement.y < 0 || this.position.y + attemptedMovement.y > this.grid.height * this.tileSize || !this.grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
+    if (this.position.y + attemptedMovement.y < this.grid.position.y || this.position.y + attemptedMovement.y > this.grid.height * this.tileSize + this.grid.position.y || !this.grid.getTile(tempGridPosition.x, tempGridPosition.y).isTraversable) {
       //  If we can't do the movement set the target to our current position.
       this.targetPos = new Vector2(this.gridPosition.x, this.gridPosition.y);
     } else {
