@@ -134,7 +134,7 @@ class Play {
   draw() {
     gameNs.game.ctx.clearRect(0, 0, gameNs.game.canvas.width, gameNs.game.canvas.height);
 
-    //this.camera.draw(0, gameNs.game.ctx);
+    this.camera.draw(0, gameNs.game.ctx);
 
     for (let i = 0; i < this.overworld.length; i++) {
       this.overworld[i].render(gameNs.game.ctx);
